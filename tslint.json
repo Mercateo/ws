@@ -10,7 +10,10 @@
     "no-duplicate-key": true,
     "no-duplicate-variable": true,
     "no-unreachable": true,
-    "no-unused-variable": true,
+    "no-unused-variable":  [
+      true,
+      "react"
+    ],
     "no-unused-expression": true,
     "one-line": [
       true,
