@@ -10,6 +10,7 @@
     "no-duplicate-key": true,
     "no-duplicate-variable": true,
     "no-unreachable": true,
+    "no-unused-variable": true,
     "no-unused-expression": true,
     "one-line": [
       true,
