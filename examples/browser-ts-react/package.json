@@ -9,19 +9,11 @@
     "ws": "node ../../bin/ws"
   },
   "ws": {
-    "type": "browser",
-    "externals": {
-      "react": {
-        "root": "React",
-        "commonjs2": "react",
-        "commonjs": "react",
-        "amd": "react"
-      }
-    }
+    "type": "browser"
   },
   "dependencies": {
-    "@types/react": "^15.0.6",
-    "@types/react-dom": "^0.14.22",
+    "@types/react": "^15.0.23",
+    "@types/react-dom": "^15.5.0",
     "react": "^15.0.0",
     "ws-examples-browser-less": "file:../browser-less",
     "ws-examples-browser-ts": "file:../browser-ts"

@@ -1,12 +1,16 @@
 import React, { Component } from 'react';
-import { someContent, contentWithMessageFormat } from 'mercateo/i18n';
+import { WsIntlConsumer } from 'ws-intl';
 
 /**
  * This component shows a translated message.
  */
 export class SomeComponent extends Component<{}, {}> {
   render() {
-    return <p>{someContent()}</p>;
+    return (
+      <WsIntlConsumer>
+        {(messages: I18N) => <p>{messages.someContent()}</p>}
+      </WsIntlConsumer>
+    );
   }
 }
 
@@ -15,6 +19,10 @@ export class SomeComponent extends Component<{}, {}> {
  */
 export class OtherComponent extends Component<{}, {}> {
   render() {
-    return <p>{contentWithMessageFormat({ count: 1 })}</p>;
+    return (
+      <WsIntlConsumer>
+        {(messages: I18N) => <p>{messages.contentWithMessageFormat({ count: 1 })}</p>}
+      </WsIntlConsumer>
+    );
   }
 }

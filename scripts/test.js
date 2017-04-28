@@ -6,6 +6,7 @@ const execSync = require('child_process').execSync;
 const rimrafSync = require('rimraf').sync;
 
 const examples = [
+  'ws-intl',
   'browser-less',
   'browser-ts',
   'browser-ts-react',
@@ -14,7 +15,7 @@ const examples = [
   'spa-ts-i18n',
   'spa-ts-lazy-import',
   'node-ts',
-  'node-ts-2',  
+  'node-ts-2',
   'electron-ts',
   'electron-ts-i18n'
 ];
@@ -35,7 +36,7 @@ examples.forEach(example => {
 
     // test commands
     execSync('npm run -s ws -- build', { cwd, stdio });
-    if (example.includes('spa') || example.includes('browser') || example.includes('electron')) {
+    if (example.includes('spa') || example.includes('browser') || example.includes('electron') || example === 'ws-intl') {
       execSync('npm run -s ws -- build --production', { cwd, stdio });
     }
     execSync('npm run -s ws -- lint', { cwd, stdio });

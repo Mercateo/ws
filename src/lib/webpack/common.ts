@@ -2,8 +2,6 @@ import { warn, error, info, getLevel, levels } from 'loglevel';
 import webpack, { compiler } from 'webpack';
 import { WebpackConfig } from './options';
 
-export * from './options';
-
 // interface SingleStats extends compiler.Stats {
 //   compilation: any;
 // }

@@ -17,8 +17,8 @@
   "dependencies": {
     "@types/bcrypt": "^1.0.0",
     "@types/node": "^7.0.4",
-    "@types/react": "^15.0.6",
-    "@types/react-dom": "^0.14.22",
+    "@types/react": "^15.0.23",
+    "@types/react-dom": "^15.5.0",
     "babel-polyfill": "^6.22.0",
     "bcrypt": "^1.0.2",
     "electron": "^1.4.15",

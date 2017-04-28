@@ -3,11 +3,13 @@ import { cyan } from 'chalk';
 import express from 'express';
 import { project } from '../project';
 import { findAsync } from './openport';
+import fallback from 'express-history-api-fallback';
 
 export async function listenAsync(middlewares: Array<any> = [], root = project.ws.distDir) {
   const app = express();
 
   middlewares.push(express.static(root));
+  middlewares.push(fallback('index.html', { root }));
 
   for (const middleware of middlewares) {
     app.use(middleware);

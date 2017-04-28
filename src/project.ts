@@ -80,10 +80,6 @@ export interface I18nConfig {
    */
   locales: string[];
   /**
-   * Currently fixed to `'mercateo/i18n'`. Used for internal logic.
-   */
-  module: string;
-  /**
    * If you want to have the benefits of i18n like using the message format, but you _really_
    * just want to support _one_ locale, you can generate your projects as if you would not
    * support any locale at all (e.g. generated SPAs aren't nested in a directory for every
@@ -286,10 +282,6 @@ export function validate(pkg: any): PackageConfig {
 
   if (!pkg.ws.distReleaseDir) {
     pkg.ws.distReleaseDir = 'dist-release';
-  }
-
-  if (pkg.ws.i18n) {
-    pkg.ws.i18n.module = 'mercateo/i18n';
   }
 
   if (pkg.ws.i18n && !pkg.ws.i18n.dir) {

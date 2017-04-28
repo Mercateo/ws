@@ -6,15 +6,9 @@
   version "2.0.45"
   resolved "https://registry.yarnpkg.com/@types/history/-/history-2.0.45.tgz#c76d79a65d189220d9d50f62e0143bdac30a564b"
 
-"@types/react-dom@^0.14.13":
-  version "0.14.19"
-  resolved "https://registry.yarnpkg.com/@types/react-dom/-/react-dom-0.14.19.tgz#698a14335e32fb1bc61db65f5647c9668a7fc2eb"
-  dependencies:
-    "@types/react" "*"
-
-"@types/react-dom@^0.14.22":
-  version "0.14.23"
-  resolved "https://registry.yarnpkg.com/@types/react-dom/-/react-dom-0.14.23.tgz#cecfcfad754b4c2765fe5d29b81b301889ad6c2e"
+"@types/react-dom@^15.5.0":
+  version "15.5.0"
+  resolved "https://registry.yarnpkg.com/@types/react-dom/-/react-dom-15.5.0.tgz#7f4fb9613d4051141773242f7b6b5f1a46b34bd9"
   dependencies:
     "@types/react" "*"
 
@@ -29,9 +23,9 @@
   version "0.14.50"
   resolved "https://registry.yarnpkg.com/@types/react/-/react-0.14.50.tgz#3f3f69db5661c8be3df99bde688e11300ef8131e"
 
-"@types/react@^15.0.6":
-  version "15.0.16"
-  resolved "https://registry.yarnpkg.com/@types/react/-/react-15.0.16.tgz#78e39511a9cfcabf7f74ecd55180522f4290a0c1"
+"@types/react@^15.0.23":
+  version "15.0.23"
+  resolved "https://registry.yarnpkg.com/@types/react/-/react-15.0.23.tgz#f3facbef5290610f54242f00308759d3a3c27346"
 
 asap@~2.0.3:
   version "2.0.5"

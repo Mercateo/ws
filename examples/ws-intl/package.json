@@ -1,0 +1,27 @@
+{
+  "name": "ws-intl",
+  "version": "1.0.0",
+  "main": "dist-release/index.js",
+  "typings": "dist-release/src/index.d.ts",
+  "private": true,
+  "scripts": {
+    "ws": "node ../../bin/ws"
+  },
+  "ws": {
+    "type": "browser"
+  },
+  "dependencies": {
+    "@types/prop-types": "^15.5.1",
+    "@types/react": "^15.0.23",
+    "@types/react-dom": "^15.5.0",
+    "prop-types": "^15.5.8",
+    "react": "^15.0.0"
+  },
+  "devDependencies": {
+    "@types/expect": "^1.13.29",
+    "@types/mocha": "^2.2.27",
+    "expect": "^1.18.0",
+    "react-addons-test-utils": "^15.0.0",
+    "react-dom": "^15.0.0"
+  }
+}

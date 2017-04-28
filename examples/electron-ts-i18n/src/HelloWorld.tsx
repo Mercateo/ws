@@ -1,8 +1,8 @@
 import React from 'react';
-import { welcome } from 'mercateo/i18n';
+import { WsIntlConsumer } from 'ws-intl';
 
 export const HelloWorld = () => (
-  <div>
-    {welcome()}
-  </div>
+  <WsIntlConsumer>
+    {(messages: I18N) => <p>{messages.welcome()}</p>}
+  </WsIntlConsumer>
 );

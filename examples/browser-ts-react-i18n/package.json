@@ -1,29 +1,15 @@
 {
   "name": "ws-examples-browser-ts-react-i18n",
   "version": "1.0.0",
-  "main": "dist-release/en_GB/index.js",
+  "main": "dist-release/index.js",
+  "typings": "dist-release/src/index.d.ts",
   "webpack": "src/index.tsx",
-  "typings": "dist-release/en_GB/src/index.d.ts",
   "private": true,
   "scripts": {
     "ws": "node ../../bin/ws"
   },
   "ws": {
     "type": "browser",
-    "externals": {
-      "react": {
-        "root": "React",
-        "commonjs2": "react",
-        "commonjs": "react",
-        "amd": "react"
-      },
-      "intl-messageformat": {
-        "root": "IntlMessageFormat",
-        "commonjs2": "intl-messageformat",
-        "commonjs": "intl-messageformat",
-        "amd": "intl-messageformat"
-      }
-    },
     "i18n": {
       "locales": [
         "en_GB",
@@ -34,10 +20,11 @@
     }
   },
   "dependencies": {
-    "@types/react": "^15.0.6",
-    "@types/react-dom": "^0.14.22",
+    "@types/react": "^15.0.23",
+    "@types/react-dom": "^15.5.0",
     "intl-messageformat": "^1.3.0",
-    "react": "^15.0.0"
+    "react": "^15.0.0",
+    "ws-intl": "file:../ws-intl"
   },
   "devDependencies": {
     "@types/enzyme": "^2.5.38",

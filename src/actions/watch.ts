@@ -1,42 +1,24 @@
-import { join } from 'path';
 import { info } from 'loglevel';
 import { cyan } from 'chalk';
 import moment from 'moment';
 import livereload from 'livereload';
 import livereloadMiddleware from 'connect-livereload';
-import { removeAsync, existsAsync } from 'fs-extra-promise';
+import { removeAsync } from 'fs-extra-promise';
 import { project, TYPE } from '../project';
 import { findAsync } from '../lib/openport';
 import { listenAsync } from '../lib/express';
-import {
-  watchAsync,
-  nodeBuildOptions,
-  getSpaDevOptions,
-  spaRootI18nBuildOptions,
-  getBrowserBuildOptions
-} from '../lib/webpack';
 import { compile as compileI18n } from '../lib/i18n';
-import { copy } from '../lib/copy';
-import {
-  electronRootI18nBuildOptions,
-  getElectronBuildOptions
-} from '../lib/webpack/options';
+import { watchAsync } from '../lib/webpack/common';
+import { nodeBuildOptions } from '../lib/webpack/node';
+import { getElectronDevOptions } from '../lib/webpack/electron';
+import { getSpaDevOptions } from '../lib/webpack/spa';
+import { getBrowserDevOptions } from '../lib/webpack/browser';
 
 export interface WatchOptions {
   locales: Array<string>;
 }
 
-const copyAssets = async () => {
-  if (project.ws.i18n) {
-    // this is a quich fix to get relative path for assets in localized spa's working
-    await Promise.all(project.ws.i18n.locales.map(locale =>
-      copy(project.ws.distDir, join(project.ws.distDir, locale), '*.{zip,pdf,png,jpg,gif,svg,eot,woff,woff2,ttf,json,js}')));
-    await Promise.all(project.ws.i18n.locales.map(locale =>
-      copy(join(project.ws.distDir, 'config'), join(project.ws.distDir, locale, 'config'), '*.js')));
-  }
-};
-
-export default async function watch(options: WatchOptions) {
+export default async function watch() {
   await removeAsync(project.ws.distDir);
 
   const port = await findAsync({
@@ -50,47 +32,31 @@ export default async function watch(options: WatchOptions) {
       await watchAsync(livereloadServer, nodeBuildOptions, onChangeSuccess);
       break;
     case TYPE.ELECTRON:
-      // await verifyDll(options.locales);
-
       if (project.ws.i18n) {
         await compileI18n();
-        const hasI18nEntry = await existsAsync(project.ws.srcI18nEntry);
-        if (hasI18nEntry) {
-          await watchAsync(livereloadServer, electronRootI18nBuildOptions);
-        }
       }
 
-      await watchAsync(livereloadServer, getElectronBuildOptions(options.locales), async (stats: any) => {
+      await watchAsync(livereloadServer, getElectronDevOptions(), async (stats: any) => {
         onChangeSuccess(stats);
-        await copyAssets();
       });
-
-      await copyAssets();
 
       break;
     case TYPE.SPA:
-      // await verifyDll(options.locales);
-
       if (project.ws.i18n) {
         await compileI18n();
-        const hasI18nEntry = await existsAsync(project.ws.srcI18nEntry);
-        if (hasI18nEntry) {
-          await watchAsync(livereloadServer, spaRootI18nBuildOptions);
-        }
       }
 
-      await watchAsync(livereloadServer, getSpaDevOptions(options.locales), async (stats: any) => {
+      await watchAsync(livereloadServer, getSpaDevOptions(), async (stats: any) => {
         onChangeSuccess(stats);
-        await copyAssets();
       });
 
-      await copyAssets();
       break;
     case TYPE.BROWSER:
       if (project.ws.i18n) {
         await compileI18n();
       }
-      await watchAsync(livereloadServer, getBrowserBuildOptions(options.locales), onChangeSuccess);
+
+      await watchAsync(livereloadServer, getBrowserDevOptions(), onChangeSuccess);
       break;
   }
 

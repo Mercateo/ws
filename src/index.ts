@@ -99,17 +99,12 @@ switch (project.ws.type) {
       buildCommand.option('-p, --production', 'create production build');
     }
 
-    const watchCommand = commander
+    commander
       .command('watch')
       .alias('w')
       .description('continuously build and serve the project')
       // .option('-H, --hot', 'enables hot reloading (experimental)')
       .action(handleAction(() => _import('./actions/watch')));
-
-    if (project.ws.i18n) {
-      buildCommand.option('-L, --locales <locales>', `locales to build (comma separated list, default: '${project.ws.i18n.locales[0]}')`, locales => locales.split(','), [project.ws.i18n.locales[0]]);
-      watchCommand.option('-L, --locales <locales>', `locales to build (comma separated list, default: '${project.ws.i18n.locales[0]}')`, locales => locales.split(','), [project.ws.i18n.locales[0]]);
-    }
 
     commander
       .command('lint')

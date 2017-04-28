@@ -4,13 +4,11 @@ import { join } from 'path';
 import { removeAsync, existsAsync } from 'fs-extra-promise';
 import { cyan, yellow, magenta } from 'chalk';
 import { project, SeleniumGridConfig } from '../project';
-import {
-  compileAsync,
-  spaE2eOptions
-} from '../lib/webpack';
 import { testAsync } from '../lib/mocha';
 import { startSeleniumServer, Browser, parseBrowser, getBrowsers, isSauceLabsHost, launchSauceConnect } from '../lib/selenium';
 import { compile as compileI18n } from '../lib/i18n';
+import { spaE2eOptions } from '../lib/webpack/spa';
+import { compileAsync } from '../lib/webpack/common';
 
 function spawnE2e(options: any, browser: Browser) {
   return new Promise((resolve, reject) => {

@@ -7,3 +7,5 @@ declare module 'react-addons-test-utils' {
   const ReactTestUtils: any;
   export default ReactTestUtils;
 }
+
+declare function _import<T>(path: string): Promise<T>;
