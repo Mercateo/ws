@@ -1,9 +1,13 @@
 // check all examples
 const join = require('path').join;
 const existsSync = require('fs').existsSync;
+const readFileSync = require('fs').readFileSync;
+const writeFileSync = require('fs').writeFileSync;
 const spawn = require('child_process').spawn;
 const execSync = require('child_process').execSync;
 const rimrafSync = require('rimraf').sync;
+const snapshotSync = require('snapshot-dir').snapshotSync;
+const snapshotCompareSync = require('snapshot-dir').snapshotCompareSync;
 
 const examples = [
   'ws-intl',
@@ -21,12 +25,15 @@ const examples = [
 ];
 
 const stdio = 'inherit';
+const diff = [];
 
 examples.forEach(example => {
   console.log(`Update "${example}":`);
   try {
     // fresh start
     const cwd = join(process.cwd(), 'examples', example);
+    const snapshotFile = join(cwd, 'snapshot.json');
+    let snapshotDir = join(cwd, 'dist-release')
     rimrafSync(join(cwd, 'node_modules'));
     rimrafSync(join(cwd, 'dist'));
     rimrafSync(join(cwd, 'dist-tests'));
@@ -38,7 +45,19 @@ examples.forEach(example => {
     execSync('npm run -s ws -- build', { cwd, stdio });
     if (example.includes('spa') || example.includes('browser') || example.includes('electron') || example === 'ws-intl') {
       execSync('npm run -s ws -- build --production', { cwd, stdio });
+    } else {
+      snapshotDir = join(cwd, 'dist')
     }
+
+    // snapshotting
+    if (!existsSync(snapshotFile)) {
+      writeFileSync(snapshotFile, JSON.stringify(snapshotSync(snapshotDir)));
+    }
+
+    if (snapshotCompareSync(snapshotDir, JSON.parse(readFileSync(snapshotFile)))) {
+     diff.push(example);
+    }
+
     execSync('npm run -s ws -- lint', { cwd, stdio });
     if (
       existsSync(join(cwd, 'tests', 'unit.ts')) ||
@@ -56,9 +75,16 @@ examples.forEach(example => {
     //   server.kill();
     // }
   } catch (err) {
-     throw `[ERROR] Couldn't update "${example}"!`;
+    throw `[ERROR] Couldn't update "${example}"!`;
   }
   console.log(`Finished updating "${example}".`);
 });
 
-console.log('Updated all examples ♥');
+if (diff.length !== 0) {
+  console.log(`Content of dist-release diffs from snapshot for: `);
+  diff.map(example => console.log(`- ${example}`))
+  console.log('If this is expected please delete snapshot.json');
+  process.exit(1);
+} else {
+  console.log('Updated all examples ♥');
+}
