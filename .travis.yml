@@ -2,6 +2,11 @@ sudo: false
 
 language: node_js
 
+addons:
+  apt:
+    packages:
+    - firefox
+
 node_js:
   - "7"
   - "6"
