@@ -5,14 +5,21 @@ import { removeAsync, existsAsync } from 'fs-extra-promise';
 import { cyan, yellow, magenta } from 'chalk';
 import { project, SeleniumGridConfig } from '../project';
 import { testAsync } from '../lib/mocha';
-import { startSeleniumServer, Browser, parseBrowser, getBrowsers, isSauceLabsHost, launchSauceConnect } from '../lib/selenium';
+import {
+  startSeleniumServer,
+  Browser,
+  parseBrowser,
+  getBrowsers,
+  isSauceLabsHost,
+  launchSauceConnect
+} from '../lib/selenium';
 import { compile as compileI18n } from '../lib/i18n';
 import { spaE2eOptions } from '../lib/webpack/spa';
 import { compileAsync } from '../lib/webpack/common';
 
 function spawnE2e(options: any, browser: Browser) {
   return new Promise((resolve, reject) => {
-    const [ node, ws ] = process.argv;
+    const [node, ws] = process.argv;
     const env = Object.assign({}, process.env, {
       WS_E2E_IS_SPAWNED: true,
       WS_E2E_SELENIUM_URL: options.seleniumUrl,
@@ -21,18 +28,31 @@ function spawnE2e(options: any, browser: Browser) {
       FORCE_COLOR: 'true'
     });
 
-    const childPrefix = `[${magenta(browser.browserName + (browser.version ? `-${browser.version}` : ''))}] `;
-    const childProcess = spawn(node, [ ws, 'e2e', '--log-level', options.parent.logLevel ], { env });
+    const childPrefix = `[${magenta(
+      browser.browserName + (browser.version ? `-${browser.version}` : '')
+    )}] `;
+    const childProcess = spawn(
+      node,
+      [ws, 'e2e', '--log-level', options.parent.logLevel],
+      { env }
+    );
 
-    childProcess.stdout.on('data', (data) => process.stdout.write(`${childPrefix}${data}`));
-    childProcess.stderr.on('data', (data) => process.stderr.write(`${childPrefix}${data}`));
+    childProcess.stdout.on('data', data =>
+      process.stdout.write(`${childPrefix}${data}`)
+    );
+    childProcess.stderr.on('data', data =>
+      process.stderr.write(`${childPrefix}${data}`)
+    );
 
     childProcess.on('error', (err: any) => {
       error(`${childPrefix}${err}`);
       reject(1);
     });
 
-    childProcess.on('close', (code: any) => code ? reject(code) : resolve(code));
+    childProcess.on(
+      'close',
+      (code: any) => (code ? reject(code) : resolve(code))
+    );
   });
 }
 
@@ -41,7 +61,11 @@ async function init(options: any) {
   const e2eEntry = `./${project.ws.testsDir}/e2e.${project.ws.entryExtension}`;
   const hasE2eTests = await existsAsync(e2eEntry);
   if (!hasE2eTests) {
-    warn(`${yellow('warn!')} You tried to run e2e tests, but ${yellow(e2eEntry)} doesn't exist.`);
+    warn(
+      `${yellow('warn!')} You tried to run e2e tests, but ${yellow(
+        e2eEntry
+      )} doesn't exist.`
+    );
     return;
   }
 
@@ -56,7 +80,9 @@ async function init(options: any) {
     // at this place we know selenium config is set, no need for null checks
     const selenium = project.ws.selenium as SeleniumGridConfig;
     const { host, port, user, password } = selenium;
-    options.seleniumUrl = `http://${user ? `${user}:${password}@` : ''}${host}:${port}/wd/hub`;
+    options.seleniumUrl = `http://${user
+      ? `${user}:${password}@`
+      : ''}${host}:${port}/wd/hub`;
     browsers = options.browsers
       ? options.browsers.split(',').map(parseBrowser)
       : await getBrowsers();
@@ -68,12 +94,14 @@ async function init(options: any) {
     options.seleniumUrl = `http://localhost:4444/wd/hub`;
     seleniumProcess = await startSeleniumServer();
     const defaultBrowsers = 'ff'; // 'chrome,ff'
-    browsers = (options.browsers || defaultBrowsers).split(',').map(parseBrowser);
+    browsers = (options.browsers || defaultBrowsers)
+      .split(',')
+      .map(parseBrowser);
   }
 
   // spawn tests
   // TODO: For now run everything in parallel. We could check `options.sequentially` to run it  sequentially in the future.
-  await Promise.all(browsers.map((browser) => spawnE2e(options, browser)));
+  await Promise.all(browsers.map(browser => spawnE2e(options, browser)));
 
   // ran locally?
   if (seleniumProcess) {

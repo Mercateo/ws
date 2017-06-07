@@ -7,7 +7,6 @@ describe('test my code', () => {
     // const renderer = ReactTestUtils.createRenderer();
     // renderer.render(<NameComponent name="foo" a={1} b={2} />);
     // const output = renderer.getRenderOutput();
-
     // expect(output.type).toBe('p');
     // expect(output.props.children).toEqual([ 'Hello ', 'foo', '! Sum is ', 3, '.' ]);
   });

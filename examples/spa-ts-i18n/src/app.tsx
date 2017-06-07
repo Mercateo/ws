@@ -1,6 +1,12 @@
 import React, { Component } from 'react';
-import { NameComponent, ImageTestComponent } from 'ws-examples-browser-ts-react';
-import { SomeComponent, OtherComponent } from 'ws-examples-browser-ts-react-i18n';
+import {
+  NameComponent,
+  ImageTestComponent
+} from 'ws-examples-browser-ts-react';
+import {
+  SomeComponent,
+  OtherComponent
+} from 'ws-examples-browser-ts-react-i18n';
 import { WsIntlProvider } from 'ws-intl';
 
 require('normalize.css/normalize.css');
@@ -17,11 +23,9 @@ export class AppComponent extends Component<{}, {}> {
       <WsIntlProvider messages={messages}>
         <NameComponent a={1} b={2} name="_otbe_" />
         <ImageTestComponent />
-        {
-          process.env.NODE_ENV === 'production'
-            ? <p>Production Build</p>
-            : <p>Dev Build</p>
-        }
+        {process.env.NODE_ENV === 'production'
+          ? <p>Production Build</p>
+          : <p>Dev Build</p>}
         <p>locale: {messages.LOCALE}</p>
         <p>intl locale: {messages.INTL_LOCALE}</p>
         <p>language code: {messages.LANGUAGE_CODE}</p>
@@ -45,4 +49,3 @@ export class AppComponent extends Component<{}, {}> {
     );
   }
 }
-

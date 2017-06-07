@@ -26,7 +26,10 @@ export default async function watch() {
   });
 
   const livereloadServer = livereload.createServer({ port });
-  const onChangeSuccess = (stats: any) => info(`Finished build at ${cyan(moment(stats.endTime).format('HH:mm:ss'))}.`);
+  const onChangeSuccess = (stats: any) =>
+    info(
+      `Finished build at ${cyan(moment(stats.endTime).format('HH:mm:ss'))}.`
+    );
   switch (project.ws.type) {
     case TYPE.NODE:
       await watchAsync(livereloadServer, nodeBuildOptions, onChangeSuccess);
@@ -36,9 +39,13 @@ export default async function watch() {
         await compileI18n();
       }
 
-      await watchAsync(livereloadServer, getElectronDevOptions(), async (stats: any) => {
-        onChangeSuccess(stats);
-      });
+      await watchAsync(
+        livereloadServer,
+        getElectronDevOptions(),
+        async (stats: any) => {
+          onChangeSuccess(stats);
+        }
+      );
 
       break;
     case TYPE.SPA:
@@ -46,9 +53,13 @@ export default async function watch() {
         await compileI18n();
       }
 
-      await watchAsync(livereloadServer, getSpaDevOptions(), async (stats: any) => {
-        onChangeSuccess(stats);
-      });
+      await watchAsync(
+        livereloadServer,
+        getSpaDevOptions(),
+        async (stats: any) => {
+          onChangeSuccess(stats);
+        }
+      );
 
       break;
     case TYPE.BROWSER:
@@ -56,14 +67,16 @@ export default async function watch() {
         await compileI18n();
       }
 
-      await watchAsync(livereloadServer, getBrowserDevOptions(), onChangeSuccess);
+      await watchAsync(
+        livereloadServer,
+        getBrowserDevOptions(),
+        onChangeSuccess
+      );
       break;
   }
 
   info('Finished initial build.');
 
-  const middlewares: Array<any> = [
-    livereloadMiddleware({ port })
-  ];
+  const middlewares: Array<any> = [livereloadMiddleware({ port })];
   await listenAsync(middlewares);
 }

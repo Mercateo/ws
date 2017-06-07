@@ -1,11 +1,18 @@
-import { WebpackSingleConfig, nodeSourceMapEntry, outputDev, getModuleConfig, externalsNode, resolveLoader, resolve, devtool, outputTest } from './options';
+import {
+  WebpackSingleConfig,
+  nodeSourceMapEntry,
+  outputDev,
+  getModuleConfig,
+  externalsNode,
+  resolveLoader,
+  resolve,
+  devtool,
+  outputTest
+} from './options';
 import { project } from '../../project';
 
 export const nodeBuildOptions: WebpackSingleConfig = {
-  entry: [
-    nodeSourceMapEntry,
-    project.ws.srcEntry
-  ],
+  entry: [nodeSourceMapEntry, project.ws.srcEntry],
   output: {
     ...outputDev,
     libraryTarget: 'commonjs2'
@@ -27,10 +34,7 @@ export const nodeBuildOptions: WebpackSingleConfig = {
 };
 
 export const nodeUnitOptions: WebpackSingleConfig = {
-  entry: [
-    nodeSourceMapEntry,
-    project.ws.unitEntry
-  ],
+  entry: [nodeSourceMapEntry, project.ws.unitEntry],
   output: {
     ...outputTest,
     libraryTarget: 'commonjs2'

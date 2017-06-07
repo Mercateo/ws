@@ -16,22 +16,23 @@
   },
   "dependencies": {
     "@types/bcrypt": "^1.0.0",
-    "@types/node": "^7.0.4",
-    "@types/react": "^15.0.23",
+    "@types/node": "^7.0.23",
+    "@types/react": "^15.0.25",
     "@types/react-dom": "^15.5.0",
-    "babel-polyfill": "^6.22.0",
+    "babel-polyfill": "^6.23.0",
     "bcrypt": "^1.0.2",
-    "electron": "^1.4.15",
-    "react": "^15.4.2",
-    "react-dom": "^15.4.2",
+    "electron": "^1.6.10",
+    "react": "^15.5.4",
+    "react-dom": "^15.5.4",
     "ws-examples-browser-ts-react": "file:../browser-ts-react",
     "ws-examples-node-ts": "file:../node-ts"
   },
   "devDependencies": {
-    "@types/expect": "^1.13.29",
-    "@types/mocha": "^2.2.27",
-    "electron-rebuild": "^1.5.7",
+    "@types/expect": "^1.20.1",
+    "@types/mocha": "^2.2.41",
+    "@types/react-test-renderer": "^15.5.0",
+    "electron-rebuild": "^1.5.11",
     "expect": "^1.18.0",
-    "react-addons-test-utils": "^15.0.0"
+    "react-test-renderer": "^15.5.4"
   }
 }

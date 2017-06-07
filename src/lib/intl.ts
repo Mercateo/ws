@@ -15,7 +15,7 @@ export async function getIntlLocales(): Promise<LocaleMap> {
     const localeFiles = await globby('*.js', { cwd });
     const locales = localeFiles.map(file => basename(file, '.js'));
     cachedLocales = {};
-    locales.forEach(key => cachedLocales[key] = true);
+    locales.forEach(key => (cachedLocales[key] = true));
   }
   return cachedLocales;
 }

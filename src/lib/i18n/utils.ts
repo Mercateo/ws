@@ -4,7 +4,10 @@ export function parseLanguage(locale: string) {
   return locale.includes('_') ? locale.split('_')[0] : locale;
 }
 
-export function isMatchingLocaleOrLanguage(localeOrLanguage: string, locale: string) {
+export function isMatchingLocaleOrLanguage(
+  localeOrLanguage: string,
+  locale: string
+) {
   return localeOrLanguage === locale || locale.startsWith(localeOrLanguage);
 }
 

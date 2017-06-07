@@ -15,7 +15,8 @@ export interface Browser {
 }
 
 const SAUCE_LABS_HOST = 'ondemand.saucelabs.com';
-const SAUCE_LABS_PLATFORMS = 'https://saucelabs.com/rest/v1.1/info/platforms/all';
+const SAUCE_LABS_PLATFORMS =
+  'https://saucelabs.com/rest/v1.1/info/platforms/all';
 
 // these are all browsers which could be returned by browserslist (key: explanation)
 // -  ie: IE
@@ -110,20 +111,26 @@ const originalData = Object.assign({}, browserslist.data);
 /**
  * Converts results of a `browserslist` query to an Selenium Browser Capabilities array.
  */
-export function queryBrowsers(query: string = project.ws.targets.browsers): Browser[] {
+export function queryBrowsers(
+  query: string = project.ws.targets.browsers
+): Browser[] {
   debug(`Parse browsers from query: ${query}.`);
   const browsers = browserslist(query)
     .map(browser => {
-      let [ name, version ] = browser.split(' ');
+      let [name, version] = browser.split(' ');
       const hasVersionRange = version.includes('-');
       if (hasVersionRange) {
         version = version.split('-')[1];
       }
       return { name, version };
     })
-    .filter(({ name }) => supportedBrowsers.some(({ browserslist }) => browserslist === name))
+    .filter(({ name }) =>
+      supportedBrowsers.some(({ browserslist }) => browserslist === name)
+    )
     .map(({ name, version }) => {
-      const browserName = supportedBrowsers.find(({ browserslist }) => browserslist === name)!.selenium;
+      const browserName = supportedBrowsers.find(
+        ({ browserslist }) => browserslist === name
+      )!.selenium;
       return {
         browserName,
         version,
@@ -183,44 +190,51 @@ export function isSauceLabsHost(host: string): boolean {
 }
 
 function sortByVersion(browserA: Browser, browserB: Browser): number {
-  return rcompare(convertToValidSemver(browserA.version), convertToValidSemver(browserB.version));
+  return rcompare(
+    convertToValidSemver(browserA.version),
+    convertToValidSemver(browserB.version)
+  );
 }
 
 async function getAllAvailableBrowsers(): Promise<Browser[]> {
-  let browsersWithoutId: { version: string, browserName: string }[];
+  let browsersWithoutId: { version: string; browserName: string }[];
   if (isSauceLabsHost(project.ws.selenium!.host)) {
     debug(`Get available browsers on Sauce Labs.`);
     const platforms: any = await new Promise((resolve, reject) => {
-      get(SAUCE_LABS_PLATFORMS, (res) => {
+      get(SAUCE_LABS_PLATFORMS, res => {
         let body = '';
-        res.on('data', (data) => body = body + data);
+        res.on('data', data => (body = body + data));
         res.on('end', () => resolve(JSON.parse(body)));
       }).on('error', reject);
     });
-    browsersWithoutId = platforms.map(({ api_name, short_version }: any) => ({
-      // treat 'iphone' like 'ipad' (same browser)
-      browserName: api_name === 'iphone' ? 'ipad' : api_name,
-      version: short_version
-    }))
-    // sauce labs supports beta/dev versions, but we can't map them back to browserslist
-    .filter(({ version }: any) => version !== 'dev' && version !== 'beta');
+    browsersWithoutId = platforms
+      .map(({ api_name, short_version }: any) => ({
+        // treat 'iphone' like 'ipad' (same browser)
+        browserName: api_name === 'iphone' ? 'ipad' : api_name,
+        version: short_version
+      }))
+      // sauce labs supports beta/dev versions, but we can't map them back to browserslist
+      .filter(({ version }: any) => version !== 'dev' && version !== 'beta');
   } else {
     debug(`Get available browsers on Selenium Grid.`);
     // convert status like https://github.com/davglass/selenium-grid-status#usage
     // to a list of unique browsers containing just the `browserName`, `version` and `id`
     const nodes = await getNodes();
-    browsersWithoutId = flatten(nodes.map(node => node.browser))
-      .map(({ browserName, version }) => ({
-        // treat 'iphone' like 'ipad' (same browser)
-        browserName: browserName === 'iphone' ? 'ipad' : browserName,
-        version
-      }));
+    browsersWithoutId = flatten(
+      nodes.map(node => node.browser)
+    ).map(({ browserName, version }) => ({
+      // treat 'iphone' like 'ipad' (same browser)
+      browserName: browserName === 'iphone' ? 'ipad' : browserName,
+      version
+    }));
   }
-  const browsersWithId: Browser[] = browsersWithoutId.map(({ version, browserName }) => ({
-    browserName,
-    version,
-    id: `${browserName}-${version}`
-  }));
+  const browsersWithId: Browser[] = browsersWithoutId.map(
+    ({ version, browserName }) => ({
+      browserName,
+      version,
+      id: `${browserName}-${version}`
+    })
+  );
   const browsers = uniqBy(browsersWithId, 'id').sort(sortByVersion);
 
   debug(`Available browsers: ${browsers.map(({ id }) => id)}.`);
@@ -231,20 +245,26 @@ async function getAllAvailableBrowsers(): Promise<Browser[]> {
  * Converts a `browserslist` string to Selenium Browser Capabilities array filtered by the
  * browsers which are really available on the Selenium Grid.
  */
-export async function getFilteredAvailableBrowsers(browsers: string = project.ws.targets.browsers): Promise<Browser[]> {
+export async function getFilteredAvailableBrowsers(
+  browsers: string = project.ws.targets.browsers
+): Promise<Browser[]> {
   const availableBrowsers = await getAllAvailableBrowsers();
   const availableBrowsersData = availableBrowsers
-    .filter(({ browserName }) => supportedBrowsers.some(({ selenium }) => selenium === browserName))
+    .filter(({ browserName }) =>
+      supportedBrowsers.some(({ selenium }) => selenium === browserName)
+    )
     .reduce((data: any, browser: any) => {
-      const name = supportedBrowsers.find(({ selenium }) => selenium === browser.browserName)!.browserslist;
+      const name = supportedBrowsers.find(
+        ({ selenium }) => selenium === browser.browserName
+      )!.browserslist;
       if (data[name]) {
         data[name].released.unshift(browser.version);
         data[name].versions.unshift(browser.version);
       } else {
         data[name] = {
           name,
-          released: [ browser.version ],
-          versions: [ browser.version ]
+          released: [browser.version],
+          versions: [browser.version]
         };
       }
       return data;
@@ -256,21 +276,25 @@ export async function getFilteredAvailableBrowsers(browsers: string = project.ws
   // restore`browserslist.data`
   browserslist.data = originalData;
 
-  debug(`Filtered available browsers: ${browsersFilteredByAvailability.map(({ id }) => id)}.`);
+  debug(
+    `Filtered available browsers: ${browsersFilteredByAvailability.map(
+      ({ id }) => id
+    )}.`
+  );
   return browsersFilteredByAvailability;
 }
 
 export async function getBrowsers(): Promise<Browser[]> {
-  const {
-    host,
-    port,
-    filterForAvailability
-  } = project.ws.selenium!;
+  const { host, port, filterForAvailability } = project.ws.selenium!;
   const browsersQuery = project.ws.targets.browsers;
-  const browsers = filterForAvailability ? await getFilteredAvailableBrowsers() : queryBrowsers();
+  const browsers = filterForAvailability
+    ? await getFilteredAvailableBrowsers()
+    : queryBrowsers();
 
   if (browsers.length === 0) {
-    throw `No browsers are available on ${yellow(`${host}:${port}`)} given ${yellow(browsersQuery)}.`;
+    throw `No browsers are available on ${yellow(
+      `${host}:${port}`
+    )} given ${yellow(browsersQuery)}.`;
   }
 
   return browsers;

@@ -5,7 +5,4 @@ import { AppComponent } from './app';
 require('normalize.css/normalize.css');
 require('./style.less');
 
-render(
-  <AppComponent />,
-  document.getElementById('app')
-);
+render(<AppComponent />, document.getElementById('app'));

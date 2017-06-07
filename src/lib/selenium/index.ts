@@ -1,6 +1,12 @@
 import { Browser } from './get-browsers';
 
-export { queryBrowsers, getFilteredAvailableBrowsers, isSauceLabsHost, Browser, getBrowsers } from './get-browsers';
+export {
+  queryBrowsers,
+  getFilteredAvailableBrowsers,
+  isSauceLabsHost,
+  Browser,
+  getBrowsers
+} from './get-browsers';
 export { startSeleniumServer } from './selenium-standalone';
 export { launchSauceConnect } from './sauce-connect';
 
@@ -9,7 +15,7 @@ export { launchSauceConnect } from './sauce-connect';
 //  `'ff-36' to `{ browserName: 'firefox', version: '36', id: 'firefox-36' }`
 //  `'chrome' to `{ browserName: 'chrome', version: undefined, id: 'chrome' }`
 export function parseBrowser(browserString: string): Browser {
-  let [ browserName, version ] = browserString.split('-');
+  let [browserName, version] = browserString.split('-');
 
   switch (browserName) {
     case 'ie':
@@ -20,5 +26,9 @@ export function parseBrowser(browserString: string): Browser {
       break;
   }
 
-  return { browserName, version, id: version ? `${browserName}-${version}` : browserName };
+  return {
+    browserName,
+    version,
+    id: version ? `${browserName}-${version}` : browserName
+  };
 }

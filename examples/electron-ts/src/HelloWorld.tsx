@@ -1,7 +1,6 @@
 import React from 'react';
 
-export const HelloWorld = () => (
+export const HelloWorld = () =>
   <div>
     Hello World :)
-  </div>
-);
+  </div>;

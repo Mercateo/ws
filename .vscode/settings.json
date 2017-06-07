@@ -1,4 +1,5 @@
 {
   "typescript.tsdk": "./node_modules/typescript/lib",
-  "tslint.configFile": "./tslint.json"
+  "tslint.configFile": "./tslint.json",
+  "prettier.singleQuote": true
 }

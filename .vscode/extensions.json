@@ -1,0 +1,10 @@
+{
+  "recommendations": [
+    // TSLint support
+    // see https://marketplace.visualstudio.com/items?itemName=eg2.tslint
+    "eg2.tslint",
+    // prettier support
+    // see https://marketplace.visualstudio.com/items?itemName=esbenp.prettier-vscode
+    "esbenp.prettier-vscode"
+  ]
+}

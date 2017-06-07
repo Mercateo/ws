@@ -5,7 +5,9 @@ import { SeleniumGridConfig } from '../../project';
 /**
  * Connect to Sauce Labs.
  */
-export function launchSauceConnect(selenium: SeleniumGridConfig): Promise<SauceConnectProcess> {
+export function launchSauceConnect(
+  selenium: SeleniumGridConfig
+): Promise<SauceConnectProcess> {
   if (!selenium.user || !selenium.password) {
     throw 'To use Sauce Labs you need to set a user and password in our ws.selenium config.';
   }
@@ -27,4 +29,3 @@ export function launchSauceConnect(selenium: SeleniumGridConfig): Promise<SauceC
     });
   });
 }
-

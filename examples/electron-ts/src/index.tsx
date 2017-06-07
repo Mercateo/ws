@@ -2,11 +2,16 @@ import 'babel-polyfill';
 import React from 'react';
 import { render } from 'react-dom';
 import { HelloWorld } from './HelloWorld';
-import { NameComponent, ImageTestComponent } from 'ws-examples-browser-ts-react';
+import {
+  NameComponent,
+  ImageTestComponent
+} from 'ws-examples-browser-ts-react';
 import { getCwd } from 'ws-examples-node-ts';
 import { genSalt } from 'bcrypt';
 
-genSalt(10, function(err, salt) { console.log(salt); });
+genSalt(10, function(err, salt) {
+  console.log(salt);
+});
 
 render(
   <div>
@@ -15,4 +20,5 @@ render(
     {getCwd()}
     <HelloWorld />
   </div>,
-  document.getElementById('app'));
+  document.getElementById('app')
+);

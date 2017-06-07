@@ -6,7 +6,11 @@ import { WsIntlProvider } from 'ws-intl';
 
 describe('test my i18n components', () => {
   it('should render <SomeComponent />', () => {
-    const provider = mount(<WsIntlProvider messages={require('../dist-i18n/en_GB')}><SomeComponent /></WsIntlProvider>);
+    const provider = mount(
+      <WsIntlProvider messages={require('../dist-i18n/en_GB')}>
+        <SomeComponent />
+      </WsIntlProvider>
+    );
     const consumer = provider.childAt(0);
     const comp = consumer.childAt(0);
 
@@ -15,7 +19,11 @@ describe('test my i18n components', () => {
   });
 
   it('should render <OtherComponent />', () => {
-    const provider = mount(<WsIntlProvider messages={require('../dist-i18n/en_GB')}><OtherComponent /></WsIntlProvider>);
+    const provider = mount(
+      <WsIntlProvider messages={require('../dist-i18n/en_GB')}>
+        <OtherComponent />
+      </WsIntlProvider>
+    );
     const consumer = provider.childAt(0);
     const comp = consumer.childAt(0);
 

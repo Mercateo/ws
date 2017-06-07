@@ -21,7 +21,8 @@ export class OtherComponent extends Component<{}, {}> {
   render() {
     return (
       <WsIntlConsumer>
-        {(messages: I18N) => <p>{messages.contentWithMessageFormat({ count: 1 })}</p>}
+        {(messages: I18N) =>
+          <p>{messages.contentWithMessageFormat({ count: 1 })}</p>}
       </WsIntlConsumer>
     );
   }

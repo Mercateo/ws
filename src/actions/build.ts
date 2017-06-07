@@ -6,9 +6,15 @@ import { project, TYPE } from '../project';
 import { compile as compileI18n } from '../lib/i18n';
 import { compileAsync } from '../lib/webpack/common';
 import { nodeBuildOptions } from '../lib/webpack/node';
-import { getElectronReleaseOptions, getElectronDevOptions } from '../lib/webpack/electron';
+import {
+  getElectronReleaseOptions,
+  getElectronDevOptions
+} from '../lib/webpack/electron';
 import { getSpaReleaseOptions, getSpaDevOptions } from '../lib/webpack/spa';
-import { getBrowserReleaseOptions, getBrowserDevOptions } from '../lib/webpack/browser';
+import {
+  getBrowserReleaseOptions,
+  getBrowserDevOptions
+} from '../lib/webpack/browser';
 
 export interface BuildOptions {
   locales: Array<string>;
@@ -40,7 +46,11 @@ export default async function build(options: BuildOptions) {
         info('...build translations');
       }
 
-      await compileAsync(options.production ? getElectronReleaseOptions() : getElectronDevOptions());
+      await compileAsync(
+        options.production
+          ? getElectronReleaseOptions()
+          : getElectronDevOptions()
+      );
 
       break;
     case TYPE.SPA:

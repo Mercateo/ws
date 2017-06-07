@@ -19,8 +19,9 @@ export interface ILazyComponent<P> {
 
 @observer
 export class LazyComponent extends Component<LazyComponentProps, {}> {
-  @observable
-  private result: IPromiseBasedObservable<{ default: ILazyComponent<any> }> | null = null;
+  @observable private result: IPromiseBasedObservable<
+    { default: ILazyComponent<any> }
+  > | null = null;
 
   componentDidMount() {
     this.result = fromPromise(this.props.fetcher());
@@ -42,16 +43,24 @@ export class LazyComponent extends Component<LazyComponentProps, {}> {
 
 const Prelude = () =>
   <div>
-    <p>Click here and the component <code>AppComponent</code> should be lazily loaded.</p>
+    <p>
+      Click here and the component <code>AppComponent</code> should be lazily
+      loaded.
+    </p>
     <Link to="/app">Show app.</Link>
   </div>;
 
 render(
   <Router history={hashHistory}>
-    <Route path="/" component={Prelude}/>
-    <Route path="/app"component={
-      (props) => <LazyComponent fetcher={() => _import<ILazyComponent<{}>>('./app')} {...props} />
-    }/>
+    <Route path="/" component={Prelude} />
+    <Route
+      path="/app"
+      component={props =>
+        <LazyComponent
+          fetcher={() => _import<ILazyComponent<{}>>('./app')}
+          {...props}
+        />}
+    />
   </Router>,
   document.getElementById('app')
 );

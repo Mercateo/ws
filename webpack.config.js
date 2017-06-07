@@ -5,7 +5,7 @@ const WebpackNodeExternals = require('webpack-node-externals');
 const babelConfig = {
   presets: [
     ['babel-preset-env', {
-      targets: { node: 6.9 },
+      targets: { node: '6.10' },
       useBuiltIns: true
     }],
     'babel-preset-stage-0'
@@ -34,12 +34,10 @@ module.exports = {
   output: {
     path: path.join(__dirname, 'dist'),
     filename: 'index.js',
-    // don't use webpack:/// protocol for source maps
-    // devtoolModuleFilenameTemplate: () => './[resource-path]',
     sourcePrefix: ''  // removes tabs before multiline strings
   },
   module: {
-    loaders: [
+    rules: [
       {
         test: /\.ts(x?)$/,
         use: [
@@ -60,12 +58,6 @@ module.exports = {
               logLevel: 'warn'
             }
           }
-          // {
-          //   loader: 'awesome-typescript-loader',
-          //   options: {
-          //     silent: true
-          //   }
-          // }
         ]
       }
     ]

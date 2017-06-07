@@ -1,6 +1,9 @@
 import expect from 'expect';
 import React from 'react';
-import { NameComponent, ImageTestComponent } from 'ws-examples-browser-ts-react';
+import {
+  NameComponent,
+  ImageTestComponent
+} from 'ws-examples-browser-ts-react';
 import { SomeComponent } from 'ws-examples-browser-ts-react-i18n';
 import { AppComponent } from '../src/app';
 import { mount } from 'enzyme';
@@ -19,12 +22,11 @@ describe('test my code', () => {
 
     const locale = app.childAt(3);
     expect(locale.type()).toBe('p');
-    expect(locale.props().children).toEqual([ 'locale: ', 'de_DE' ]);
+    expect(locale.props().children).toEqual(['locale: ', 'de_DE']);
 
     const someComponent = app.childAt(7);
     expect(someComponent.type()).toBe(SomeComponent);
     expect(someComponent.props()).toEqual({});
-
 
     // .toEqual([
     //   <NameComponent a={1} b={2} name="_otbe_" />,

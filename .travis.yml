@@ -28,9 +28,8 @@ before_script:
   - test ! -d node_modules || npm prune
 
 script:
-  - npm run -s build
-  - npm run -s ws lint
-  - npm run test
+  - npm run test # also builds
+  - npm run -s ws -- lint
 
 after_script:
   - "sh -e /etc/init.d/xvfb stop"

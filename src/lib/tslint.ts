@@ -23,7 +23,9 @@ const defaultFilePatterns = [
 
 export async function lintAsync(filePatterns = defaultFilePatterns) {
   const filePaths = await globby(filePatterns);
-  const contents = await Promise.all(filePaths.map(filePath => fs.readFileAsync(filePath, 'utf8') as any)) as string[];
+  const contents = (await Promise.all(
+    filePaths.map(filePath => fs.readFileAsync(filePath, 'utf8') as any)
+  )) as string[];
 
   const results = filePaths.map((filePath, index) => {
     const content = contents[index];
@@ -34,8 +36,14 @@ export async function lintAsync(filePatterns = defaultFilePatterns) {
   });
 
   const errors = results.filter(result => !!result.errorCount);
-  const errorsCount = results.reduce((count, result) => count + result.failures.length, 0);
-  const fixesCount = results.reduce((count, result) => count + (result.fixes ? result.fixes.length : 0), 0);
+  const errorsCount = results.reduce(
+    (count, result) => count + result.failures.length,
+    0
+  );
+  const fixesCount = results.reduce(
+    (count, result) => count + (result.fixes ? result.fixes.length : 0),
+    0
+  );
 
   return { errors, errorsCount, fixesCount };
 }

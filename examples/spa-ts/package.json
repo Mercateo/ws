@@ -13,18 +13,19 @@
     }
   },
   "dependencies": {
-    "@types/react": "^15.0.23",
+    "@types/react": "^15.0.25",
     "@types/react-dom": "^15.5.0",
-    "normalize.css": "^4.2.0",
-    "react": "^15.0.0",
-    "react-dom": "^15.0.0",
+    "normalize.css": "^7.0.0",
+    "react": "^15.5.4",
+    "react-dom": "^15.5.4",
     "ws-examples-browser-ts-react": "file:../browser-ts-react"
   },
   "devDependencies": {
-    "@types/expect": "^1.13.29",
-    "@types/mocha": "^2.2.27",
+    "@types/expect": "^1.20.1",
+    "@types/mocha": "^2.2.41",
+    "@types/react-test-renderer": "^15.5.0",
     "expect": "^1.18.0",
-    "react-addons-test-utils": "^15.0.0",
-    "selenium-webdriver": "^2.53.2"
+    "react-test-renderer": "^15.5.4",
+    "selenium-webdriver": "^3.4.0"
   }
 }

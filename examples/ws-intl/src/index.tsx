@@ -5,7 +5,7 @@ export interface WsIntlProviderProps {
   messages: any;
 }
 
-export class WsIntlProvider extends Component<WsIntlProviderProps, {}> {
+export class WsIntlProvider extends Component<WsIntlProviderProps, {}> {
   static childContextTypes = {
     messages: PropTypes.any.isRequired
   };

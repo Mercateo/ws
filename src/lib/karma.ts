@@ -27,10 +27,12 @@ function toCustomLaunchersObject(customLaunchers: any, browser: any) {
 interface EnhancedConfigOptions extends ConfigOptions {
   // with mocha
   mochaReporter: {
-    showDiff: boolean
+    showDiff: boolean;
   };
   // with new formatError added in 1.3
-  formatError?(msg: string): string;
+  formatError?(
+    msg: string
+  ): string;
   // new in karma 1.5.0
   browserConsoleLogOptions: {
     level?: string;
@@ -46,22 +48,18 @@ const defaultConfig: EnhancedConfigOptions = {
   plugins: [
     'karma-mocha',
     'karma-phantomjs-launcher',
-    project.ws.type === 'electron' ? 'karma-electron' : 'karma-webdriver-launcher',
+    project.ws.type === 'electron'
+      ? 'karma-electron'
+      : 'karma-webdriver-launcher',
     'karma-sourcemap-loader',
     'karma-mocha-reporter'
   ],
-  frameworks: [
-    'mocha'
-  ],
-  reporters: [
-    'mocha'
-  ],
+  frameworks: ['mocha'],
+  reporters: ['mocha'],
   mochaReporter: {
     showDiff: true
   },
-  browsers: [
-    project.ws.type === 'electron' ? 'Electron' : 'PhantomJS'
-  ],
+  browsers: [project.ws.type === 'electron' ? 'Electron' : 'PhantomJS'],
   logLevel: 'WARN',
   browserConsoleLogOptions: {
     level: 'log',
@@ -94,11 +92,12 @@ export async function testAsync(options: { grid?: boolean } = {}) {
   debug(`Configure Karma...`);
   const karmaConfig = Object.assign({}, defaultConfig, {
     basePath: process.cwd(),
-    files: [
-      join(project.ws.distTestsDir, 'index.js')
-    ],
+    files: [join(project.ws.distTestsDir, 'index.js')],
     preprocessors: {
-      [join(project.ws.distTestsDir, 'index.js')]: (project.ws.type === 'electron' ? ['electron'] : []).concat(['sourcemap'])
+      [join(project.ws.distTestsDir, 'index.js')]: (project.ws.type ===
+        'electron'
+        ? ['electron']
+        : []).concat(['sourcemap'])
     }
   });
 
@@ -122,7 +121,7 @@ export async function testAsync(options: { grid?: boolean } = {}) {
   }
 
   return new Promise<number>(resolve => {
-    const server = new Server(karmaConfig, (exitCode) => {
+    const server = new Server(karmaConfig, exitCode => {
       debug(`Karma finished.`);
       if (sauceConnectProcess) {
         debug(`Tries to close Sauce Connect.`);

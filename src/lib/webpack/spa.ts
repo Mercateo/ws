@@ -1,4 +1,24 @@
-import { WebpackSingleConfig, outputDev, getModuleConfig, indexHtmlPlugin, extractCssPlugin, loaderOptionsPlugin, resolveLoader, resolve, devtool, outputRelease, extractCssHashPlugin, defineProductionPlugin, minifyJsPlugin, productionOptionsPlugin, devtoolProduction, outputTest, enzymeExternals, nodeSourceMapEntry, externalsNode } from './options';
+import {
+  WebpackSingleConfig,
+  outputDev,
+  getModuleConfig,
+  indexHtmlPlugin,
+  extractCssPlugin,
+  loaderOptionsPlugin,
+  resolveLoader,
+  resolve,
+  devtool,
+  outputRelease,
+  extractCssHashPlugin,
+  defineProductionPlugin,
+  minifyJsPlugin,
+  productionOptionsPlugin,
+  devtoolProduction,
+  outputTest,
+  enzymeExternals,
+  nodeSourceMapEntry,
+  externalsNode
+} from './options';
 import { project } from '../../project';
 import { optimize } from 'webpack';
 
@@ -11,11 +31,7 @@ export const getSpaDevOptions = (): WebpackSingleConfig => ({
     filename: '[name].js'
   },
   module: getModuleConfig('build'),
-  plugins: [
-    indexHtmlPlugin,
-    extractCssPlugin,
-    loaderOptionsPlugin
-  ],
+  plugins: [indexHtmlPlugin, extractCssPlugin, loaderOptionsPlugin],
   externals: [],
   performance: {
     hints: false
@@ -54,10 +70,7 @@ export const spaUnitOptions: WebpackSingleConfig = {
   entry: project.ws.unitEntry,
   output: outputTest,
   module: getModuleConfig('unit'),
-  plugins: [
-    extractCssPlugin,
-    loaderOptionsPlugin
-  ],
+  plugins: [extractCssPlugin, loaderOptionsPlugin],
   externals: enzymeExternals,
   performance: {
     hints: false
@@ -68,10 +81,7 @@ export const spaUnitOptions: WebpackSingleConfig = {
 };
 
 export const spaE2eOptions: WebpackSingleConfig = {
-  entry: [
-    nodeSourceMapEntry,
-    project.ws.e2eEntry
-  ],
+  entry: [nodeSourceMapEntry, project.ws.e2eEntry],
   output: {
     ...outputTest,
     libraryTarget: 'commonjs2'

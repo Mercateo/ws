@@ -1,5 +1,21 @@
 import { project } from '../../project';
-import { WebpackSingleConfig, outputDev, getModuleConfig, extractCssPlugin, loaderOptionsPlugin, externalsBrowser, resolveLoader, resolve, devtool, outputRelease, defineProductionPlugin, minifyJsPlugin, devtoolProduction, outputTest, enzymeExternals } from './options';
+import {
+  WebpackSingleConfig,
+  outputDev,
+  getModuleConfig,
+  extractCssPlugin,
+  loaderOptionsPlugin,
+  externalsBrowser,
+  resolveLoader,
+  resolve,
+  devtool,
+  outputRelease,
+  defineProductionPlugin,
+  minifyJsPlugin,
+  devtoolProduction,
+  outputTest,
+  enzymeExternals
+} from './options';
 
 export const getBrowserDevOptions = (): WebpackSingleConfig => ({
   entry: project.ws.srcEntry,
@@ -12,10 +28,7 @@ export const getBrowserDevOptions = (): WebpackSingleConfig => ({
     library: project.name
   },
   module: getModuleConfig('build'),
-  plugins: [
-    extractCssPlugin,
-    loaderOptionsPlugin
-  ],
+  plugins: [extractCssPlugin, loaderOptionsPlugin],
   externals: externalsBrowser,
   performance: {
     hints: false
@@ -56,10 +69,7 @@ export const getBrowserUnitOptions = (): WebpackSingleConfig => ({
   },
   // module: moduleBrowser,
   module: getModuleConfig('unit'),
-  plugins: [
-    extractCssPlugin,
-    loaderOptionsPlugin
-  ],
+  plugins: [extractCssPlugin, loaderOptionsPlugin],
   externals: enzymeExternals,
   performance: {
     hints: false

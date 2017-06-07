@@ -47,7 +47,7 @@ function isVerbose(): boolean {
 function optionallyProfile(options: WebpackConfig) {
   if (isVerbose()) {
     if (Array.isArray(options)) {
-      options.map(option => option.profile = true);
+      options.map(option => (option.profile = true));
     } else {
       options.profile = true;
     }
@@ -55,7 +55,9 @@ function optionallyProfile(options: WebpackConfig) {
 }
 
 function stringifyStats(stats: any): string {
-  const stringifierOptions = isVerbose() ? verboseStatsStringifierOptions : statsStringifierOptions;
+  const stringifierOptions = isVerbose()
+    ? verboseStatsStringifierOptions
+    : statsStringifierOptions;
   return stats.toString(stringifierOptions);
 }
 
@@ -64,7 +66,9 @@ function getModules(stats: any): Array<any> {
   const isMultiStats = !!stats.stats;
   if (isMultiStats) {
     let modules: Array<any> = [];
-    stats.stats.forEach((stats: any) => modules = modules.concat(stats.compilation.modules));
+    stats.stats.forEach(
+      (stats: any) => (modules = modules.concat(stats.compilation.modules))
+    );
     return modules;
   } else {
     return stats.compilation.modules;
@@ -72,7 +76,13 @@ function getModules(stats: any): Array<any> {
 }
 
 // error handling taken from https://webpack.github.io/docs/node.js-api.html#error-handling
-function onBuild(resolve: any, reject: any, err: any, stats: compiler.Stats, watcher?: any) {
+function onBuild(
+  resolve: any,
+  reject: any,
+  err: any,
+  stats: compiler.Stats,
+  watcher?: any
+) {
   if (err) {
     // "hard" error
     return reject(err);
@@ -96,7 +106,12 @@ function onBuild(resolve: any, reject: any, err: any, stats: compiler.Stats, wat
 }
 
 // error handling taken from https://webpack.github.io/docs/node.js-api.html#error-handling
-async function onChange(err: any, stats: compiler.Stats, livereloadServer: any, onChangeSuccess?: any) {
+async function onChange(
+  err: any,
+  stats: compiler.Stats,
+  livereloadServer: any,
+  onChangeSuccess?: any
+) {
   if (err) {
     // "hard" error
     return error(err);
@@ -121,9 +136,14 @@ async function onChange(err: any, stats: compiler.Stats, livereloadServer: any, 
 
   // filter changes for live reloading
   const modules = getModules(stats);
-  const changedModules = modules.filter((module: any) => module.built && module.resource);
-  const changedStyleModules = changedModules.filter((module: any) => module.resource.match(/\.(css|less|sass)$/));
-  let hasOnlyStyleChanges = changedModules.length === changedStyleModules.length;
+  const changedModules = modules.filter(
+    (module: any) => module.built && module.resource
+  );
+  const changedStyleModules = changedModules.filter((module: any) =>
+    module.resource.match(/\.(css|less|sass)$/)
+  );
+  let hasOnlyStyleChanges =
+    changedModules.length === changedStyleModules.length;
   if (hasOnlyStyleChanges) {
     livereloadServer.refresh('style.css');
   } else {
@@ -139,7 +159,11 @@ export function compileAsync(options: WebpackConfig) {
   });
 }
 
-export function watchAsync(livereloadServer: any, options: WebpackConfig, onChangeSuccess?: (stats: compiler.Stats) => void) {
+export function watchAsync(
+  livereloadServer: any,
+  options: WebpackConfig,
+  onChangeSuccess?: (stats: compiler.Stats) => void
+) {
   optionallyProfile(options);
   const compiler = webpack(options);
   let isInitialBuild = true;

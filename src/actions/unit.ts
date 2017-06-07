@@ -15,7 +15,11 @@ import { getBrowserUnitOptions } from '../lib/webpack/browser';
 export default async function unit(options: any) {
   const hasUnitTests = await existsAsync(project.ws.unitEntry);
   if (!hasUnitTests) {
-    warn(`${yellow('warn!')} You tried to run unit tests, but ${yellow(project.ws.unitEntry)} doesn't exist.`);
+    warn(
+      `${yellow('warn!')} You tried to run unit tests, but ${yellow(
+        project.ws.unitEntry
+      )} doesn't exist.`
+    );
     return;
   }
 

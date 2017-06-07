@@ -6,20 +6,20 @@
   version "0.22.1"
   resolved "https://registry.yarnpkg.com/@types/cheerio/-/cheerio-0.22.1.tgz#740c4cd8c4d3f3074f83b9ab62e711eac2c764ce"
 
-"@types/enzyme@^2.7.9":
-  version "2.7.9"
-  resolved "https://registry.yarnpkg.com/@types/enzyme/-/enzyme-2.7.9.tgz#2d9cb8c6addb3483e9034a47e38eda9301186535"
+"@types/enzyme@^2.8.0":
+  version "2.8.0"
+  resolved "https://registry.yarnpkg.com/@types/enzyme/-/enzyme-2.8.0.tgz#84c6204cf89831223a89ab6dc3f490b1e0886352"
   dependencies:
     "@types/cheerio" "*"
     "@types/react" "*"
 
-"@types/expect@^1.13.29":
-  version "1.13.30"
-  resolved "https://registry.yarnpkg.com/@types/expect/-/expect-1.13.30.tgz#1b09a2794de06ee5e9dc15db1d531f49960e4a6f"
+"@types/expect@^1.20.1":
+  version "1.20.1"
+  resolved "https://registry.yarnpkg.com/@types/expect/-/expect-1.20.1.tgz#db794c8a2127e302ed341221a0cba83d51c4e5fc"
 
-"@types/mocha@^2.2.27":
-  version "2.2.33"
-  resolved "https://registry.yarnpkg.com/@types/mocha/-/mocha-2.2.33.tgz#d79a0061ec270379f4d9e225f4096fb436669def"
+"@types/mocha@^2.2.41":
+  version "2.2.41"
+  resolved "https://registry.yarnpkg.com/@types/mocha/-/mocha-2.2.41.tgz#e27cf0817153eb9f2713b2d3f6c68f1e1c3ca608"
 
 "@types/prop-types@^15.5.1":
   version "15.5.1"
@@ -31,9 +31,9 @@
   dependencies:
     "@types/react" "*"
 
-"@types/react@*", "@types/react@^15.0.23":
-  version "15.0.23"
-  resolved "https://registry.yarnpkg.com/@types/react/-/react-15.0.23.tgz#f3facbef5290610f54242f00308759d3a3c27346"
+"@types/react@*", "@types/react@^15.0.23", "@types/react@^15.0.25":
+  version "15.0.25"
+  resolved "https://registry.yarnpkg.com/@types/react/-/react-15.0.25.tgz#d396949cccc9a90b61755def9781e5aced9b2261"
 
 asap@~2.0.3:
   version "2.0.5"
@@ -177,17 +177,6 @@ expect@^1.18.0:
     object-inspect "^1.1.0"
     object-keys "^1.0.9"
     tmatch "^2.0.1"
-
-fbjs@^0.8.1, fbjs@^0.8.4:
-  version "0.8.6"
-  resolved "https://registry.yarnpkg.com/fbjs/-/fbjs-0.8.6.tgz#7eb67d6986b2d5007a9b6e92e0e7cb6f75cad290"
-  dependencies:
-    core-js "^1.0.0"
-    isomorphic-fetch "^2.1.1"
-    loose-envify "^1.0.0"
-    object-assign "^4.1.0"
-    promise "^7.1.1"
-    ua-parser-js "^0.7.9"
 
 fbjs@^0.8.9:
   version "0.8.12"
@@ -398,9 +387,9 @@ node-fetch@^1.0.1:
     encoding "^0.1.11"
     is-stream "^1.0.1"
 
-normalize.css@^4.2.0:
-  version "4.2.0"
-  resolved "https://registry.yarnpkg.com/normalize.css/-/normalize.css-4.2.0.tgz#21d66cc557154d4379fd1e079ec7de58a379b099"
+normalize.css@^7.0.0:
+  version "7.0.0"
+  resolved "https://registry.yarnpkg.com/normalize.css/-/normalize.css-7.0.0.tgz#abfb1dd82470674e0322b53ceb1aaf412938e4bf"
 
 nth-check@~1.0.1:
   version "1.0.1"
@@ -460,34 +449,36 @@ promise@^7.1.1:
   dependencies:
     asap "~2.0.3"
 
-prop-types@^15.5.4, prop-types@^15.5.8:
+prop-types@^15.5.4, prop-types@^15.5.7, prop-types@^15.5.8, prop-types@~15.5.7:
   version "15.5.8"
   resolved "https://registry.yarnpkg.com/prop-types/-/prop-types-15.5.8.tgz#6b7b2e141083be38c8595aa51fc55775c7199394"
   dependencies:
     fbjs "^0.8.9"
 
-react-addons-test-utils@^15.5.1:
-  version "15.5.1"
-  resolved "https://registry.yarnpkg.com/react-addons-test-utils/-/react-addons-test-utils-15.5.1.tgz#e0d258cda2a122ad0dff69f838260d0c3958f5f7"
+react-dom@^15.5.4:
+  version "15.5.4"
+  resolved "https://registry.yarnpkg.com/react-dom/-/react-dom-15.5.4.tgz#ba0c28786fd52ed7e4f2135fe0288d462aef93da"
   dependencies:
-    fbjs "^0.8.4"
-    object-assign "^4.1.0"
-
-react-dom@^15.0.0:
-  version "15.4.1"
-  resolved "https://registry.yarnpkg.com/react-dom/-/react-dom-15.4.1.tgz#d54c913261aaedb17adc20410d029dcc18a1344a"
-  dependencies:
-    fbjs "^0.8.1"
+    fbjs "^0.8.9"
     loose-envify "^1.1.0"
     object-assign "^4.1.0"
+    prop-types "~15.5.7"
 
-react@^15.0.0:
-  version "15.4.1"
-  resolved "https://registry.yarnpkg.com/react/-/react-15.4.1.tgz#498e918602677a3983cd0fd206dfe700389a0dd6"
+react-test-renderer@^15.5.4:
+  version "15.5.4"
+  resolved "https://registry.yarnpkg.com/react-test-renderer/-/react-test-renderer-15.5.4.tgz#d4ebb23f613d685ea8f5390109c2d20fbf7c83bc"
   dependencies:
-    fbjs "^0.8.4"
+    fbjs "^0.8.9"
+    object-assign "^4.1.0"
+
+react@^15.0.0, react@^15.5.4:
+  version "15.5.4"
+  resolved "https://registry.yarnpkg.com/react/-/react-15.5.4.tgz#fa83eb01506ab237cdc1c8c3b1cea8de012bf047"
+  dependencies:
+    fbjs "^0.8.9"
     loose-envify "^1.1.0"
     object-assign "^4.1.0"
+    prop-types "^15.5.7"
 
 readable-stream@^2.0.2:
   version "2.2.9"
@@ -537,18 +528,17 @@ whatwg-fetch@>=0.10.0:
 "ws-examples-browser-ts-react-i18n@file:../browser-ts-react-i18n":
   version "1.0.0"
   dependencies:
-    "@types/react" "^15.0.23"
+    "@types/react" "^15.0.25"
     "@types/react-dom" "^15.5.0"
     intl-messageformat "^1.3.0"
-    react "^15.0.0"
+    react "^15.5.4"
     ws-intl "file:../ws-intl"
 
 "ws-examples-browser-ts-react@file:../browser-ts-react":
   version "1.0.0"
   dependencies:
-    "@types/react" "^15.0.6"
-    "@types/react-dom" "^0.14.22"
-    react "^15.0.0"
+    "@types/react" "^15.0.25"
+    react "^15.5.4"
     ws-examples-browser-less "file:../browser-less"
     ws-examples-browser-ts "file:../browser-ts"
 
@@ -559,7 +549,7 @@ whatwg-fetch@>=0.10.0:
   version "1.0.0"
   dependencies:
     "@types/prop-types" "^15.5.1"
-    "@types/react" "^15.0.6"
-    "@types/react-dom" "^0.14.22"
+    "@types/react" "^15.0.23"
+    "@types/react-dom" "^15.5.0"
     prop-types "^15.5.8"
     react "^15.0.0"

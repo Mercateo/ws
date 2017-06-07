@@ -10,16 +10,29 @@ commander.version(pkg.version);
 commander.usage('<command> [options]');
 
 // global options
-const allowedLogLevels = Object.keys(levels).map(level => level.toLocaleLowerCase());
-commander.option('-l, --log-level <level>', 'set log level', (value) => {
-  if (allowedLogLevels.some(allowedValue => value === allowedValue)) {
-    return value;
-  } else {
-    throw `Your log level  ${yellow(value)} doesn't match any of the valid values: ${yellow(allowedLogLevels.join(', '))}.`;
-  }
-}, 'info');
+const allowedLogLevels = Object.keys(levels).map(level =>
+  level.toLocaleLowerCase()
+);
+commander.option(
+  '-l, --log-level <level>',
+  'set log level',
+  value => {
+    if (allowedLogLevels.some(allowedValue => value === allowedValue)) {
+      return value;
+    } else {
+      throw `Your log level ${yellow(
+        value
+      )} doesn't match any of the valid values: ${yellow(
+        allowedLogLevels.join(', ')
+      )}.`;
+    }
+  },
+  'info'
+);
 
-function handleAction(lazyAction: () => Promise<{ default: (options?: any) => Promise<any> }>) {
+function handleAction(
+  lazyAction: () => Promise<{ default: (options?: any) => Promise<any> }>
+) {
   return (options: any) => {
     // handle global options
     setLevel(levels[options.parent.logLevel.toUpperCase()]);
@@ -51,7 +64,10 @@ switch (project.ws.type) {
       .command('e2e')
       .alias('e')
       .description('run e2e tests')
-      .option('--browsers <browsers>', `browsers to used (comma separated list, e.g. 'ie-9,ff-36,chrome-41')`)
+      .option(
+        '--browsers <browsers>',
+        `browsers to used (comma separated list, e.g. 'ie-9,ff-36,chrome-41')`
+      )
       .action((...args) => {
         if (args.length === 2) {
           const [browsers, options] = args;
@@ -95,7 +111,11 @@ switch (project.ws.type) {
       .description('build the project')
       .action(handleAction(() => _import('./actions/build')));
 
-    if (project.ws.type === TYPE.SPA || project.ws.type === TYPE.BROWSER || project.ws.type === TYPE.ELECTRON) {
+    if (
+      project.ws.type === TYPE.SPA ||
+      project.ws.type === TYPE.BROWSER ||
+      project.ws.type === TYPE.ELECTRON
+    ) {
       buildCommand.option('-p, --production', 'create production build');
     }
 
@@ -128,7 +148,9 @@ switch (project.ws.type) {
 // handle unknown commands
 commander.on('*', (unknownCommand: string) => {
   commander.outputHelp();
-  throw `${yellow(unknownCommand)} is not a known command. You can see all supported commands above.`;
+  throw `${yellow(
+    unknownCommand
+  )} is not a known command. You can see all supported commands above.`;
 });
 
 // invoke commands

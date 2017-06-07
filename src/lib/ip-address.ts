@@ -7,7 +7,11 @@ export default function getIpAddress() {
   for (const devName in interfaces) {
     const iface = interfaces[devName];
     for (let alias of iface) {
-      if (alias.family === 'IPv4' && alias.address !== '127.0.0.1' && !alias.internal) {
+      if (
+        alias.family === 'IPv4' &&
+        alias.address !== '127.0.0.1' &&
+        !alias.internal
+      ) {
         return alias.address;
       }
     }

@@ -7,6 +7,8 @@ describe('test my spa', function() {
 
   it('should render my name component', async () => {
     await driver.get('localhost:8080');
-    expect(await driver.findElement(By.css('.name-component')).getText()).toBe('Hello _otbe_! Sum is 3.');
+    expect(await driver.findElement(By.css('.name-component')).getText()).toBe(
+      'Hello _otbe_! Sum is 3.'
+    );
   });
 });

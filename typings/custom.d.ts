@@ -4,6 +4,8 @@
 //   ensure: (paths: string[], callback: (require: <T>(path: string) => T) => void) => void;
 // };
 
+declare module 'prettier';
+
 declare module 'autoprefixer';
 
 declare function _import<T>(path: string): Promise<T>;
