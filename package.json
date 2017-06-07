@@ -1,6 +1,6 @@
 {
   "name": "@mercateo/ws",
-  "version": "2.0.0-2",
+  "version": "2.0.0-3",
   "main": "./dist/index.js",
   "description": "Scripts for building web projects.",
   "bin": {
@@ -79,6 +79,7 @@
     "openport": "0.0.4",
     "phantomjs-prebuilt": "^2.1.14",
     "postcss-loader": "^2.0.5",
+    "prettier": "^1.4.2",
     "properties": "^1.2.1",
     "resolve-from": "^3.0.0",
     "sauce-connect-launcher": "^1.2.2",
@@ -103,8 +104,7 @@
   "devDependencies": {
     "rimraf": "^2.6.1",
     "snapshot-dir": "^1.1.1",
-    "electron": "^1.6.10",
-    "prettier": "^1.4.2"
+    "electron": "^1.6.10"
   },
   "keywords": [
     "build",
