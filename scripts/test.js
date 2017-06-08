@@ -10,18 +10,18 @@ const snapshotSync = require('snapshot-dir').snapshotSync;
 const snapshotCompareSync = require('snapshot-dir').snapshotCompareSync;
 
 const examples = [
-  'ws-intl'
-  // 'browser-less',
-  // 'browser-ts',
-  // 'browser-ts-react',
-  // 'browser-ts-react-i18n',
-  // 'spa-ts',
-  // 'spa-ts-i18n',
-  // 'spa-ts-lazy-import',
-  // 'node-ts',
-  // 'node-ts-2',
-  // 'electron-ts',
-  // 'electron-ts-i18n'
+  'ws-intl',
+  'browser-less',
+  'browser-ts',
+  'browser-ts-react',
+  'browser-ts-react-i18n',
+  'spa-ts',
+  'spa-ts-i18n',
+  'spa-ts-lazy-import',
+  'node-ts',
+  'node-ts-2',
+  'electron-ts',
+  'electron-ts-i18n'
 ];
 
 const stdio = 'inherit';
