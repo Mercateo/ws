@@ -10,18 +10,18 @@ const snapshotSync = require('snapshot-dir').snapshotSync;
 const snapshotCompareSync = require('snapshot-dir').snapshotCompareSync;
 
 const examples = [
-  'ws-intl',
-  'browser-less',
-  'browser-ts',
-  'browser-ts-react',
-  'browser-ts-react-i18n',
-  'spa-ts',
-  'spa-ts-i18n',
-  'spa-ts-lazy-import',
-  'node-ts',
-  'node-ts-2',
-  'electron-ts',
-  'electron-ts-i18n'
+  'ws-intl'
+  // 'browser-less',
+  // 'browser-ts',
+  // 'browser-ts-react',
+  // 'browser-ts-react-i18n',
+  // 'spa-ts',
+  // 'spa-ts-i18n',
+  // 'spa-ts-lazy-import',
+  // 'node-ts',
+  // 'node-ts-2',
+  // 'electron-ts',
+  // 'electron-ts-i18n'
 ];
 
 const stdio = 'inherit';
@@ -33,7 +33,7 @@ examples.forEach(example => {
     // fresh start
     const cwd = join(process.cwd(), 'examples', example);
     const snapshotFile = join(cwd, 'snapshot.json');
-    let snapshotDir = join(cwd, 'dist-release')
+    let snapshotDir = join(cwd, 'dist-release');
     rimrafSync(join(cwd, 'node_modules'));
     rimrafSync(join(cwd, 'dist'));
     rimrafSync(join(cwd, 'dist-tests'));
@@ -43,10 +43,15 @@ examples.forEach(example => {
 
     // test commands
     execSync('npm run -s ws -- build', { cwd, stdio });
-    if (example.includes('spa') || example.includes('browser') || example.includes('electron') || example === 'ws-intl') {
+    if (
+      example.includes('spa') ||
+      example.includes('browser') ||
+      example.includes('electron') ||
+      example === 'ws-intl'
+    ) {
       execSync('npm run -s ws -- build --production', { cwd, stdio });
     } else {
-      snapshotDir = join(cwd, 'dist')
+      snapshotDir = join(cwd, 'dist');
     }
 
     // snapshotting
@@ -54,8 +59,12 @@ examples.forEach(example => {
       writeFileSync(snapshotFile, JSON.stringify(snapshotSync(snapshotDir)));
     }
 
-    if (snapshotCompareSync(snapshotDir, JSON.parse(readFileSync(snapshotFile)))) {
-     diff.push(example);
+    const dirDiff = snapshotCompareSync(
+      snapshotDir,
+      JSON.parse(readFileSync(snapshotFile))
+    );
+    if (dirDiff) {
+      diff.push({ name: example, diff: dirDiff });
     }
 
     execSync('npm run -s ws -- lint', { cwd, stdio });
@@ -81,8 +90,10 @@ examples.forEach(example => {
 });
 
 if (diff.length !== 0) {
-  console.log(`Content of dist-release diffs from snapshot for: `);
-  diff.map(example => console.log(`- ${example}`))
+  console.log(`Content of dist diffs from snapshot for: `);
+  diff.map(example => {
+    console.log(`- ${example.name}`, example.diff);
+  });
   console.log('If this is expected please delete snapshot.json');
   process.exit(1);
 } else {
