@@ -10,54 +10,56 @@ import {
 } from './options';
 import { BaseOptions } from '../../options';
 
-export const getElectronBuildConfig = (
+export const getElectronBuildConfig = async (
   options: BaseOptions
-): WebpackConfig[] => {
-  const mainConfig: WebpackConfig = {
+): Promise<WebpackConfig[]> => {
+  const mainConfig: WebpackConfig = await {
     ...baseConfig,
     ...electronMainConfig,
-    ...getEntryAndOutput('electron-main', 'build'),
+    ...await getEntryAndOutput('electron-main', 'build'),
     ...getModuleAndPlugins('electron-main', 'build', options),
     externals: externalsSpa // is this needed here?
   };
 
-  const rendererConfig: WebpackConfig = {
+  const rendererConfig: WebpackConfig = await {
     ...baseConfig,
     ...electronRendererConfig,
-    ...getEntryAndOutput('electron-renderer', 'build'),
+    ...await getEntryAndOutput('electron-renderer', 'build'),
     ...getModuleAndPlugins('electron-renderer', 'build', options),
     externals: externalsSpa // is this needed here?
   };
 
-  return [mainConfig, rendererConfig];
+  return Promise.resolve([mainConfig, rendererConfig]);
 };
 
-export const getElectronReleaseConfig = (
+export const getElectronReleaseConfig = async (
   options: BaseOptions
-): WebpackConfig[] => {
-  const mainConfig: WebpackConfig = {
+): Promise<WebpackConfig[]> => {
+  const mainConfig: WebpackConfig = await {
     ...baseConfig,
     ...electronMainConfig,
-    ...getEntryAndOutput('electron-main', 'build -p'),
+    ...await getEntryAndOutput('electron-main', 'build -p'),
     ...getModuleAndPlugins('electron-main', 'build -p', options),
     externals: externalsSpa // is this needed here?
   };
 
-  const rendererConfig: WebpackConfig = {
+  const rendererConfig: WebpackConfig = await {
     ...baseConfig,
     ...electronRendererConfig,
-    ...getEntryAndOutput('electron-renderer', 'build -p'),
+    ...await getEntryAndOutput('electron-renderer', 'build -p'),
     ...getModuleAndPlugins('electron-renderer', 'build -p', options),
     externals: externalsSpa // is this needed here?
   };
 
-  return [mainConfig, rendererConfig];
+  return Promise.resolve([mainConfig, rendererConfig]);
 };
 
-export const getElectronUnitConfig = (options: BaseOptions): WebpackConfig => ({
+export const getElectronUnitConfig = async (
+  options: BaseOptions
+): Promise<WebpackConfig> => ({
   ...baseConfig,
   ...electronRendererConfig,
-  ...getEntryAndOutput('electron-renderer', 'unit'),
+  ...await getEntryAndOutput('electron-renderer', 'unit'),
   ...getModuleAndPlugins('electron-renderer', 'unit', options),
   externals: enzymeExternals
 });

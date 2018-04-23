@@ -10,30 +10,38 @@ import {
 } from './options';
 import { BaseOptions } from '../../options';
 
-export const getSpaBuildConfig = (options: BaseOptions): WebpackConfig => ({
+export const getSpaBuildConfig = async (
+  options: BaseOptions
+): Promise<WebpackConfig> => ({
   ...baseConfig,
-  ...getEntryAndOutput('spa', 'build'),
+  ...await getEntryAndOutput('spa', 'build'),
   ...getModuleAndPlugins('spa', 'build', options),
   externals: externalsSpa
 });
 
-export const getSpaReleaseConfig = (options: BaseOptions): WebpackConfig => ({
+export const getSpaReleaseConfig = async (
+  options: BaseOptions
+): Promise<WebpackConfig> => ({
   ...baseConfig,
   ...releaseConfig,
-  ...getEntryAndOutput('spa', 'build -p'),
+  ...await getEntryAndOutput('spa', 'build -p'),
   ...getModuleAndPlugins('spa', 'build -p', options)
 });
 
-export const getSpaUnitConfig = (options: BaseOptions): WebpackConfig => ({
+export const getSpaUnitConfig = async (
+  options: BaseOptions
+): Promise<WebpackConfig> => ({
   ...baseConfig,
-  ...getEntryAndOutput('spa', 'unit'),
+  ...await getEntryAndOutput('spa', 'unit'),
   ...getModuleAndPlugins('spa', 'unit', options),
   externals: enzymeExternals
 });
 
-export const getSpaE2eConfig = (options: BaseOptions): WebpackConfig => ({
+export const getSpaE2eConfig = async (
+  options: BaseOptions
+): Promise<WebpackConfig> => ({
   ...baseConfig,
   ...nodeConfig,
-  ...getEntryAndOutput('node', 'e2e'),
+  ...await getEntryAndOutput('node', 'e2e'),
   ...getModuleAndPlugins('node', 'e2e', options)
 });

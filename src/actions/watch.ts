@@ -36,7 +36,7 @@ async function watchHot(options: WatchOptions) {
     await compileI18n();
   }
 
-  const config = getSpaBuildConfig(options);
+  const config = await getSpaBuildConfig(options);
   const { index } = config.entry;
   config.entry.index = [
     'react-hot-loader/patch',
@@ -89,7 +89,7 @@ export default async function watch(options: WatchOptions) {
     case TYPE.NODE:
       await watchAsync(
         livereloadServer,
-        getNodeBuildConfig(options),
+        await getNodeBuildConfig(options),
         'build',
         onChangeSuccess
       );
@@ -97,7 +97,7 @@ export default async function watch(options: WatchOptions) {
     case TYPE.ELECTRON:
       await watchAsync(
         livereloadServer,
-        getElectronBuildConfig(options),
+        await getElectronBuildConfig(options),
         'build',
         onChangeSuccess
       );
@@ -106,7 +106,7 @@ export default async function watch(options: WatchOptions) {
     case TYPE.SPA:
       await watchAsync(
         livereloadServer,
-        getSpaBuildConfig(options),
+        await getSpaBuildConfig(options),
         'build',
         onChangeSuccess
       );
@@ -115,7 +115,7 @@ export default async function watch(options: WatchOptions) {
     case TYPE.BROWSER:
       await watchAsync(
         livereloadServer,
-        getBrowserBuildConfig(options),
+        await getBrowserBuildConfig(options),
         'build',
         onChangeSuccess
       );

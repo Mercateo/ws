@@ -79,7 +79,7 @@ async function init(options: BaseOptions) {
   }
 
   await removeAsync(project.ws.distTestsDir);
-  await compileAsync(getSpaE2eConfig(options), 'e2e');
+  await compileAsync(await getSpaE2eConfig(options), 'e2e');
   debug(`Build E2E tests.`);
 
   // prepare selenium
@@ -128,7 +128,7 @@ async function init(options: BaseOptions) {
 }
 
 async function run(options: BaseOptions) {
-  const { output } = getSpaE2eConfig(options);
+  const { output } = await getSpaE2eConfig(options);
   const files = [join(output.path, 'index.js')];
   const exitCode = await testAsync(files);
   if (exitCode !== 0) {

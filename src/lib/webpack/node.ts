@@ -7,16 +7,20 @@ import {
 } from './options';
 import { BaseOptions } from '../../options';
 
-export const getNodeBuildConfig = (options: BaseOptions): WebpackConfig => ({
+export const getNodeBuildConfig = async (
+  options: BaseOptions
+): Promise<WebpackConfig> => ({
   ...baseConfig,
   ...nodeConfig,
-  ...getEntryAndOutput('node', 'build'),
+  ...await getEntryAndOutput('node', 'build'),
   ...getModuleAndPlugins('node', 'build', options)
 });
 
-export const getNodeUnitConfig = (options: BaseOptions): WebpackConfig => ({
+export const getNodeUnitConfig = async (
+  options: BaseOptions
+): Promise<WebpackConfig> => ({
   ...baseConfig,
   ...nodeConfig,
-  ...getEntryAndOutput('node', 'unit'),
+  ...await getEntryAndOutput('node', 'unit'),
   ...getModuleAndPlugins('node', 'unit', options)
 });
