@@ -1,5 +1,9 @@
 The changelog is currently handwritten.
 
+# 2.10.0 (2018-04-24)
+
+- Allow setting `testsPattern?: string | string[];` in your `ws` config as an alternative way to specify unit tests.
+
 # 2.9.3 (2018-01-16)
 
 - Try to prevent another hanging running webpack process.
