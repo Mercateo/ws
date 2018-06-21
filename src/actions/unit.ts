@@ -1,5 +1,6 @@
 import { warn } from 'loglevel';
 import path from 'path';
+import { execSync } from 'child_process';
 import { removeAsync, existsAsync } from 'fs-extra-promise';
 import chalk from 'chalk';
 import { project, TYPE } from '../project';
@@ -20,6 +21,26 @@ export interface UnitOptions extends BaseOptions {
 }
 
 export default async function unit(options: UnitOptions) {
+  // we slowly migrate to using jest, exit old logic and use jest directly, if possible
+  if (project.devDependencies && project.devDependencies.jest) {
+    const stdio = 'inherit';
+    const cwd = process.cwd();
+    warn(
+      `${yellow(
+        'warn!'
+      )} Consider running Jest directly for a small performance improvement and better configuration.`
+    );
+    warn(
+      `You could add ${yellow(
+        '"unit": "jest --config tests/jest.config.js"'
+      )} to your package.json's ${yellow(
+        '"section"'
+      )} section and use it as ${yellow('$ yarn unit')}.`
+    );
+    execSync('yarn jest --config tests/jest.config.js', { cwd, stdio });
+    return;
+  }
+
   const hasUnitTests = await existsAsync(project.ws.unitEntry);
   if (!hasUnitTests) {
     warn(

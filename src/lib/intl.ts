@@ -2,7 +2,7 @@ import globby from 'globby';
 import { join, basename, dirname } from 'path';
 import { resolve } from './resolve';
 
-interface LocaleMap {
+export interface LocaleMap {
   [s: string]: boolean;
 }
 

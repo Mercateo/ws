@@ -1,5 +1,10 @@
 The changelog is currently handwritten.
 
+# HEAD
+
+- Add initial config for Jest and expose Babel config via `import { getJestConfig, getBabelConfig } from '@mercateo/ws'`.
+- Made Node 8.9 the new minimum Node version for ws itself as well as the default value for Node projects build with the ws tool.
+
 # 2.10.0 (2018-04-24)
 
 - Allow setting `testsPattern?: string | string[];` in your `ws` config as an alternative way to specify unit tests.

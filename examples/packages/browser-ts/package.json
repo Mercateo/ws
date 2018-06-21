@@ -5,13 +5,13 @@
   "webpack": "src/index.ts",
   "private": true,
   "scripts": {
-    "ws": "node ../../../bin/ws"
+    "ws": "node ../../../bin/ws",
+    "unit": "jest --config tests/jest.config.js"
   },
   "ws": {
     "type": "browser",
     "targets": {
-      "browsers":
-        "last 2 Chrome versions, last 1 Safari versions, last 2 Firefox versions, Explorer 9-11"
+      "browsers": "last 2 Chrome versions, last 1 Safari versions, last 2 Firefox versions, Explorer 9-11"
     },
     "selenium": {
       "host": "ondemand.saucelabs.com",
@@ -23,8 +23,7 @@
   },
   "typings": "dist-release/src/index.d.ts",
   "devDependencies": {
-    "@types/expect": "^1.13.29",
-    "@types/mocha": "^2.2.27",
-    "expect": "^1.18.0"
+    "@types/jest": "^23.1.1",
+    "jest": "^23.1.0"
   }
 }

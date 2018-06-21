@@ -7,7 +7,7 @@ const babelConfig = {
     [
       'babel-preset-env',
       {
-        targets: { node: '6.10' },
+        targets: { node: '8.9' },
         useBuiltIns: true
       }
     ],
@@ -32,6 +32,7 @@ module.exports = {
   output: {
     path: path.join(__dirname, 'dist'),
     filename: 'index.js',
+    libraryTarget: 'commonjs2',
     sourcePrefix: '' // removes tabs before multiline strings
   },
   module: {
@@ -41,7 +42,7 @@ module.exports = {
         use: [
           {
             loader: 'babel-loader',
-            options: Object.assign({}, babelConfig, { cacheDirectory: true })
+            options: { ...babelConfig, cacheDirectory: true }
           },
           {
             loader: 'ts-loader',
