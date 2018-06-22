@@ -1,5 +1,4 @@
-import expect from 'expect';
-import { add } from '../src/index';
+import { add } from '../src';
 
 describe('test my code', () => {
   it('should add two numbers', () => {

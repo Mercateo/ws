@@ -232,6 +232,10 @@ export interface PackageConfig {
    */
   dependencies?: { [dependency: string]: string };
   /**
+   * The devDependencies of your project.
+   */
+  devDependencies?: { [dependency: string]: string };
+  /**
    * Flags if this package is private.
    */
   private?: boolean;
@@ -346,7 +350,7 @@ export function validate(pkg: any): PackageConfig {
   }
 
   if (!pkg.ws.targets.node) {
-    pkg.ws.targets.node = '6.10';
+    pkg.ws.targets.node = '8.9';
   }
 
   if (!pkg.ws.targets.browsers) {

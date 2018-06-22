@@ -4,9 +4,8 @@
     "moduleResolution": "node",
     "experimentalDecorators": true,
     "allowSyntheticDefaultImports": true,
-    "types": []
-  },
-  "include": [
-    "src"
-  ]
+    "types": [
+      "jest"
+    ]
+  }
 }

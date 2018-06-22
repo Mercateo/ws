@@ -10,11 +10,11 @@ import { project, I18nConfig } from '../../project';
 
 const parser = require('intl-messageformat-parser');
 
-interface TranslationMap {
+export interface TranslationMap {
   [key: string]: string;
 }
 
-interface AstMap {
+export interface AstMap {
   [key: string]: any;
 }
 
