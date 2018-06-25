@@ -1,6 +1,6 @@
 The changelog is currently handwritten.
 
-# HEAD
+# 2.11.0 (2018-06-25)
 
 - Add initial config for Jest and expose Babel config via `import { getJestConfig, getBabelConfig } from '@mercateo/ws'`.
 - Made Node 8.9 the new minimum Node version for ws itself as well as the default value for Node projects build with the ws tool.
