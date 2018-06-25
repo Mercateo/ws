@@ -1,5 +1,3 @@
-import { join } from 'path';
-
 export const getJestConfig = () => ({
   testMatch: ['**/*.+(ts|tsx|js|jsx)'],
   // roots: ['<rootDir>/../src', '<rootDir>/../tests'],

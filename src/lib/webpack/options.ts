@@ -489,7 +489,9 @@ export const getEntryAndOutput = async (target: Target, command: Command) => {
   } else if (target === 'spa') {
     output.libraryTarget = 'umd'; // is this needed?
   } else if (target === 'node') {
-    const currentEntry = Array.isArray(entry.index) ? entry.index : [entry.index as string];
+    const currentEntry = Array.isArray(entry.index)
+      ? entry.index
+      : [entry.index as string];
     entry.index = [nodeSourceMapEntry, ...currentEntry];
     output.libraryTarget = 'commonjs2';
   } else if (target === 'electron-main') {
