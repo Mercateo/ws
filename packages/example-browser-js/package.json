@@ -1,0 +1,21 @@
+{
+  "name": "example-browser-js",
+  "version": "1.0.0",
+  "main": "dist-release/index.js",
+  "webpack": "src/index.js",
+  "private": true,
+  "scripts": {
+    "ws": "ws"
+  },
+  "ws": {
+    "type": "browser",
+    "targets": {
+      "browsers":
+        "last 2 Chrome versions, last 1 Safari versions, last 2 Firefox versions, Explorer 9-11"
+    }
+  },
+  "devDependencies": {
+    "@mercateo/ws": "link:../ws",
+    "expect": "^1.18.0"
+  }
+}

@@ -1,0 +1,16 @@
+{
+  "name": "example-browser-less",
+  "version": "1.0.0",
+  "main": "dist/index.js",
+  "webpack": "src/index.js",
+  "private": true,
+  "scripts": {
+    "ws": "ws"
+  },
+  "ws": {
+    "type": "browser"
+  },
+  "devDependencies": {
+    "@mercateo/ws": "link:../ws"
+  }
+}

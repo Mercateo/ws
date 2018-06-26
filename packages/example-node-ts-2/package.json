@@ -1,0 +1,24 @@
+{
+  "name": "example-node-ts-2",
+  "version": "1.0.0",
+  "main": "dist/index.js",
+  "webpack": "src/index.ts",
+  "typings": "dist/index.d.ts",
+  "private": true,
+  "scripts": {
+    "ws": "ws"
+  },
+  "ws": {
+    "type": "node"
+  },
+  "dependencies": {
+    "@types/node": "^4.0.29",
+    "example-node-ts": "*"
+  },
+  "devDependencies": {
+    "@mercateo/ws": "link:../ws",
+    "@types/expect": "^1.13.29",
+    "@types/mocha": "^2.2.27",
+    "expect": "^1.18.0"
+  }
+}

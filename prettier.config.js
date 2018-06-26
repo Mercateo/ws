@@ -1,5 +1,1 @@
-module.exports = {
-  arrowParens: 'always',
-  singleQuote: true,
-  parser: 'typescript'
-};
+module.exports = require('./packages/ws/prettier.config');

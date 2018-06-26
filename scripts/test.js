@@ -5,29 +5,32 @@ const execSync = require('child_process').execSync;
 const rimrafSync = require('rimraf').sync;
 
 const examples = [
-  'browser-js',
-  'browser-less',
-  'browser-ts',
-  'browser-ts-react',
-  'browser-ts-react-i18n',
-  'node-ts',
-  'node-ts-2',
-  // 'electron-ts',
-  // 'electron-ts-i18n',
-  'spa-ts',
-  'spa-ts-i18n',
-  'spa-ts-lazy-import'
+  'example-browser-js',
+  'example-browser-less',
+  'example-browser-ts',
+  'example-browser-ts-react',
+  'example-browser-ts-react-i18n',
+  'example-node-ts',
+  'example-node-ts-2',
+  // 'example-electron-ts',
+  // 'example-electron-ts-i18n',
+  'example-spa-ts',
+  'example-spa-ts-i18n',
+  'example-spa-ts-lazy-import'
 ];
 
 const stdio = 'inherit';
 
-execSync('yarn', { cwd: join(process.cwd(), 'examples'), stdio });
+execSync('yarn', { stdio });
+
+execSync('yarn build', { cwd: join(process.cwd(), 'packages', 'ws'), stdio });
+execSync('yarn ws lint', { cwd: join(process.cwd(), 'packages', 'ws'), stdio });
 
 examples.forEach((example) => {
   console.log(`Update "${example}":`);
   try {
     // fresh start
-    const cwd = join(process.cwd(), 'examples', 'packages', example);
+    const cwd = join(process.cwd(), 'packages', example);
     rimrafSync(join(cwd, 'dist'));
     rimrafSync(join(cwd, 'dist-tests'));
     rimrafSync(join(cwd, 'dist-release'));
