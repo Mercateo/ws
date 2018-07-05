@@ -13,5 +13,8 @@
     "javascriptreact",
     { "language": "typescript", "autoFix": true },
     { "language": "typescriptreact", "autoFix": true }
-  ]
+  ],
+  "files.associations": {
+    ".babelrc": "jsonc"
+  }
 }

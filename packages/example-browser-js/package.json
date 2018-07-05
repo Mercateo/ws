@@ -5,7 +5,8 @@
   "webpack": "src/index.js",
   "private": true,
   "scripts": {
-    "ws": "ws"
+    "ws": "ws",
+    "unit": "jest --config tests/jest.config.js"
   },
   "ws": {
     "type": "browser",
@@ -16,6 +17,6 @@
   },
   "devDependencies": {
     "@mercateo/ws": "link:../ws",
-    "expect": "^1.18.0"
+    "jest": "^23.3.0"
   }
 }
