@@ -10,11 +10,10 @@
   "scripts": {
     "build": "rimraf dist/ && webpack",
     "ws": "node ./bin/ws.js",
-    "preversion": "yarn build && yarn ws lint",
-    "prerelease": "npm version prerelease && git push && npm publish --tag next --access public",
-    "patch": "npm version patch && git push && npm publish --access public",
-    "minor": "npm version minor && git push && npm publish --access public",
-    "major": "npm version major && git push && npm publish --access public"
+    "preversion": "yarn build && yarn ws lint"
+  },
+  "publishConfig": {
+    "access": "public"
   },
   "ws": {
     "type": "node"

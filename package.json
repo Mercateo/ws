@@ -5,7 +5,8 @@
     "build:production": "lerna run --concurrency 1 --stream --scope example-node-* -- ws build && lerna run --concurrency 1 --stream --ignore example-node-* -- ws build -- --production",
     "build": "lerna run --scope @mercateo/* -- build && lerna run --concurrency 1 --stream -- ws build",
     "unit": "lerna run --concurrency 1 --stream --ignore example-electron-* -- ws unit",
-    "test": "node scripts/test.js"
+    "test": "node scripts/test.js",
+    "release": "workspace-version"
   },
   "workspaces": [
     "packages/*"
@@ -16,6 +17,7 @@
   },
   "devDependencies": {
     "lerna": "2.5.1",
-    "rimraf": "^2.6.2"
+    "rimraf": "^2.6.2",
+    "workspace-release": "^0.4.4"
   }
 }
