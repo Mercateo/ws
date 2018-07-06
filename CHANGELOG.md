@@ -1,5 +1,6 @@
 The changelog is currently handwritten.
 
+# 2.11.2 (2018-07-06)
 # 2.11.1 (2018-07-06)
 
 - Try [`workspace-release`](https://github.com/donaldpipowitch/workspace-release).

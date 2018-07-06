@@ -14,6 +14,14 @@ before_install:
 script:
   - yarn test # also builds
 
+jobs:
+  include:
+    - stage: deploy
+      script:
+        # publish on tag
+        - if [ -n "$TRAVIS_TAG" ]; then node node_modules/.bin/workspace-publish; fi
+      node: "9"
+
 env:
   global:
     # SAUCE_USERNAME
