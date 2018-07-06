@@ -1,5 +1,9 @@
 The changelog is currently handwritten.
 
+# 2.11.1 (2018-07-06)
+
+- Try [`workspace-release`](https://github.com/donaldpipowitch/workspace-release).
+
 # 2.11.0 (2018-06-25)
 
 - Add initial config for Jest and expose Babel config via `import { getJestConfig, getBabelConfig } from '@mercateo/ws'`.
