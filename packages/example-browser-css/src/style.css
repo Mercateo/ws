@@ -1,8 +1,5 @@
-@coolColor: #0038ab;
-@otherColor: #22ff00;
-
 p {
-  color: @coolColor;
+  color: '#0038a';
 }
 
 .some-image {

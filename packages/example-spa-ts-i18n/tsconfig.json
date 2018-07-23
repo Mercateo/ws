@@ -9,7 +9,7 @@
     "noImplicitThis": true,
     "strictNullChecks": true,
     "jsx": "react",
-    "types": ["mocha"]
+    "types": ["jest"]
   },
   "exclude": ["node_modules"]
 }

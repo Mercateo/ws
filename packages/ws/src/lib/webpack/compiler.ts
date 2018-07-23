@@ -6,6 +6,9 @@ import { Server } from 'livereload';
 import { WebpackConfig, Command } from './options';
 
 const statsStringifierOptions: compiler.StatsToStringOptions = {
+  // ignore warning, because we use transpileOnly
+  // https://github.com/TypeStrong/ts-loader/commit/eb8bbf8e11779487d3af527f8b70644316075ee8
+  warningsFilter: /export .* was not found in/,
   // minimal logging
   assets: false,
   colors: true,
@@ -186,17 +189,6 @@ export function watchAsync(
   onChangeSuccess?: (stats: compiler.Stats) => void
 ) {
   const compiler = getCompiler(options, command);
-
-  // workaround for too many initial builds
-  // see https://github.com/webpack/watchpack/issues/25#issuecomment-319292564
-  const timefix = 11000;
-  compiler.plugin('watch-run', (watching, callback) => {
-    watching.startTime += timefix;
-    callback();
-  });
-  compiler.plugin('done', (stats) => {
-    stats.startTime -= timefix;
-  });
 
   let isInitialBuild = true;
   let hash: any;

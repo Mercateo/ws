@@ -6,7 +6,7 @@
     "allowSyntheticDefaultImports": true,
     "jsx": "react",
     "types": [
-      "mocha"
+      "jest"
     ]
   },
   "exclude": [

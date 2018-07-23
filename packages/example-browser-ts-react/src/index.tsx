@@ -1,7 +1,7 @@
 import React, { Component } from 'react';
 import { add } from 'example-browser-ts';
 
-require('./style.less');
+require('./style.css');
 const smileSrc = require('./smile.png');
 
 /**

@@ -25,7 +25,8 @@ export const getBrowserReleaseConfig = async (
   ...releaseConfig,
   ...await getEntryAndOutput('browser', 'build -p'),
   ...getModuleAndPlugins('browser', 'build -p', options),
-  externals: externalsBrowser
+  externals: externalsBrowser,
+  mode: 'production'
 });
 
 export const getBrowserUnitConfig = async (

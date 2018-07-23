@@ -3,7 +3,7 @@
   "scripts": {
     "lint": "lerna run --concurrency 1 --stream -- ws lint",
     "build:production": "lerna run --concurrency 1 --stream --scope example-node-* -- ws build && lerna run --concurrency 1 --stream --ignore example-node-* -- ws build -- --production",
-    "build": "lerna run --scope @mercateo/* -- build && lerna run --concurrency 1 --stream -- ws build",
+    "build": "lerna run --scope @mercateo/* -- build && lerna run --concurrency 1 --stream --ignore @mercateo/ws* -- ws build",
     "unit": "lerna run --concurrency 1 --stream --ignore example-electron-* -- ws unit",
     "test": "node scripts/test.js",
     "release": "workspace-version"
@@ -12,8 +12,7 @@
     "packages/*"
   ],
   "resolutions": {
-    "**/@types/react": "^15.0.0",
-    "**/react": "^15.0.0"
+    "**/@types/react": "^16.0.0"
   },
   "devDependencies": {
     "lerna": "2.5.1",

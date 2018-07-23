@@ -13,7 +13,7 @@ import { BaseOptions } from '../../options';
 export const getElectronBuildConfig = async (
   options: BaseOptions
 ): Promise<WebpackConfig[]> => {
-  const mainConfig: WebpackConfig = await {
+  const mainConfig: WebpackConfig = {
     ...baseConfig,
     ...electronMainConfig,
     ...await getEntryAndOutput('electron-main', 'build'),
@@ -21,7 +21,7 @@ export const getElectronBuildConfig = async (
     externals: externalsSpa // is this needed here?
   };
 
-  const rendererConfig: WebpackConfig = await {
+  const rendererConfig: WebpackConfig = {
     ...baseConfig,
     ...electronRendererConfig,
     ...await getEntryAndOutput('electron-renderer', 'build'),
@@ -35,20 +35,22 @@ export const getElectronBuildConfig = async (
 export const getElectronReleaseConfig = async (
   options: BaseOptions
 ): Promise<WebpackConfig[]> => {
-  const mainConfig: WebpackConfig = await {
+  const mainConfig: WebpackConfig = {
     ...baseConfig,
     ...electronMainConfig,
     ...await getEntryAndOutput('electron-main', 'build -p'),
     ...getModuleAndPlugins('electron-main', 'build -p', options),
-    externals: externalsSpa // is this needed here?
+    externals: externalsSpa, // is this needed here?
+    mode: 'production'
   };
 
-  const rendererConfig: WebpackConfig = await {
+  const rendererConfig: WebpackConfig = {
     ...baseConfig,
     ...electronRendererConfig,
     ...await getEntryAndOutput('electron-renderer', 'build -p'),
     ...getModuleAndPlugins('electron-renderer', 'build -p', options),
-    externals: externalsSpa // is this needed here?
+    externals: externalsSpa, // is this needed here?
+    mode: 'production'
   };
 
   return Promise.resolve([mainConfig, rendererConfig]);

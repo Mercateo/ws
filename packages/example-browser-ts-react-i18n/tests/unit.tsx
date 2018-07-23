@@ -1,12 +1,15 @@
-import expect from 'expect';
 import React from 'react';
+import { configure, mount } from 'enzyme';
+import Adapter from 'enzyme-adapter-react-16';
+import { Translations } from '@mercateo/ws-intl';
+
 import {
   SomeComponent,
   OtherComponent,
   NestedMessageFormatComponent
-} from '../src/index';
-import { mount } from 'enzyme';
-import { Translations } from '@mercateo/ws-intl';
+} from '../src';
+
+configure({ adapter: new Adapter() });
 
 describe('test my i18n components', () => {
   it('should render <SomeComponent />', () => {

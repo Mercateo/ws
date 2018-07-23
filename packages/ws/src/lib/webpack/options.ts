@@ -1,9 +1,9 @@
 import { join } from 'path';
+import { warn } from 'loglevel';
 import globby from 'globby';
 import { pull } from 'lodash';
 import webpack, {
   DefinePlugin,
-  optimize,
   Configuration,
   Rule,
   Plugin,
@@ -11,7 +11,7 @@ import webpack, {
   Output,
   Entry
 } from 'webpack';
-import ExtractTextWebpackPlugin from 'extract-text-webpack-plugin';
+import MiniCssExtractPlugin from 'mini-css-extract-plugin';
 import ForkTsCheckerWebpackPlugin from 'fork-ts-checker-webpack-plugin';
 import WebpackNodeExternals from 'webpack-node-externals';
 import HtmlWebpackPlugin from 'html-webpack-plugin';
@@ -161,13 +161,6 @@ const getTsRule = (target: Target, command: Command): Rule => ({
       }
     },
     {
-      loader: 'string-replace-loader',
-      options: {
-        search: /_import\(/g,
-        replace: 'import('
-      }
-    },
-    {
       loader: `happypack/loader?id=ts-${target}-${command}&compilerId=ts-${target}-${command}`
     }
   ]
@@ -178,71 +171,31 @@ export const jsonRule: Rule = {
   loader: 'json-loader'
 };
 
-export const cssRule: Rule = {
+const getCssRule = (command: Command): Rule => ({
   test: /\.css$/,
-  use: ExtractTextWebpackPlugin.extract({
-    fallback: [
-      {
-        loader: 'style-loader'
+  use: [
+    command === 'build -p'
+      ? MiniCssExtractPlugin.loader
+      : { loader: 'style-loader' },
+    {
+      loader: 'css-loader',
+      options: {
+        sourceMap: true
       }
-    ],
-    use: [
-      {
-        loader: 'css-loader',
-        options: {
-          sourceMap: true
-        }
-      },
-      {
-        loader: 'postcss-loader',
-        options: {
-          sourceMap: true,
-          plugins: () => [
-            autoprefixer({
-              browsers: project.ws.targets.browsers
-            })
-          ]
-        }
+    },
+    {
+      loader: 'postcss-loader',
+      options: {
+        sourceMap: true,
+        plugins: () => [
+          autoprefixer({
+            browsers: project.ws.targets.browsers
+          })
+        ]
       }
-    ]
-  })
-};
-
-export const lessRule: Rule = {
-  test: /\.less/,
-  use: ExtractTextWebpackPlugin.extract({
-    fallback: [
-      {
-        loader: 'style-loader'
-      }
-    ],
-    use: [
-      {
-        loader: 'css-loader',
-        options: {
-          sourceMap: true
-        }
-      },
-      {
-        loader: 'postcss-loader',
-        options: {
-          sourceMap: true,
-          plugins: () => [
-            autoprefixer({
-              browsers: project.ws.targets.browsers
-            })
-          ]
-        }
-      },
-      {
-        loader: 'less-loader',
-        options: {
-          sourceMap: true
-        }
-      }
-    ]
-  })
-};
+    }
+  ]
+});
 
 export const imageRule: Rule = {
   test: /\.(png|jpg|gif|svg)$/,
@@ -264,20 +217,18 @@ export const ttfRule: Rule = {
   loader: 'url-loader?limit=10000&mimetype=application/octet-stream'
 };
 
-export const extractCssPlugin = new ExtractTextWebpackPlugin('style.css');
+export const miniCssExtractPlugin = new MiniCssExtractPlugin({
+  filename: '[name].css',
+  chunkFilename: '[id].css'
+});
 
-export const extractCssHashPlugin = new ExtractTextWebpackPlugin(
-  'style-[chunkhash].css'
-);
+export const miniCssExtractPluginHashed = new MiniCssExtractPlugin({
+  filename: '[name].[hash].css',
+  chunkFilename: '[id].[hash].css'
+});
 
 export const defineProductionPlugin = new DefinePlugin({
   'process.env.NODE_ENV': JSON.stringify('production')
-});
-
-export const minifyJsPlugin = new optimize.UglifyJsPlugin();
-
-export const commonsChunkPlugin = new optimize.CommonsChunkPlugin({
-  names: ['manifest']
 });
 
 export const indexHtmlPlugin = new HtmlWebpackPlugin({
@@ -403,12 +354,29 @@ export const externalsBrowser = [
   ...externalsSpa
 ];
 
-export const enzymeExternals = [
-  'react/lib/ExecutionEnvironment',
-  'react/lib/ReactContext',
-  'react/addons',
-  'react-addons-test-utils'
-];
+function isOldEnzyme() {
+  const { devDependencies = {} } = project;
+  const { enzyme = '' } = devDependencies;
+  if (
+    enzyme.startsWith('2.') ||
+    enzyme.startsWith('~2.') ||
+    enzyme.startsWith('^2.')
+  ) {
+    warn('You use an old Enzyme version. Please upgrade.');
+    return true;
+  } else {
+    return false;
+  }
+}
+
+export const enzymeExternals = isOldEnzyme()
+  ? [
+      'react/lib/ExecutionEnvironment',
+      'react/lib/ReactContext',
+      'react/addons',
+      'react-addons-test-utils'
+    ]
+  : [];
 
 export const node = {
   __dirname: false,
@@ -419,7 +387,8 @@ export const baseConfig: Configuration = {
   performance,
   resolveLoader,
   resolve,
-  devtool
+  devtool,
+  mode: 'development'
 };
 
 export const releaseConfig: Configuration = {
@@ -516,8 +485,7 @@ export const getModuleAndPlugins = (
   const rules: Rule[] = [
     getJsRule(target, command),
     jsonRule,
-    cssRule,
-    lessRule,
+    getCssRule(command),
     imageRule,
     eotRule,
     woffRule,
@@ -525,7 +493,7 @@ export const getModuleAndPlugins = (
   ];
   const plugins: Plugin[] = [
     getHappyPackPluginJs(target, command),
-    extractCssPlugin,
+    miniCssExtractPlugin,
     loaderOptionsPlugin
   ];
 
@@ -558,21 +526,14 @@ export const getModuleAndPlugins = (
 
   // it looks like i can't minify electron code...?
 
-  if (target === 'browser' && command === 'build -p') {
-    plugins.push(minifyJsPlugin);
-  }
-
   if (target === 'spa' && command === 'build -p') {
-    plugins.push(commonsChunkPlugin);
-    plugins.push(minifyJsPlugin);
-
     // should this be used in non-spa's, too?
     // should we remove loaderOptionsPlugin then?
     plugins.push(productionOptionsPlugin);
 
     // switch css plugin
-    pull(plugins, extractCssPlugin);
-    plugins.push(extractCssHashPlugin);
+    pull(plugins, miniCssExtractPlugin);
+    plugins.push(miniCssExtractPluginHashed);
   }
 
   return { module: { rules }, plugins };

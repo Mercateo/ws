@@ -31,7 +31,7 @@ export async function tslintAsync() {
   const files = Linter.getFileNames(program).filter(isSourceFile);
 
   files.forEach((file) => {
-    const fileContents = program.getSourceFile(file).getFullText();
+    const fileContents = program.getSourceFile(file)!.getFullText();
     const conf = Configuration.findConfiguration(configPath, file).results;
     linter.lint(file, fileContents, conf);
   });

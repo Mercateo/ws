@@ -7,7 +7,9 @@
     "jsx": "react",
     "strict": true,
     "noImplicitReturns": true,
-    "types": ["mocha"]
+    "types": [
+      "jest"
+    ]
   },
   "exclude": ["node_modules"]
 }

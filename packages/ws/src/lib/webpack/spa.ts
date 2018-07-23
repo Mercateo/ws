@@ -25,7 +25,8 @@ export const getSpaReleaseConfig = async (
   ...baseConfig,
   ...releaseConfig,
   ...await getEntryAndOutput('spa', 'build -p'),
-  ...getModuleAndPlugins('spa', 'build -p', options)
+  ...getModuleAndPlugins('spa', 'build -p', options),
+  mode: 'production'
 });
 
 export const getSpaUnitConfig = async (

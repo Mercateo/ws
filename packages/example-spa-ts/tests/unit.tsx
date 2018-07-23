@@ -1,4 +1,3 @@
-import expect from 'expect';
 import React from 'react';
 import { createRenderer } from 'react-test-renderer/shallow';
 import { NameComponent, ImageTestComponent } from 'example-browser-ts-react';

@@ -6,7 +6,7 @@ import { fromPromise, IPromiseBasedObservable } from 'mobx-utils';
 import { Router, Route, hashHistory, Link } from 'react-router';
 
 require('normalize.css/normalize.css');
-require('./style.less');
+require('./style.css');
 
 export interface LazyComponentProps {
   fetcher: () => Promise<any>;

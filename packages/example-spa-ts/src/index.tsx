@@ -4,7 +4,7 @@ import { AppContainer } from 'react-hot-loader';
 import { AppComponent } from './app';
 
 require('normalize.css/normalize.css');
-require('./style.less');
+require('./style.css');
 
 function run(Component: SFC) {
   render(

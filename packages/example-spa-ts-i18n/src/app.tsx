@@ -4,7 +4,7 @@ import { SomeComponent, OtherComponent } from 'example-browser-ts-react-i18n';
 import { Translations } from '@mercateo/ws-intl';
 
 require('normalize.css/normalize.css');
-require('./style.less');
+require('./style.css');
 
 const messages: I18N = require('../dist-i18n/de_DE');
 

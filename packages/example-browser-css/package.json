@@ -1,5 +1,5 @@
 {
-  "name": "example-browser-less",
+  "name": "example-browser-css",
   "version": "1.0.0",
   "main": "dist/index.js",
   "webpack": "src/index.js",

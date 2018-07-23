@@ -17,6 +17,7 @@ const babelConfig = {
 };
 
 module.exports = {
+  mode: 'development',
   // `stats` only available when used with webpack cli
   stats: {
     assets: false,

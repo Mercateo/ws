@@ -12,12 +12,12 @@
     "type": "node"
   },
   "devDependencies": {
+    "@mercateo/ws": "link:../ws",
     "@types/expect": "^1.13.29",
     "@types/mocha": "^2.2.27",
     "expect": "^1.18.0"
   },
   "dependencies": {
-    "@mercateo/ws": "link:../ws",
     "@types/node": "^4.0.29"
   }
 }

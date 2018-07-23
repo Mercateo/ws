@@ -6,7 +6,7 @@ const rimrafSync = require('rimraf').sync;
 
 const examples = [
   'example-browser-js',
-  'example-browser-less',
+  'example-browser-css',
   'example-browser-ts',
   'example-browser-ts-react',
   'example-browser-ts-react-i18n',
