@@ -1,5 +1,22 @@
 The changelog is currently handwritten.
 
+# HEAD
+
+This is a release with **BREAKING CHANGES**.
+
+- Removed support for Less. (You need to use plain CSS or a CSS-in-JS solution.)
+- Removed support for `_import`. (Use `import()` instead.)
+- Removed support for Enzyme v2. (Use Enzyme v3 instead.)
+- Removed support for automatically started Selenium tests. (Use something like Cypress instead.)
+- Removed support for Unit tests run in the browser with Karma and Mocha. (Use Jest instead.)
+- Removed support for custom webpack loaders in Unit tests. (It was never really needed so far. Maybe it comes back later.)
+- Removed support for Electron. (We haven't used it in a long time. Maybe it comes back later.)
+
+This is **new and shiny**:
+
+- We use Webpack v4.
+- We encourage to use multiple `tsconfig.json`'s.
+
 # 2.11.2 (2018-07-06)
 # 2.11.1 (2018-07-06)
 
