@@ -4,12 +4,7 @@
     "moduleResolution": "node",
     "experimentalDecorators": true,
     "allowSyntheticDefaultImports": true,
-    "noImplicitAny": true,
-    "noImplicitReturns": true,
-    "noImplicitThis": true,
-    "strictNullChecks": true,
     "jsx": "react",
-    "types": ["jest"]
-  },
-  "exclude": ["node_modules"]
+    "types": []
+  }
 }

@@ -3,15 +3,14 @@ import { NameComponent, ImageTestComponent } from 'example-browser-ts-react';
 import { SomeComponent, OtherComponent } from 'example-browser-ts-react-i18n';
 import { Translations } from '@mercateo/ws-intl';
 
-require('normalize.css/normalize.css');
-require('./style.css');
+import './style.css';
 
 const messages: I18N = require('../dist-i18n/de_DE');
 
 /**
  * This is our app component.
  */
-export class AppComponent extends Component<{}, {}> {
+export class AppComponent extends Component {
   render() {
     return (
       <Translations messages={messages}>

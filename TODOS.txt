@@ -1,0 +1,4 @@
+- remove e2e
+- expose webpack config
+- update examples
+- use multiple tsconfig's

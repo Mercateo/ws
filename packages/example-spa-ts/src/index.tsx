@@ -1,22 +1,22 @@
-import React, { SFC } from 'react';
+import 'normalize.css';
+import React from 'react';
 import { render } from 'react-dom';
 import { AppContainer } from 'react-hot-loader';
+
+import './style.css';
 import { AppComponent } from './app';
 
-require('normalize.css/normalize.css');
-require('./style.css');
-
-function run(Component: SFC) {
+function run() {
   render(
     <AppContainer>
-      <Component />
+      <AppComponent />
     </AppContainer>,
     document.getElementById('app')
   );
 }
 
-run(AppComponent);
+run();
 
 if (module.hot) {
-  module.hot.accept('./app', () => run(AppComponent));
+  module.hot.accept('./app', () => run());
 }

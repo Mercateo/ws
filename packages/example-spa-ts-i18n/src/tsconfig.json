@@ -1,0 +1,9 @@
+{
+  "extends": "../tsconfig.base.json",
+  "compilerOptions": {
+    "types": [
+      "../dist-i18n",
+      "@types/webpack-env"
+    ]
+  }
+}

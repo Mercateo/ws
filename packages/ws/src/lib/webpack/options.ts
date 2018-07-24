@@ -127,6 +127,7 @@ export const getHappyPackPluginTs = (target: Target, command: Command) =>
           // this automatically sets `transpileOnly` to `true`
           happyPackMode: true,
           logLevel: 'warn',
+          configFile: project.ws.tsconfigPath,
           compilerOptions: {
             sourceMap: true
           }
@@ -304,6 +305,7 @@ export const productionOptionsPlugin = new webpack.LoaderOptionsPlugin({
 });
 
 export const forkTsCheckerPlugin = new ForkTsCheckerWebpackPlugin({
+  tsconfig: project.ws.tsconfigPath,
   silent: true,
   async: false,
   checkSyntacticErrors: true,

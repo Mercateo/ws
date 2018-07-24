@@ -1,19 +1,16 @@
-import { join } from 'path';
+import { join, basename } from 'path';
 import chalk from 'chalk';
-import { readJsonSync } from 'fs-extra-promise';
+import { existsSync, readJsonSync } from 'fs-extra-promise';
+import {
+  parseJsonConfigFileContent,
+  readConfigFile,
+  sys,
+  CompilerOptions
+} from 'typescript';
 
 const { yellow } = chalk;
 
 const unvalidatedProject = readJsonSync(join(process.cwd(), 'package.json'));
-let tsconfig: any;
-try {
-  tsconfig = readJsonSync(join(process.cwd(), 'tsconfig.json'));
-} catch (err) {
-  // re-throw any error except 'ENOENT', because tsconfig is purely optional
-  if (err.code !== 'ENOENT') {
-    throw err;
-  }
-}
 
 export const TYPE = {
   SPA: 'spa' as 'spa',
@@ -125,7 +122,11 @@ export interface WsConfig {
   /**
    * If this is a TypeScript project, we will save the `tsconfig.json` here.
    */
-  tsconfig?: any;
+  tsconfig?: CompilerOptions;
+  /**
+   * If this is a TypeScript project, we will save the path to `tsconfig.json` here.
+   */
+  tsconfigPath?: string;
   /**
    * Probably only needed for 'browser' projects currently.
    * See https://webpack.github.io/docs/configuration.html#externals.
@@ -318,15 +319,36 @@ export function validate(pkg: any): PackageConfig {
   }
 
   // check if this project is using typescript (and tsx)
-  if (!tsconfig) {
-    pkg.ws.entryExtension = 'js';
-  } else {
-    pkg.ws.tsconfig = tsconfig;
-    if (!(tsconfig.compilerOptions && tsconfig.compilerOptions.jsx)) {
-      pkg.ws.entryExtension = 'ts';
-    } else {
-      pkg.ws.entryExtension = 'tsx';
+  const tsconfigRoot = join(process.cwd(), 'tsconfig.json');
+  const tsconfigSrc = join(process.cwd(), pkg.ws.srcDir, 'tsconfig.json');
+  if (existsSync(tsconfigSrc)) {
+    pkg.ws.tsconfigPath = tsconfigSrc;
+  } else if (existsSync(tsconfigRoot)) {
+    pkg.ws.tsconfigPath = tsconfigRoot;
+  }
+  if (pkg.ws.tsconfigPath) {
+    const { config } = readConfigFile(pkg.ws.tsconfigPath, sys.readFile);
+    const host = {
+      useCaseSensitiveFileNames: false,
+      readDirectory: sys.readDirectory,
+      fileExists: sys.fileExists,
+      readFile: sys.readFile
+    };
+    const { options } = parseJsonConfigFileContent(
+      config,
+      host,
+      basename(pkg.ws.tsconfigPath)
+    );
+    if (options) {
+      pkg.ws.tsconfig = options;
+      if (options.jsx) {
+        pkg.ws.entryExtension = 'tsx';
+      } else {
+        pkg.ws.entryExtension = 'ts';
+      }
     }
+  } else {
+    pkg.ws.entryExtension = 'js';
   }
 
   // entry files
@@ -335,7 +357,7 @@ export function validate(pkg: any): PackageConfig {
     pkg.ws.entryExtension
   }`;
   pkg.ws.srcElectronEntry = `./${pkg.ws.srcDir}/electron.${
-    !tsconfig ? 'js' : 'ts'
+    !pkg.ws.tsconfig ? 'js' : 'ts'
   }`;
   pkg.ws.unitEntry = `./${pkg.ws.testsDir}/unit.${pkg.ws.entryExtension}`;
   pkg.ws.e2eEntry = `./${pkg.ws.testsDir}/e2e.${pkg.ws.entryExtension}`;

@@ -12,6 +12,13 @@
     "ws": "node ./bin/ws.js",
     "preversion": "yarn build"
   },
+  "files": [
+    "bin",
+    "dist",
+    ".eslintrc.json",
+    "tslint.json",
+    "prettier.config.js"
+  ],
   "publishConfig": {
     "access": "public"
   },
