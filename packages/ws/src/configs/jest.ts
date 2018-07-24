@@ -1,18 +1,23 @@
+const { defaults } = require('jest-config');
+
 export const getJestConfig = () => ({
   testMatch: ['**/*.+(ts|tsx|js|jsx)'],
   // roots: ['<rootDir>/../src', '<rootDir>/../tests'],
   testPathIgnorePatterns: [
-    '<rootDir>/jest.config.js',
-    '<rootDir>/.babelrc.js',
-    '<rootDir>/__mocks__/'
+    'jest.config.js',
+    '.babelrc.js',
+    '__mocks__/',
+    '^.+\\.d\\.ts$'
   ],
   transform: {
     '^.+\\.jsx?$': 'babel-jest',
     // '^.+\\.jsx?$': join(__dirname, 'jest-transformer-jsx'),
     '^.+\\.tsx?$': 'ts-jest'
   },
-  moduleFileExtensions: ['ts', 'tsx', 'js', 'jsx', 'json', 'node'],
+  moduleFileExtensions: [...defaults.moduleFileExtensions, 'ts', 'tsx'],
   globals: {
+    // it looks like `ts-jest` resolves `process.cwd()/tsconfig.json` instead
+    // of `<rootDir>/tsconfig.json` so we need that
     'ts-jest': {
       tsConfigFile: './tsconfig.json'
     }

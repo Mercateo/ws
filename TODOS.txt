@@ -3,9 +3,13 @@
 - update examples
 - use multiple tsconfig's
 - linter should work with multiple tsconfig's
+- remove targets.browsers?
 
 BREAKING
 - Less
 - _import string-replace-loader
 - Enzyme v2
 - E2E
+- Mocha/Expect
+- no custom loaders in jest tests
+- Electron

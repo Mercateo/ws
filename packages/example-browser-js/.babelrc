@@ -1,0 +1,11 @@
+// needed for jest
+// see https://github.com/facebook/jest/issues/4604#issuecomment-402683216
+{
+    "env": {
+      "test": {
+        "presets": [
+          "env"
+         ]
+      }
+    }
+  }

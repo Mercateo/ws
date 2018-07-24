@@ -16,7 +16,9 @@ export class Counter extends Component<{}, { value: number }> {
   }
 
   componentWillUnmount() {
-    clearInterval(this.intervalId);
+    if (this.intervalId) {
+      clearInterval(this.intervalId);
+    }
   }
 
   render() {

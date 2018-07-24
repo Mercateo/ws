@@ -9,17 +9,7 @@
     "unit": "jest --config tests/jest.config.js"
   },
   "ws": {
-    "type": "browser",
-    "targets": {
-      "browsers": "last 2 Chrome versions, last 1 Safari versions, last 2 Firefox versions, Explorer 9-11"
-    },
-    "selenium": {
-      "host": "ondemand.saucelabs.com",
-      "port": 80,
-      "envUser": "SAUCE_USERNAME",
-      "envPassword": "SAUCE_ACCESS_KEY",
-      "filterForAvailability": true
-    }
+    "type": "browser"
   },
   "typings": "dist-release/src/index.d.ts",
   "devDependencies": {

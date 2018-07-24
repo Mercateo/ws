@@ -1,4 +1,3 @@
-import expect from 'expect';
 import { multiply } from '../src';
 
 describe('test my code', () => {

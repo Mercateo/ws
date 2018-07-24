@@ -1,8 +1,8 @@
 import React, { Component } from 'react';
 import { add } from 'example-browser-ts';
 
-require('./style.css');
-const smileSrc = require('./smile.png');
+import './style.css';
+import smileSrc from './smile.png';
 
 /**
  * These are the props which can be passed to our component.

@@ -1,4 +1,3 @@
-import expect from 'expect';
 import { getCwd } from '../src/index';
 
 describe('test my code', () => {

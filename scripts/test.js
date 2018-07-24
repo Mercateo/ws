@@ -12,11 +12,9 @@ const examples = [
   'example-browser-ts-react-i18n',
   'example-node-ts',
   'example-node-ts-2',
-  // 'example-electron-ts',
-  // 'example-electron-ts-i18n',
   'example-spa-ts',
   'example-spa-ts-i18n',
-  'example-spa-ts-lazy-import'
+  'example-spa-ts-import'
 ];
 
 const stdio = 'inherit';

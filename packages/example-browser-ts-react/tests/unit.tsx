@@ -1,4 +1,3 @@
-import expect from 'expect';
 import React from 'react';
 import { createRenderer } from 'react-test-renderer/shallow';
 import { NameComponent } from '../src/index';
@@ -15,13 +14,7 @@ describe('test my code', () => {
       'foo',
       '! Sum is ',
       3,
-      '. This is for @otbe.'
+      '. This is for @BOO.'
     ]);
-  });
-
-  it('should use custom babel plugin for markdown', () => {
-    // TODO: Remove this line https://github.com/prettier/prettier/issues/3292
-    // prettier-ignore
-    expect(markdown`# hello`).toBe('<h1>hello</h1>\n');
   });
 });

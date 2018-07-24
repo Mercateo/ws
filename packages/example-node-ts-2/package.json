@@ -12,13 +12,10 @@
     "type": "node"
   },
   "dependencies": {
-    "@types/node": "^4.0.29",
+    "@types/node": "^8.0.0",
     "example-node-ts": "*"
   },
   "devDependencies": {
-    "@mercateo/ws": "link:../ws",
-    "@types/expect": "^1.13.29",
-    "@types/mocha": "^2.2.27",
-    "expect": "^1.18.0"
+    "@mercateo/ws": "link:../ws"
   }
 }
