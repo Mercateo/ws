@@ -12,7 +12,7 @@ export const getNodeBuildConfig = async (
 ): Promise<WebpackConfig> => ({
   ...baseConfig,
   ...nodeConfig,
-  ...await getEntryAndOutput('node', 'build'),
+  ...(await getEntryAndOutput('node', 'build')),
   ...getModuleAndPlugins('node', 'build', options)
 });
 
@@ -21,6 +21,6 @@ export const getNodeUnitConfig = async (
 ): Promise<WebpackConfig> => ({
   ...baseConfig,
   ...nodeConfig,
-  ...await getEntryAndOutput('node', 'unit'),
+  ...(await getEntryAndOutput('node', 'unit')),
   ...getModuleAndPlugins('node', 'unit', options)
 });

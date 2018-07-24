@@ -35,36 +35,42 @@ function collectArgumentsRecursive(ast: any): KeyTypePair[] {
 
   pairs = ast.elements
     .filter((element: any) => element.type === 'argumentElement')
-    .map((element: any): KeyTypePair => ({
-      key: element.id,
-      type:
-        element.format && element.format.type === 'pluralFormat'
-          ? 'number'
-          : element.format && element.format.type === 'selectFormat'
-            ? element.format.options
-                .map(
-                  ({ selector }: any) =>
-                    selector === 'other' ? 'string' : `'${selector}'`
-                )
-                .join(' | ')
-            : 'string'
-    }));
+    .map(
+      (element: any): KeyTypePair => ({
+        key: element.id,
+        type:
+          element.format && element.format.type === 'pluralFormat'
+            ? 'number'
+            : element.format && element.format.type === 'selectFormat'
+              ? element.format.options
+                  .map(
+                    ({ selector }: any) =>
+                      selector === 'other' ? 'string' : `'${selector}'`
+                  )
+                  .join(' | ')
+              : 'string'
+      })
+    );
 
   const elements: KeyTypePair[][][] = ast.elements
     .filter((element: any) => element.type === 'argumentElement')
-    .map((element: any): KeyTypePair[][] => {
-      if (element.format && element.format.options) {
-        return element.format.options.map((option: any): KeyTypePair[] => {
-          if (option.value) {
-            return collectArgumentsRecursive(option.value);
-          }
+    .map(
+      (element: any): KeyTypePair[][] => {
+        if (element.format && element.format.options) {
+          return element.format.options.map(
+            (option: any): KeyTypePair[] => {
+              if (option.value) {
+                return collectArgumentsRecursive(option.value);
+              }
 
-          return [];
-        });
+              return [];
+            }
+          );
+        }
+
+        return [];
       }
-
-      return [];
-    });
+    );
 
   elements.forEach((element) => {
     element.forEach((option) => {

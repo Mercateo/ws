@@ -80,7 +80,7 @@ const defaultConfig: EnhancedConfigOptions = {
   mochaReporter: {
     showDiff: true
   },
-  ...project.ws.type === 'electron' ? electronConfig : headlessChromeConfig,
+  ...(project.ws.type === 'electron' ? electronConfig : headlessChromeConfig),
   logLevel: 'WARN',
   browserConsoleLogOptions: {
     level: 'log',

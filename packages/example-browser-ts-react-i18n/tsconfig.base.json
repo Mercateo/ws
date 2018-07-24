@@ -5,11 +5,6 @@
     "experimentalDecorators": true,
     "allowSyntheticDefaultImports": true,
     "jsx": "react",
-    "strict": true,
-    "noImplicitReturns": true,
-    "types": [
-      "jest"
-    ]
-  },
-  "exclude": ["node_modules"]
+    "types": []
+  }
 }

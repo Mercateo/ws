@@ -2,3 +2,10 @@
 - expose webpack config
 - update examples
 - use multiple tsconfig's
+- linter should work with multiple tsconfig's
+
+BREAKING
+- Less
+- _import string-replace-loader
+- Enzyme v2
+- E2E

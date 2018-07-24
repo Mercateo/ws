@@ -13,7 +13,7 @@ export const getBrowserBuildConfig = async (
   options: BaseOptions
 ): Promise<WebpackConfig> => ({
   ...baseConfig,
-  ...await getEntryAndOutput('browser', 'build'),
+  ...(await getEntryAndOutput('browser', 'build')),
   ...getModuleAndPlugins('browser', 'build', options),
   externals: externalsBrowser
 });
@@ -23,7 +23,7 @@ export const getBrowserReleaseConfig = async (
 ): Promise<WebpackConfig> => ({
   ...baseConfig,
   ...releaseConfig,
-  ...await getEntryAndOutput('browser', 'build -p'),
+  ...(await getEntryAndOutput('browser', 'build -p')),
   ...getModuleAndPlugins('browser', 'build -p', options),
   externals: externalsBrowser,
   mode: 'production'
@@ -33,7 +33,7 @@ export const getBrowserUnitConfig = async (
   options: BaseOptions
 ): Promise<WebpackConfig> => ({
   ...baseConfig,
-  ...await getEntryAndOutput('browser', 'unit'),
+  ...(await getEntryAndOutput('browser', 'unit')),
   ...getModuleAndPlugins('browser', 'unit', options),
   externals: enzymeExternals
 });

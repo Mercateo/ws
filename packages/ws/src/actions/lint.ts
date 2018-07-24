@@ -15,9 +15,17 @@ const smile = cyan('(~‾▿‾)~');
 const files = (count: number) => plur('file', count);
 const errors = (count: number) => plur('error', count);
 
+const emptyTslintResult = {
+  errors: '',
+  errorsCount: 0,
+  fixedFiles: []
+};
+
 export default async function lint() {
   // tslint
-  const tsintResult = await tslintAsync();
+  const tsintResult = project.ws.tsconfig
+    ? await tslintAsync()
+    : emptyTslintResult;
   if (tsintResult.errorsCount) {
     error('');
     error(tsintResult.errors);
@@ -38,7 +46,7 @@ export default async function lint() {
   // documentation
   const docsErrors: Array<string> = [];
   if (!project.private) {
-    if (!await existsAsync(join(process.cwd(), 'README.md'))) {
+    if (!(await existsAsync(join(process.cwd(), 'README.md')))) {
       docsErrors.push(`You have ${yellow('no README.md')}.`);
     }
     if (!project.keywords || !project.keywords.length) {

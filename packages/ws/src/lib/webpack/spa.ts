@@ -14,7 +14,7 @@ export const getSpaBuildConfig = async (
   options: BaseOptions
 ): Promise<WebpackConfig> => ({
   ...baseConfig,
-  ...await getEntryAndOutput('spa', 'build'),
+  ...(await getEntryAndOutput('spa', 'build')),
   ...getModuleAndPlugins('spa', 'build', options),
   externals: externalsSpa
 });
@@ -24,7 +24,7 @@ export const getSpaReleaseConfig = async (
 ): Promise<WebpackConfig> => ({
   ...baseConfig,
   ...releaseConfig,
-  ...await getEntryAndOutput('spa', 'build -p'),
+  ...(await getEntryAndOutput('spa', 'build -p')),
   ...getModuleAndPlugins('spa', 'build -p', options),
   mode: 'production'
 });
@@ -33,7 +33,7 @@ export const getSpaUnitConfig = async (
   options: BaseOptions
 ): Promise<WebpackConfig> => ({
   ...baseConfig,
-  ...await getEntryAndOutput('spa', 'unit'),
+  ...(await getEntryAndOutput('spa', 'unit')),
   ...getModuleAndPlugins('spa', 'unit', options),
   externals: enzymeExternals
 });
@@ -43,6 +43,6 @@ export const getSpaE2eConfig = async (
 ): Promise<WebpackConfig> => ({
   ...baseConfig,
   ...nodeConfig,
-  ...await getEntryAndOutput('node', 'e2e'),
+  ...(await getEntryAndOutput('node', 'e2e')),
   ...getModuleAndPlugins('node', 'e2e', options)
 });

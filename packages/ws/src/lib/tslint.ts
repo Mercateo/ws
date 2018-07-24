@@ -2,7 +2,7 @@ import { Linter, ILinterOptions, Configuration } from 'tslint';
 import { join } from 'path';
 import { uniq } from 'lodash';
 import globToRegExp from 'glob-to-regexp';
-import { sourceFilePatterns } from '../project';
+import { sourceFilePatterns, project } from '../project';
 
 // relative from dist/index.js
 const configPath = join(__dirname, '..', 'tslint.json');
@@ -22,7 +22,9 @@ const sourceFileMatcher = globToRegExp(
 const isSourceFile = (file: string) => file.match(sourceFileMatcher);
 
 export async function tslintAsync() {
-  const program = Linter.createProgram('tsconfig.json');
+  const program = Linter.createProgram(
+    project.ws.tsconfigPath! // TODO: This would currently ignore a tests/tsconfig.json
+  );
   const linter = new Linter(lintOptions, program);
 
   // note: normally dependencies aren't part of your source files, but if you

@@ -16,7 +16,7 @@ export const getElectronBuildConfig = async (
   const mainConfig: WebpackConfig = {
     ...baseConfig,
     ...electronMainConfig,
-    ...await getEntryAndOutput('electron-main', 'build'),
+    ...(await getEntryAndOutput('electron-main', 'build')),
     ...getModuleAndPlugins('electron-main', 'build', options),
     externals: externalsSpa // is this needed here?
   };
@@ -24,7 +24,7 @@ export const getElectronBuildConfig = async (
   const rendererConfig: WebpackConfig = {
     ...baseConfig,
     ...electronRendererConfig,
-    ...await getEntryAndOutput('electron-renderer', 'build'),
+    ...(await getEntryAndOutput('electron-renderer', 'build')),
     ...getModuleAndPlugins('electron-renderer', 'build', options),
     externals: externalsSpa // is this needed here?
   };
@@ -38,7 +38,7 @@ export const getElectronReleaseConfig = async (
   const mainConfig: WebpackConfig = {
     ...baseConfig,
     ...electronMainConfig,
-    ...await getEntryAndOutput('electron-main', 'build -p'),
+    ...(await getEntryAndOutput('electron-main', 'build -p')),
     ...getModuleAndPlugins('electron-main', 'build -p', options),
     externals: externalsSpa, // is this needed here?
     mode: 'production'
@@ -47,7 +47,7 @@ export const getElectronReleaseConfig = async (
   const rendererConfig: WebpackConfig = {
     ...baseConfig,
     ...electronRendererConfig,
-    ...await getEntryAndOutput('electron-renderer', 'build -p'),
+    ...(await getEntryAndOutput('electron-renderer', 'build -p')),
     ...getModuleAndPlugins('electron-renderer', 'build -p', options),
     externals: externalsSpa, // is this needed here?
     mode: 'production'
@@ -61,7 +61,7 @@ export const getElectronUnitConfig = async (
 ): Promise<WebpackConfig> => ({
   ...baseConfig,
   ...electronRendererConfig,
-  ...await getEntryAndOutput('electron-renderer', 'unit'),
+  ...(await getEntryAndOutput('electron-renderer', 'unit')),
   ...getModuleAndPlugins('electron-renderer', 'unit', options),
   externals: enzymeExternals
 });
