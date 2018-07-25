@@ -5,7 +5,8 @@
   "webpack": "src/index.ts",
   "private": true,
   "scripts": {
-    "ws": "ws",
+    "build": "webpack-cli --config src/webpack.config.js",
+    "lint": "ws lint",
     "unit": "jest --config tests/jest.config.js"
   },
   "ws": {
@@ -15,6 +16,7 @@
   "devDependencies": {
     "@mercateo/ws": "link:../ws",
     "@types/jest": "^23.1.1",
-    "jest": "^23.1.0"
+    "jest": "^23.1.0",
+    "webpack-cli": "^3.1.0"
   }
 }

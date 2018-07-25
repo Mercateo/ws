@@ -8,10 +8,10 @@ import {
   getEntryAndOutput,
   getModuleAndPlugins
 } from './options';
-import { BaseOptions } from '../../options';
+import { EnvOptions } from '../../options';
 
 export const getSpaBuildConfig = async (
-  options: BaseOptions
+  options: EnvOptions
 ): Promise<WebpackConfig> => ({
   ...baseConfig,
   ...(await getEntryAndOutput('spa', 'build')),
@@ -20,7 +20,7 @@ export const getSpaBuildConfig = async (
 });
 
 export const getSpaReleaseConfig = async (
-  options: BaseOptions
+  options: EnvOptions
 ): Promise<WebpackConfig> => ({
   ...baseConfig,
   ...releaseConfig,
@@ -30,7 +30,7 @@ export const getSpaReleaseConfig = async (
 });
 
 export const getSpaUnitConfig = async (
-  options: BaseOptions
+  options: EnvOptions
 ): Promise<WebpackConfig> => ({
   ...baseConfig,
   ...(await getEntryAndOutput('spa', 'unit')),
@@ -39,7 +39,7 @@ export const getSpaUnitConfig = async (
 });
 
 export const getSpaE2eConfig = async (
-  options: BaseOptions
+  options: EnvOptions
 ): Promise<WebpackConfig> => ({
   ...baseConfig,
   ...nodeConfig,

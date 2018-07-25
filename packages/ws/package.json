@@ -9,7 +9,7 @@
   },
   "scripts": {
     "build": "rimraf dist/ && webpack",
-    "ws": "node ./bin/ws.js",
+    "lint": "node ./bin/ws.js lint",
     "preversion": "yarn build"
   },
   "files": [

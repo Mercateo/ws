@@ -19,7 +19,7 @@ import autoprefixer from 'autoprefixer';
 import { readJsonSync } from 'fs-extra-promise';
 import { resolve as resolveModule } from '../resolve';
 import { project } from '../../project';
-import { BaseOptions } from '../../options';
+import { EnvOptions } from '../../options';
 
 const HappyPack: any = require('happypack');
 
@@ -482,7 +482,7 @@ export const getEntryAndOutput = async (target: Target, command: Command) => {
 export const getModuleAndPlugins = (
   target: Target,
   command: Command,
-  options: BaseOptions
+  options: EnvOptions
 ) => {
   const rules: Rule[] = [
     getJsRule(target, command),

@@ -5,10 +5,10 @@ import {
   getEntryAndOutput,
   getModuleAndPlugins
 } from './options';
-import { BaseOptions } from '../../options';
+import { EnvOptions } from '../../options';
 
 export const getNodeBuildConfig = async (
-  options: BaseOptions
+  options: EnvOptions
 ): Promise<WebpackConfig> => ({
   ...baseConfig,
   ...nodeConfig,
@@ -17,7 +17,7 @@ export const getNodeBuildConfig = async (
 });
 
 export const getNodeUnitConfig = async (
-  options: BaseOptions
+  options: EnvOptions
 ): Promise<WebpackConfig> => ({
   ...baseConfig,
   ...nodeConfig,

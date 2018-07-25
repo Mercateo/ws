@@ -3,7 +3,8 @@
   "version": "1.0.0",
   "private": true,
   "scripts": {
-    "ws": "ws",
+    "build": "webpack-cli --config src/webpack.config.js",
+    "lint": "ws lint",
     "unit": "jest --config tests/jest.config.js"
   },
   "ws": {
@@ -42,6 +43,7 @@
     "@types/webpack-env": "^1.13.6",
     "enzyme": "^3.0.0",
     "enzyme-adapter-react-16": "^1.1.1",
-    "jest": "^23.4.1"
+    "jest": "^23.4.1",
+    "webpack-cli": "^3.1.0"
   }
 }

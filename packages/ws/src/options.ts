@@ -6,7 +6,13 @@ export interface Env {
   value: string;
 }
 
-export interface BaseOptions extends CommanderStatic {
+export interface EnvOptions {
+  parent: {
+    env: Env[];
+  };
+}
+
+export interface BaseOptions extends CommanderStatic, EnvOptions {
   parent: {
     logLevel: LogLevelDesc;
     env: Env[];

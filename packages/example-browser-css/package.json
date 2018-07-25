@@ -5,12 +5,14 @@
   "webpack": "src/index.js",
   "private": true,
   "scripts": {
-    "ws": "ws"
+    "build": "webpack-cli --config src/webpack.config.js",
+    "lint": "ws lint"
   },
   "ws": {
     "type": "browser"
   },
   "devDependencies": {
-    "@mercateo/ws": "link:../ws"
+    "@mercateo/ws": "link:../ws",
+    "webpack-cli": "^3.1.0"
   }
 }

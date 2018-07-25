@@ -6,7 +6,8 @@
   "typings": "dist/index.d.ts",
   "private": true,
   "scripts": {
-    "ws": "ws"
+    "build": "webpack-cli --config src/webpack.config.js",
+    "lint": "ws lint"
   },
   "ws": {
     "type": "node"
@@ -16,6 +17,7 @@
     "example-node-ts": "*"
   },
   "devDependencies": {
-    "@mercateo/ws": "link:../ws"
+    "@mercateo/ws": "link:../ws",
+    "webpack-cli": "^3.1.0"
   }
 }

@@ -3,3 +3,7 @@
 - use multiple tsconfig's
 - linter should work with multiple tsconfig's
 - remove targets.browsers?
+- add storybook
+- check react-hot-loader
+- transpileOnly
+- extract building i18n

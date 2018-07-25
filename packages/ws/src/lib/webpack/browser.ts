@@ -7,10 +7,10 @@ import {
   getEntryAndOutput,
   getModuleAndPlugins
 } from './options';
-import { BaseOptions } from '../../options';
+import { EnvOptions } from '../../options';
 
 export const getBrowserBuildConfig = async (
-  options: BaseOptions
+  options: EnvOptions
 ): Promise<WebpackConfig> => ({
   ...baseConfig,
   ...(await getEntryAndOutput('browser', 'build')),
@@ -19,7 +19,7 @@ export const getBrowserBuildConfig = async (
 });
 
 export const getBrowserReleaseConfig = async (
-  options: BaseOptions
+  options: EnvOptions
 ): Promise<WebpackConfig> => ({
   ...baseConfig,
   ...releaseConfig,
@@ -30,7 +30,7 @@ export const getBrowserReleaseConfig = async (
 });
 
 export const getBrowserUnitConfig = async (
-  options: BaseOptions
+  options: EnvOptions
 ): Promise<WebpackConfig> => ({
   ...baseConfig,
   ...(await getEntryAndOutput('browser', 'unit')),
