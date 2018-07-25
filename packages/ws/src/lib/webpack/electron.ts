@@ -8,10 +8,10 @@ import {
   getEntryAndOutput,
   getModuleAndPlugins
 } from './options';
-import { BaseOptions } from '../../options';
+import { EnvOptions } from '../../options';
 
 export const getElectronBuildConfig = async (
-  options: BaseOptions
+  options: EnvOptions
 ): Promise<WebpackConfig[]> => {
   const mainConfig: WebpackConfig = {
     ...baseConfig,
@@ -33,7 +33,7 @@ export const getElectronBuildConfig = async (
 };
 
 export const getElectronReleaseConfig = async (
-  options: BaseOptions
+  options: EnvOptions
 ): Promise<WebpackConfig[]> => {
   const mainConfig: WebpackConfig = {
     ...baseConfig,
@@ -57,7 +57,7 @@ export const getElectronReleaseConfig = async (
 };
 
 export const getElectronUnitConfig = async (
-  options: BaseOptions
+  options: EnvOptions
 ): Promise<WebpackConfig> => ({
   ...baseConfig,
   ...electronRendererConfig,

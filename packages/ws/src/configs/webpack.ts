@@ -2,6 +2,7 @@ import { project, WsConfig } from '../project';
 import { getBrowserReleaseConfig } from '../lib/webpack/browser';
 import { getNodeBuildConfig } from '../lib/webpack/node';
 import { getSpaReleaseConfig } from '../lib/webpack/spa';
+import watch from '../actions/watch';
 
 const options = {
   parent: {
@@ -16,6 +17,10 @@ export const getWebpackConfig = (type: WsConfig['type'] = project.ws.type) => {
     case 'node':
       return getNodeBuildConfig(options);
     case 'spa':
-      return getSpaReleaseConfig(options);
+      if (process.env.WEBPACK_SERVE) {
+        return watch({ ...options, hot: true });
+      } else {
+        return getSpaReleaseConfig(options);
+      }
   }
 };

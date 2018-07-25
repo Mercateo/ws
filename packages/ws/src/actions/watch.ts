@@ -22,11 +22,11 @@ import { getSpaBuildConfig } from '../lib/webpack/spa';
 import { getBrowserBuildConfig } from '../lib/webpack/browser';
 import { resolve } from '../lib/resolve';
 import { nodemonAsync } from '../lib/nodemon';
-import { BaseOptions } from '../options';
+import { EnvOptions } from '../options';
 
 const { cyan } = chalk;
 
-export interface WatchOptions extends BaseOptions {
+export interface WatchOptions extends EnvOptions {
   hot?: true;
 }
 

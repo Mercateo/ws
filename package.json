@@ -4,13 +4,14 @@
     "lint": "wsrun lint --exclude-missing --serial",
     "build": "wsrun build --exclude-missing --serial",
     "unit": "wsrun unit --exclude-missing --serial",
-    "ci": "yarn build && yarn unit && yarn lint",
+    "ci": "node scripts/ci.js",
     "release": "workspace-version"
   },
   "workspaces": [
     "packages/*"
   ],
   "devDependencies": {
+    "rimraf": "^2.6.2",
     "workspace-release": "^0.4.4",
     "wsrun": "^2.2.1"
   }
