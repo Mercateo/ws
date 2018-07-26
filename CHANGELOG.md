@@ -17,6 +17,7 @@ This is **new and shiny**:
 - We use Webpack v4.
 - We encourage to use multiple `tsconfig.json`'s.
 - We encourage to use the Jest/Webpack CLIs directly and just use the configs prepared by `@mercateo/ws`.
+- We encourage to manually prebuild translations now via `$ yarn ws-build-translations`.
 
 # 2.11.2 (2018-07-06)
 # 2.11.1 (2018-07-06)

@@ -3,8 +3,10 @@
   "version": "1.0.0",
   "private": true,
   "scripts": {
+    "prebuild": "ws-build-translations",
     "build": "webpack-cli --config src/webpack.config.js",
     "lint": "ws lint",
+    "preunit": "ws-build-translations",
     "unit": "jest --config tests/jest.config.js",
     "watch": "webpack-serve --config src/webpack.config.js"
   },

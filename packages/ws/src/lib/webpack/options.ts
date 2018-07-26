@@ -17,9 +17,11 @@ import WebpackNodeExternals from 'webpack-node-externals';
 import HtmlWebpackPlugin from 'html-webpack-plugin';
 import autoprefixer from 'autoprefixer';
 import { readJsonSync } from 'fs-extra-promise';
+import CleanWebpackPlugin from 'clean-webpack-plugin';
 import { resolve as resolveModule } from '../resolve';
 import { project } from '../../project';
 import { EnvOptions } from '../../options';
+import { TypingsPlugin } from '../typescript';
 
 const HappyPack: any = require('happypack');
 
@@ -524,6 +526,25 @@ export const getModuleAndPlugins = (
   // does node need a production build?
   if (command === 'build -p') {
     plugins.push(defineProductionPlugin);
+    plugins.push(
+      new CleanWebpackPlugin([project.ws.distReleaseDir], {
+        verbose: false,
+        root: process.cwd()
+      })
+    );
+    if (project.ws.tsconfig) {
+      plugins.push(new TypingsPlugin(project.ws.distReleaseDir));
+    }
+  } else if (command === 'build') {
+    plugins.push(
+      new CleanWebpackPlugin([project.ws.distDir], {
+        verbose: false,
+        root: process.cwd()
+      })
+    );
+    if (project.ws.tsconfig && target === 'node') {
+      plugins.push(new TypingsPlugin(project.ws.distDir));
+    }
   }
 
   // it looks like i can't minify electron code...?

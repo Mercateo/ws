@@ -6,8 +6,10 @@
   "webpack": "src/index.tsx",
   "private": true,
   "scripts": {
+    "prebuild": "ws-build-translations",
     "build": "webpack-cli --config src/webpack.config.js",
     "lint": "ws lint",
+    "preunit": "ws-build-translations",
     "unit": "jest --config tests/jest.config.js"
   },
   "ws": {

@@ -35,43 +35,6 @@ declare module 'stringify-object' {
   ): string;
 }
 
-declare module 'globby' {
-  export interface Options {
-    absolute?: boolean;
-    cwd?: string;
-    root?: string;
-    dot?: boolean;
-    nomount?: boolean;
-    mark?: boolean;
-    nosort?: boolean;
-    stat?: boolean;
-    silent?: boolean;
-    strict?: boolean;
-    sync?: boolean;
-    nounique?: boolean;
-    nonull?: boolean;
-    debug?: boolean;
-    nobrace?: boolean;
-    noglobstar?: boolean;
-    noext?: boolean;
-    nocase?: boolean;
-    nodir?: boolean;
-    follow?: boolean;
-    realpath?: boolean;
-    nonegate?: boolean;
-    nocomment?: boolean;
-    cache?: any;
-    statCache?: any;
-    symlinks?: any;
-    realpathCache?: any;
-  }
-
-  export default function globby(
-    pattern: string | string[],
-    options?: Options
-  ): Promise<string[]>;
-}
-
 declare module 'browserslist' {
   function browserslist(browsers: string, options?: any): string[];
 

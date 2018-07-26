@@ -3,6 +3,7 @@ import { join } from 'path';
 import globby from 'globby';
 import { existsAsync } from 'fs-extra-promise';
 import { createProgram } from 'typescript';
+import { Compiler } from 'webpack';
 import chalk from 'chalk';
 import codeFrame from 'babel-code-frame';
 import { project } from '../project';
@@ -56,5 +57,15 @@ export async function generateTypings(
     if (!exist) {
       throw `${red('typings')} do not exist in ${project.typings}`;
     }
+  }
+}
+
+export class TypingsPlugin {
+  constructor(private declarationDir: string) {}
+
+  apply(compiler: Compiler) {
+    compiler.hooks.emit.tapPromise('TypingsPlugin', async () => {
+      await generateTypings(this.declarationDir);
+    });
   }
 }

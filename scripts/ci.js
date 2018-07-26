@@ -34,7 +34,7 @@ packages.forEach((package) => {
     const pkg = require(join(cwd, 'package.json'));
     commands.forEach((command) => {
       if (pkg.scripts[command]) {
-        execSync(`npm run -s -- ${command}`, { cwd, stdio });
+        execSync(`yarn ${command}`, { cwd, stdio });
       }
     });
   } catch (err) {

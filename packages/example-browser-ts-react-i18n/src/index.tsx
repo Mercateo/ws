@@ -4,7 +4,7 @@ import { Translate } from '@mercateo/ws-intl';
 /**
  * This component shows a translated message.
  */
-export class SomeComponent extends Component<{}, {}> {
+export class SomeComponent extends Component {
   render() {
     return (
       <Translate>
@@ -17,7 +17,7 @@ export class SomeComponent extends Component<{}, {}> {
 /**
  * This component shows a the usage of the message format.
  */
-export class OtherComponent extends Component<{}, {}> {
+export class OtherComponent extends Component {
   render() {
     return (
       <Translate>
