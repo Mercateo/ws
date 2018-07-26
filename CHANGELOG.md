@@ -1,6 +1,6 @@
 The changelog is currently handwritten.
 
-# HEAD
+# 3.0.0-0 (2018-07-26)
 
 This is a release with **BREAKING CHANGES**.
 
