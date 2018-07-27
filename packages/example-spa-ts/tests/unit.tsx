@@ -10,11 +10,13 @@ describe('test my code', () => {
     const output = renderer.getRenderOutput();
 
     expect(output.type).toBe('div');
+    const world = 'world';
     expect(output.props.children).toEqual([
       <Counter />,
       <NameComponent a={1} b={2} name="_otbe_" />,
       <ImageTestComponent />,
-      <p>Dev Build</p>
+      <p>Dev Build</p>,
+      <p>This string was loaded from a JSON file: {world}</p>
     ]);
   });
 });

@@ -3,3 +3,7 @@ declare interface process {
     NODE_ENV?: string;
   };
 }
+
+declare module '*.json' {
+  export const hello: string;
+}

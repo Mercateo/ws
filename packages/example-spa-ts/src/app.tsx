@@ -1,5 +1,6 @@
 import React, { Component } from 'react';
 import { NameComponent, ImageTestComponent } from 'example-browser-ts-react';
+import { hello } from './data.json';
 
 export class Counter extends Component<{}, { value: number }> {
   state = {
@@ -39,5 +40,6 @@ export const AppComponent = () => (
     ) : (
       <p>Dev Build</p>
     )}
+    <p>This string was loaded from a JSON file: {hello}</p>
   </div>
 );

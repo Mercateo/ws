@@ -1,5 +1,9 @@
 The changelog is currently handwritten.
 
+# 3.0.0-1 (2018-07-27)
+
+- Loading JSON files works again.
+
 # 3.0.0-0 (2018-07-26)
 
 This is a release with **BREAKING CHANGES**.
