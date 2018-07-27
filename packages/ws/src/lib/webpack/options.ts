@@ -169,11 +169,6 @@ const getTsRule = (target: Target, command: Command): Rule => ({
   ]
 });
 
-export const jsonRule: Rule = {
-  test: /\.json$/,
-  loader: 'json-loader'
-};
-
 const getCssRule = (command: Command): Rule => ({
   test: /\.css$/,
   use: [
@@ -488,7 +483,6 @@ export const getModuleAndPlugins = (
 ) => {
   const rules: Rule[] = [
     getJsRule(target, command),
-    jsonRule,
     getCssRule(command),
     imageRule,
     eotRule,

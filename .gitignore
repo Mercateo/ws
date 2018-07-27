@@ -4,3 +4,4 @@ dist/
 dist-i18n/
 dist-tests/
 dist-release/
+.history/
