@@ -15,11 +15,10 @@ const unvalidatedProject = readJsonSync(join(process.cwd(), 'package.json'));
 export const TYPE = {
   SPA: 'spa' as 'spa',
   NODE: 'node' as 'node',
-  BROWSER: 'browser' as 'browser',
-  ELECTRON: 'electron' as 'electron'
+  BROWSER: 'browser' as 'browser'
 };
 
-const TYPES = [TYPE.SPA, TYPE.NODE, TYPE.BROWSER, TYPE.ELECTRON];
+const TYPES = [TYPE.SPA, TYPE.NODE, TYPE.BROWSER];
 
 /**
  * Our selenium grid settings. Only needed if you run tests with a custom selenium grid.
@@ -111,9 +110,9 @@ export interface I18nConfig {
  */
 export interface WsConfig {
   /**
-   * We currently support four types of projects: `'spa'`, `'node'`, `'browser'` and `'electron``.
+   * We currently support four types of projects: `'spa'`, `'node'` and `'browser'`.
    */
-  type: 'spa' | 'node' | 'browser' | 'electron';
+  type: 'spa' | 'node' | 'browser';
   /**
    * The file extension of your entry file. Either `js`, `ts` or `tsx`.
    * This value is set automatically.
@@ -141,11 +140,6 @@ export interface WsConfig {
    * It could look this: `./src/index.ts`.
    */
   srcEntry: string;
-  /**
-   * The entry file for your electron main process code. This value is set automatically.
-   * It could look this: `./src/electron.ts`.
-   */
-  srcElectronEntry: string;
   /**
    * The _optional_ entry file for source code at the root level of a localized spa.
    * This value is set automatically.
@@ -204,10 +198,6 @@ export interface WsConfig {
      * If you want to compile against the current node version, you can specify "node": "current", which would be the same as "node": parseFloat(process.versions.node).
      */
     node: string | number;
-    /**
-     * If you want to compile against electron set a version number. Default is 1.4
-     */
-    electron: number;
   };
   /**
    * Our selenium grid settings. Only needed if you run tests with a custom selenium grid.
@@ -356,9 +346,6 @@ export function validate(pkg: any): PackageConfig {
   pkg.ws.srcI18nEntry = `./${pkg.ws.srcDir}/index.i18n.${
     pkg.ws.entryExtension
   }`;
-  pkg.ws.srcElectronEntry = `./${pkg.ws.srcDir}/electron.${
-    !pkg.ws.tsconfig ? 'js' : 'ts'
-  }`;
   pkg.ws.unitEntry = `./${pkg.ws.testsDir}/unit.${pkg.ws.entryExtension}`;
   pkg.ws.e2eEntry = `./${pkg.ws.testsDir}/e2e.${pkg.ws.entryExtension}`;
 
@@ -377,10 +364,6 @@ export function validate(pkg: any): PackageConfig {
 
   if (!pkg.ws.targets.browsers) {
     pkg.ws.targets.browsers = '> 1%, last 2 versions, Firefox ESR';
-  }
-
-  if (!pkg.ws.targets.electron) {
-    pkg.ws.targets.electron = '1.4';
   }
 
   // defaults for selenium

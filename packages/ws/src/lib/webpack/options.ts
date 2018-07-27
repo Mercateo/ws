@@ -67,10 +67,7 @@ export const babelBrowser = {
     [
       resolveModule('babel-preset-env'),
       {
-        targets:
-          project.ws.type === 'electron'
-            ? { electron: project.ws.targets.electron }
-            : { browsers: project.ws.targets.browsers },
+        targets: { browsers: project.ws.targets.browsers },
         modules: false,
         useBuiltIns: true
       }
@@ -403,22 +400,7 @@ export const nodeConfig: Configuration = {
   externals: externalsNode
 };
 
-export const electronMainConfig: Configuration = {
-  target: 'electron-main',
-  node
-};
-
-export const electronRendererConfig: Configuration = {
-  target: 'electron-renderer',
-  node
-};
-
-export type Target =
-  | 'spa'
-  | 'node'
-  | 'browser'
-  | 'electron-main'
-  | 'electron-renderer';
+export type Target = 'spa' | 'node' | 'browser';
 
 export const getEntryAndOutput = async (target: Target, command: Command) => {
   const entry: Entry = {
@@ -462,9 +444,6 @@ export const getEntryAndOutput = async (target: Target, command: Command) => {
       : [entry.index as string];
     entry.index = [nodeSourceMapEntry, ...currentEntry];
     output.libraryTarget = 'commonjs2';
-  } else if (target === 'electron-main') {
-    delete entry.index;
-    entry.electron = project.ws.srcElectronEntry;
   }
 
   // special cases
@@ -473,7 +452,7 @@ export const getEntryAndOutput = async (target: Target, command: Command) => {
     output.chunkFilename = '[name].[chunkhash].lazy.js';
   }
 
-  return Promise.resolve({ entry, output });
+  return { entry, output };
 };
 
 export const getModuleAndPlugins = (
@@ -513,7 +492,7 @@ export const getModuleAndPlugins = (
     plugins.push(forkTsCheckerPlugin);
   }
 
-  if (target === 'spa' || target === 'electron-renderer') {
+  if (target === 'spa') {
     plugins.push(indexHtmlPlugin);
   }
 
@@ -540,8 +519,6 @@ export const getModuleAndPlugins = (
       plugins.push(new TypingsPlugin(project.ws.distDir));
     }
   }
-
-  // it looks like i can't minify electron code...?
 
   if (target === 'spa' && command === 'build -p') {
     // should this be used in non-spa's, too?

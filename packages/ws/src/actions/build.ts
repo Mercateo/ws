@@ -4,10 +4,6 @@ import { project, TYPE } from '../project';
 import { compile as compileI18n } from '../lib/i18n';
 import { compileAsync } from '../lib/webpack/compiler';
 import { getNodeBuildConfig } from '../lib/webpack/node';
-import {
-  getElectronReleaseConfig,
-  getElectronBuildConfig
-} from '../lib/webpack/electron';
 import { getSpaReleaseConfig, getSpaBuildConfig } from '../lib/webpack/spa';
 import {
   getBrowserReleaseConfig,
@@ -38,13 +34,6 @@ export default async function build(options: BuildOptions) {
   switch (project.ws.type) {
     case TYPE.NODE:
       await compileAsync(await getNodeBuildConfig(options), 'build');
-      break;
-    case TYPE.ELECTRON:
-      if (options.production) {
-        await compileAsync(await getElectronReleaseConfig(options), 'build -p');
-      } else {
-        await compileAsync(await getElectronBuildConfig(options), 'build');
-      }
       break;
     case TYPE.SPA:
       if (options.production) {

@@ -43,11 +43,8 @@ interface EnhancedConfigOptions extends ConfigOptions {
     path?: string;
     terminal?: boolean;
   };
+  customLaunchers: any;
 }
-
-const electronConfig = {
-  browsers: ['Electron']
-};
 
 const headlessChromeConfig = {
   browsers: ['CustomChromeHeadless'],
@@ -69,9 +66,7 @@ const defaultConfig: EnhancedConfigOptions = {
   plugins: [
     'karma-mocha',
     'karma-chrome-launcher',
-    project.ws.type === 'electron'
-      ? 'karma-electron'
-      : 'karma-webdriver-launcher',
+    'karma-webdriver-launcher',
     'karma-sourcemap-loader',
     'karma-mocha-reporter'
   ],
@@ -80,7 +75,7 @@ const defaultConfig: EnhancedConfigOptions = {
   mochaReporter: {
     showDiff: true
   },
-  ...(project.ws.type === 'electron' ? electronConfig : headlessChromeConfig),
+  ...headlessChromeConfig,
   logLevel: 'WARN',
   browserConsoleLogOptions: {
     level: 'log',
@@ -112,11 +107,7 @@ export async function testAsync(options: { grid?: boolean } = {}) {
     basePath: process.cwd(),
     files: [join(project.ws.distTestsDir, 'index.js')],
     preprocessors: {
-      [join(project.ws.distTestsDir, 'index.js')]: (project.ws.type ===
-      'electron'
-        ? ['electron']
-        : []
-      ).concat(['sourcemap'])
+      [join(project.ws.distTestsDir, 'index.js')]: ['sourcemap']
     }
   };
 

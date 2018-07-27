@@ -46,7 +46,7 @@ Besides that we think that most of our code and our dependencies of `ws` are sha
 
 1. Install [Node](https://nodejs.org/). We try to support at least the current LTS version of Node.
 1. `$ npm install --save-dev @mercateo/ws@next`
-1. Add `"ws": { "type": "spa" }` (or `"node"` or `"browser"` or `"electron"`) to your `package.json`, depending on the project you have.
+1. Add `"ws": { "type": "spa" }` (or `"node"` or `"browser"`) to your `package.json`, depending on the project you have.
 1. Optionally: Create a `tsconfig.json` to use TypeScript. Highly recommended!
 1. Optionally: Add a `"jsx"` setting to your `tsconfig.json`.
 
@@ -160,7 +160,7 @@ Currently we have no in-depth documentation for `ws` as long as we try to add mo
 
 # Config
 
-The ws specific config must be set in the `package.json` in a `"ws"` property. You can see multiple examples in the [`examples/`](examples) directory. The only mandatory setting is the `type` which must be either `"spa"`, `"browser"`, `"node"` or `"electron"`. You can see all your possible configurations [here](src/project.ts).
+The ws specific config must be set in the `package.json` in a `"ws"` property. You can see multiple examples in the [`examples/`](examples) directory. The only mandatory setting is the `type` which must be either `"spa"`, `"browser"` or `"node"`. You can see all your possible configurations [here](src/project.ts).
 
 If you want to write a TypeScript-based project, you need to create a [`tsconfig.json`](https://www.typescriptlang.org/docs/handbook/tsconfig-json.html) as well.
 

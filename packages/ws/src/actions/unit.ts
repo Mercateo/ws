@@ -9,7 +9,6 @@ import { testAsync as mochaTestAsync } from '../lib/mocha';
 import { compile as compileI18n } from '../lib/i18n';
 import { compileAsync } from '../lib/webpack/compiler';
 import { getNodeUnitConfig } from '../lib/webpack/node';
-import { getElectronUnitConfig } from '../lib/webpack/electron';
 import { getSpaUnitConfig } from '../lib/webpack/spa';
 import { getBrowserUnitConfig } from '../lib/webpack/browser';
 import { BaseOptions } from '../options';
@@ -64,10 +63,6 @@ export default async function unit(options: UnitOptions) {
       await compileAsync(config, 'unit');
       const files = [path.join(config.output.path, 'index.js')];
       exitCode = await mochaTestAsync(files);
-      break;
-    case TYPE.ELECTRON:
-      await compileAsync(await getElectronUnitConfig(options), 'unit');
-      exitCode = await karmaTestAsync(options);
       break;
     case TYPE.SPA:
       const conf = await getSpaUnitConfig(options);

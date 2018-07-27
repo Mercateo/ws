@@ -76,7 +76,6 @@ export function runCli() {
   // specific setup
   switch (project.ws.type) {
     case TYPE.SPA:
-    case TYPE.ELECTRON:
       commander.description('We build your SPA!');
 
       commander
@@ -131,18 +130,13 @@ export function runCli() {
     case TYPE.SPA:
     case TYPE.NODE:
     case TYPE.BROWSER:
-    case TYPE.ELECTRON:
       const buildCommand = commander
         .command('build')
         .alias('b')
         .description('build the project')
         .action(handleAction(() => import('./actions/build')));
 
-      if (
-        project.ws.type === TYPE.SPA ||
-        project.ws.type === TYPE.BROWSER ||
-        project.ws.type === TYPE.ELECTRON
-      ) {
+      if (project.ws.type === TYPE.SPA || project.ws.type === TYPE.BROWSER) {
         buildCommand.option('-p, --production', 'create production build');
       }
 

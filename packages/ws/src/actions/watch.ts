@@ -17,7 +17,6 @@ import {
   getStatsOptions
 } from '../lib/webpack/compiler';
 import { getNodeBuildConfig } from '../lib/webpack/node';
-import { getElectronBuildConfig } from '../lib/webpack/electron';
 import { getSpaBuildConfig } from '../lib/webpack/spa';
 import { getBrowserBuildConfig } from '../lib/webpack/browser';
 import { resolve } from '../lib/resolve';
@@ -93,15 +92,6 @@ export default async function watch(options: WatchOptions) {
         'build',
         onChangeSuccess
       );
-      break;
-    case TYPE.ELECTRON:
-      await watchAsync(
-        livereloadServer,
-        await getElectronBuildConfig(options),
-        'build',
-        onChangeSuccess
-      );
-
       break;
     case TYPE.SPA:
       await watchAsync(

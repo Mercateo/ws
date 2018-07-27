@@ -17,6 +17,7 @@ declare module 'eslint';
 declare module 'plur';
 declare module 'nodemon';
 declare module 'babel-jest';
+declare module 'koa-connect';
 
 declare module 'parent-dirs' {
   function parentDirs(cwd?: string): string[];
