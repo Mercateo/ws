@@ -4,7 +4,7 @@
     "lint": "wsrun lint --exclude-missing --serial",
     "build": "wsrun build --exclude-missing --serial",
     "unit": "wsrun unit --exclude-missing --serial",
-    "ci": "node scripts/ci.js",
+    "ci": "yarn build && yarn lint && yarn unit",
     "release": "workspace-version"
   },
   "workspaces": [
