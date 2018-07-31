@@ -1,6 +1,6 @@
 The changelog is currently handwritten.
 
-# HEAD
+# 3.0.0-3 (2018-07-31)
 
 - Added Cypress example.
 
