@@ -10203,9 +10203,9 @@ worker-farm@^1.5.2:
   dependencies:
     errno "~0.1.7"
 
-workspace-release@^0.4.4:
-  version "0.4.4"
-  resolved "https://registry.yarnpkg.com/workspace-release/-/workspace-release-0.4.4.tgz#cbd59ce69fa010e7dd008eaac37eba91a4c8665c"
+workspace-release@^0.4.5:
+  version "0.4.5"
+  resolved "https://registry.yarnpkg.com/workspace-release/-/workspace-release-0.4.5.tgz#2776509e3dd0ec416c3939578610582d733e20fd"
   dependencies:
     chalk "^2.3.0"
     fast-glob "^2.0.1"

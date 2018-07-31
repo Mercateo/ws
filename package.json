@@ -13,7 +13,7 @@
   ],
   "devDependencies": {
     "rimraf": "^2.6.2",
-    "workspace-release": "^0.4.4",
+    "workspace-release": "^0.4.5",
     "wsrun": "^2.2.1"
   }
 }
