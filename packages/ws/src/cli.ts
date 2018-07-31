@@ -73,50 +73,6 @@ export function runCli() {
     };
   }
 
-  // specific setup
-  switch (project.ws.type) {
-    case TYPE.SPA:
-      commander.description('We build your SPA!');
-
-      commander
-        .command('serve')
-        .alias('s')
-        .description('serve the project')
-        .option('-p, --production', 'serve production build')
-        .action(handleAction(() => import('./actions/serve')));
-
-      const e2eCommand = commander
-        .command('e2e')
-        .alias('e')
-        .description('run e2e tests')
-        .option(
-          '--browsers <browsers>',
-          `browsers to use (comma separated list, e.g. 'ie-9,ff-36,chrome-41')`
-        )
-        .option('--headless', `prefer headless mode`)
-        .action((...args: any[]) => {
-          if (args.length === 2) {
-            const [browsers, options] = args;
-            options.browsers = browsers;
-            handleAction(() => import('./actions/e2e'))(options);
-          } else {
-            const [options] = args;
-            handleAction(() => import('./actions/e2e'))(options);
-          }
-        });
-
-      if (project.ws.selenium) {
-        e2eCommand.option('-g, --grid', 'run on selenium grid');
-      }
-      break;
-    case TYPE.NODE:
-      commander.description('We build your Node module!');
-      break;
-    case TYPE.BROWSER:
-      commander.description('We build your Browser module!');
-      break;
-  }
-
   if (project.ws.i18n && project.ws.i18n.importUrl) {
     commander
       .command('i18n:import')
@@ -130,45 +86,11 @@ export function runCli() {
     case TYPE.SPA:
     case TYPE.NODE:
     case TYPE.BROWSER:
-      const buildCommand = commander
-        .command('build')
-        .alias('b')
-        .description('build the project')
-        .action(handleAction(() => import('./actions/build')));
-
-      if (project.ws.type === TYPE.SPA || project.ws.type === TYPE.BROWSER) {
-        buildCommand.option('-p, --production', 'create production build');
-      }
-
-      const watchCommand = commander
-        .command('watch')
-        .alias('w')
-        .description('continuously build and serve the project')
-        .action(handleAction(() => import('./actions/watch')));
-
-      if (project.ws.type === TYPE.SPA) {
-        watchCommand.option(
-          '-H, --hot',
-          'enables hot reloading (experimental)'
-        );
-      }
-
       commander
         .command('lint')
         .alias('l')
         .description('run linter')
         .action(handleAction(() => import('./actions/lint')));
-
-      const unitCommand = commander
-        .command('unit')
-        .alias('u')
-        .description('run unit tests')
-        // .option('-c, --coverage', 'generates code coverage')
-        .action(handleAction(() => import('./actions/unit')));
-
-      if (project.ws.selenium) {
-        unitCommand.option('-g, --grid', 'run on selenium grid');
-      }
       break;
   }
 

@@ -21,43 +21,6 @@ export const TYPE = {
 const TYPES = [TYPE.SPA, TYPE.NODE, TYPE.BROWSER];
 
 /**
- * Our selenium grid settings. Only needed if you run tests with a custom selenium grid.
- */
-export interface SeleniumGridConfig {
-  /**
-   * The host of selenium.
-   */
-  host: string;
-  /**
-   * The port of selenium.
-   */
-  port: number;
-  /**
-   * User name which should be used to access selenium (e.g. needed for Sauce Labs).
-   *
-   * You can also set `envUser` in in your `package.json` and we get the user from `process.env`.
-   * E.g. when `"envUser": "SAUCE_USERNAME"` is set we use `process.env['SAUCE_USERNAME']` as `user`.
-   */
-  user?: string;
-  /**
-   * Password which should be used to access selenium (e.g. needed for Sauce Labs).
-   *
-   * You can also set `envPassword` in in your `package.json` and we get the password from
-   * `process.env`. E.g. when `"envPassword": "SAUCE_ACCESS_KEY"` is set we use
-   * `process.env['SAUCE_ACCESS_KEY']` as `password`.
-   */
-  password?: string;
-  /**
-   * Tries to use the `browsers` query only against available browsers on the selenium grid.
-   * E.g. `"last 2 Chrome versions"` would return the last 2 chrome versions available on the
-   * grid, not the last 2 released chrome versions. Defaults to `false`.
-   *
-   * This is experimental!
-   */
-  filterForAvailability: boolean;
-}
-
-/**
  * Our i18n settings. Only needed for translated projects.
  */
 export interface I18nConfig {
@@ -71,13 +34,6 @@ export interface I18nConfig {
    * in a `de.properties` file). That way you don't have to save duplicates.
    */
   locales: string[];
-  /**
-   * If you want to have the benefits of i18n like using the message format, but you _really_
-   * just want to support _one_ locale, you can generate your projects as if you would not
-   * support any locale at all (e.g. generated SPAs aren't nested in a directory for every
-   * locale).
-   */
-  isSingleLocale?: boolean;
   /**
    * The directory where your `.properties` with translations are located. Defaults to `i18n`.
    */
@@ -199,10 +155,6 @@ export interface WsConfig {
      */
     node: string | number;
   };
-  /**
-   * Our selenium grid settings. Only needed if you run tests with a custom selenium grid.
-   */
-  selenium?: SeleniumGridConfig;
   /**
    * Our i18n settings. Only needed for translated projects.
    */
@@ -364,19 +316,6 @@ export function validate(pkg: any): PackageConfig {
 
   if (!pkg.ws.targets.browsers) {
     pkg.ws.targets.browsers = '> 1%, last 2 versions, Firefox ESR';
-  }
-
-  // defaults for selenium
-  if (pkg.ws.selenium) {
-    if (!pkg.ws.selenium.filterForAvailability) {
-      pkg.ws.selenium.filterForAvailability = false;
-    }
-    if (pkg.ws.selenium.envUser) {
-      pkg.ws.selenium.user = process.env[pkg.ws.selenium.envUser];
-    }
-    if (pkg.ws.selenium.envPassword) {
-      pkg.ws.selenium.password = process.env[pkg.ws.selenium.envPassword];
-    }
   }
 
   return pkg;

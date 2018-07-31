@@ -302,9 +302,9 @@ export const forkTsCheckerPlugin = new ForkTsCheckerWebpackPlugin({
   tsconfig: project.ws.tsconfigPath,
   silent: true,
   async: false,
-  checkSyntacticErrors: true,
+  checkSyntacticErrors: true
   // `watch` is optional, but docs say it improves performance (less stat calls)
-  watch: [project.ws.srcDir, project.ws.testsDir]
+  // watch: [project.ws.srcDir, project.ws.testsDir]
 });
 
 export const devtool = 'inline-source-map';
@@ -402,7 +402,7 @@ export const nodeConfig: Configuration = {
 
 export type Target = 'spa' | 'node' | 'browser';
 
-export const getEntryAndOutput = async (target: Target, command: Command) => {
+export const getEntryAndOutput = (target: Target, command: Command) => {
   const entry: Entry = {
     index: project.ws.srcEntry
   };
@@ -425,7 +425,7 @@ export const getEntryAndOutput = async (target: Target, command: Command) => {
         ? project.ws.testsPattern
         : [project.ws.testsPattern];
     }
-    entry.index = await globby([project.ws.unitEntry, ...pattern]);
+    entry.index = globby.sync([project.ws.unitEntry, ...pattern]);
     output.path = join(process.cwd(), project.ws.distTestsDir);
   } else if (command === 'e2e') {
     entry.index = project.ws.e2eEntry;

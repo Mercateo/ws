@@ -4,7 +4,8 @@
     "lint": "wsrun lint --exclude-missing --serial",
     "build": "wsrun build --exclude-missing --serial",
     "unit": "wsrun unit --exclude-missing --serial",
-    "ci": "yarn build && yarn lint && yarn unit",
+    "e2e": "wsrun e2e --exclude-missing --serial",
+    "ci": "yarn build && yarn lint && yarn unit && yarn e2e",
     "release": "workspace-version"
   },
   "workspaces": [

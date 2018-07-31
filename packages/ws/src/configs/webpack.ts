@@ -1,12 +1,15 @@
-import { project, WsConfig } from '../project';
-import { getBrowserReleaseConfig } from '../lib/webpack/browser';
-import { getNodeBuildConfig } from '../lib/webpack/node';
-import { getSpaReleaseConfig, getSpaBuildConfig } from '../lib/webpack/spa';
-// import watch from '../actions/watch';
-
+import { Configuration } from 'webpack';
 import history from 'connect-history-api-fallback';
 import convert from 'koa-connect';
-import { WebpackConfig } from '../lib/webpack/options';
+
+import { project } from '../project';
+import { getBrowserReleaseConfig } from '../lib/webpack/browser';
+import { getNodeBuildConfig } from '../lib/webpack/node';
+import {
+  getSpaReleaseConfig,
+  getSpaBuildConfig,
+  getSpaE2eConfig
+} from '../lib/webpack/spa';
 
 const options = {
   parent: {
@@ -14,18 +17,21 @@ const options = {
   }
 };
 
-export const getWebpackConfig = async (
-  type: WsConfig['type'] = project.ws.type
-): Promise<WebpackConfig> => {
+type Type = 'spa' | 'browser' | 'node' | 'cypress';
+
+export const getWebpackConfig = (
+  type: Type = project.ws.type
+): Configuration => {
   switch (type) {
     case 'browser':
       return getBrowserReleaseConfig(options);
     case 'node':
       return getNodeBuildConfig(options);
+    case 'cypress':
+      return getSpaE2eConfig(options);
     case 'spa':
       if (process.env.WEBPACK_SERVE) {
-        // return watch({ ...options, hot: true });
-        const config = await getSpaBuildConfig(options);
+        const config = getSpaBuildConfig(options);
         config.serve = {
           add(app, middleware, options) {
             app.use(convert(history()));

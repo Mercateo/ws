@@ -1,48 +1,57 @@
+import { Configuration } from 'webpack';
 import {
   WebpackConfig,
   enzymeExternals,
   externalsSpa,
   baseConfig,
-  nodeConfig,
   releaseConfig,
   getEntryAndOutput,
   getModuleAndPlugins
 } from './options';
 import { EnvOptions } from '../../options';
 
-export const getSpaBuildConfig = async (
-  options: EnvOptions
-): Promise<WebpackConfig> => ({
+export const getSpaBuildConfig = (options: EnvOptions): WebpackConfig => ({
   ...baseConfig,
-  ...(await getEntryAndOutput('spa', 'build')),
+  ...getEntryAndOutput('spa', 'build'),
   ...getModuleAndPlugins('spa', 'build', options),
   externals: externalsSpa
 });
 
-export const getSpaReleaseConfig = async (
-  options: EnvOptions
-): Promise<WebpackConfig> => ({
+export const getSpaReleaseConfig = (options: EnvOptions): WebpackConfig => ({
   ...baseConfig,
   ...releaseConfig,
-  ...(await getEntryAndOutput('spa', 'build -p')),
+  ...getEntryAndOutput('spa', 'build -p'),
   ...getModuleAndPlugins('spa', 'build -p', options),
   mode: 'production'
 });
 
-export const getSpaUnitConfig = async (
-  options: EnvOptions
-): Promise<WebpackConfig> => ({
+export const getSpaUnitConfig = (options: EnvOptions): WebpackConfig => ({
   ...baseConfig,
-  ...(await getEntryAndOutput('spa', 'unit')),
+  ...getEntryAndOutput('spa', 'unit'),
   ...getModuleAndPlugins('spa', 'unit', options),
   externals: enzymeExternals
 });
 
-export const getSpaE2eConfig = async (
-  options: EnvOptions
-): Promise<WebpackConfig> => ({
-  ...baseConfig,
-  ...nodeConfig,
-  ...(await getEntryAndOutput('node', 'e2e')),
-  ...getModuleAndPlugins('node', 'e2e', options)
+export const getSpaE2eConfig = (options: EnvOptions): Configuration => ({
+  // ...baseConfig,
+  // ...getEntryAndOutput('browser', 'build'),
+  // ...getModuleAndPlugins('browser', 'build', options)
+  // externals: externalsSpa
+  resolve: {
+    extensions: ['.ts', '.js']
+  },
+  module: {
+    rules: [
+      {
+        test: /\.ts$/,
+        exclude: [/node_modules/],
+        use: [
+          {
+            loader: 'ts-loader'
+          }
+        ]
+      }
+    ]
+  },
+  devtool: 'inline-source-map'
 });

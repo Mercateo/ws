@@ -9,31 +9,27 @@ import {
 } from './options';
 import { EnvOptions } from '../../options';
 
-export const getBrowserBuildConfig = async (
-  options: EnvOptions
-): Promise<WebpackConfig> => ({
+export const getBrowserBuildConfig = (options: EnvOptions): WebpackConfig => ({
   ...baseConfig,
-  ...(await getEntryAndOutput('browser', 'build')),
+  ...getEntryAndOutput('browser', 'build'),
   ...getModuleAndPlugins('browser', 'build', options),
   externals: externalsBrowser
 });
 
-export const getBrowserReleaseConfig = async (
+export const getBrowserReleaseConfig = (
   options: EnvOptions
-): Promise<WebpackConfig> => ({
+): WebpackConfig => ({
   ...baseConfig,
   ...releaseConfig,
-  ...(await getEntryAndOutput('browser', 'build -p')),
+  ...getEntryAndOutput('browser', 'build -p'),
   ...getModuleAndPlugins('browser', 'build -p', options),
   externals: externalsBrowser,
   mode: 'production'
 });
 
-export const getBrowserUnitConfig = async (
-  options: EnvOptions
-): Promise<WebpackConfig> => ({
+export const getBrowserUnitConfig = (options: EnvOptions): WebpackConfig => ({
   ...baseConfig,
-  ...(await getEntryAndOutput('browser', 'unit')),
+  ...getEntryAndOutput('browser', 'unit'),
   ...getModuleAndPlugins('browser', 'unit', options),
   externals: enzymeExternals
 });

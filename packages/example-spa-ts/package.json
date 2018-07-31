@@ -6,7 +6,11 @@
     "build": "webpack-cli --config src/webpack.config.js",
     "lint": "ws lint",
     "unit": "jest --config tests/jest.config.js",
-    "watch": "webpack-serve --config src/webpack.config.js"
+    "watch": "webpack-serve --config src/webpack.config.js",
+    "e2e": "start-server-and-test e2e:server http://localhost:8080 e2e:run",
+    "e2e:run": "cypress run",
+    "e2e:debug": "cypress open",
+    "e2e:server": "yarn build && http-server dist-release"
   },
   "ws": {
     "type": "spa"
@@ -22,12 +26,15 @@
     "react-hot-loader": "^4.3.3"
   },
   "devDependencies": {
+    "@cypress/webpack-preprocessor": "^2.0.1",
     "@mercateo/ws": "link:../ws",
     "@types/jest": "^23.3.0",
     "@types/react-test-renderer": "^16.0.0",
     "@types/webpack-env": "^1.13.6",
+    "cypress": "^3.0.2",
     "jest": "^23.4.1",
     "react-test-renderer": "^16.0.0",
+    "start-server-and-test": "^1.7.0",
     "webpack-cli": "^3.1.0",
     "webpack-serve": "^2.0.2"
   }

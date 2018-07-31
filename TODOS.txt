@@ -1,9 +1,9 @@
-- remove e2e
-- expose webpack config
+- test env vars in webpack build
 - use multiple tsconfig's
 - linter should work with multiple tsconfig's
 - remove targets.browsers?
 - add storybook
-- check react-hot-loader
+- eslint config for storybook
 - transpileOnly
-- extract building i18n
+- extract import i18n
+- add base tsconfig?
