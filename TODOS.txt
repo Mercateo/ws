@@ -7,3 +7,5 @@
 - transpileOnly
 - extract import i18n
 - add base tsconfig?
+- tslint no-unused-variable?
+- prettier/babel/typescript update
