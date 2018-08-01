@@ -1,9 +1,14 @@
 {
   "private": true,
+  "name": "root",
+  "ws": {
+    "type": "browser"
+  },
   "scripts": {
     "lint": "wsrun lint --exclude-missing --serial",
     "build": "wsrun build --exclude-missing --serial",
-    "unit": "wsrun unit --exclude-missing --serial",
+    "preunit": "wsrun preunit --exclude-missing --serial",
+    "unit": "yarn jest",
     "e2e": "wsrun e2e --exclude-missing --serial",
     "ci": "yarn build && yarn lint && yarn unit && yarn e2e",
     "release": "workspace-version"
@@ -12,6 +17,7 @@
     "packages/*"
   ],
   "devDependencies": {
+    "jest": "^23.4.2",
     "rimraf": "^2.6.2",
     "workspace-release": "^0.4.5",
     "wsrun": "^2.2.1"

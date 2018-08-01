@@ -14,7 +14,7 @@
   },
   "devDependencies": {
     "@mercateo/ws": "link:../ws",
-    "jest": "^23.4.1",
+    "jest": "^23.4.2",
     "webpack-cli": "^3.1.0"
   }
 }
