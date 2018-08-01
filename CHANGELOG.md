@@ -1,5 +1,10 @@
 The changelog is currently handwritten.
 
+# 3.0.0-4 (2018-08-01)
+
+- `getWebpackConfig` expects an optional options object now.
+- You can pass build time env vars via `getWebpackConfig({ env: { foo: 'bar' }})` now.
+
 # 3.0.0-3 (2018-07-31)
 
 - Added Cypress example.

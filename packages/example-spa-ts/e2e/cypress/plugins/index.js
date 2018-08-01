@@ -4,7 +4,7 @@ const { getWebpackConfig } = require('@mercateo/ws');
 
 module.exports = (on, config) => {
   const options = {
-    webpackOptions: getWebpackConfig('cypress')
+    webpackOptions: getWebpackConfig({ type: 'cypress' })
   };
   on('file:preprocessor', wp(options));
 };

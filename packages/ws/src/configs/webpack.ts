@@ -11,17 +11,31 @@ import {
   getSpaE2eConfig
 } from '../lib/webpack/spa';
 
-const options = {
-  parent: {
-    env: []
-  }
-};
-
 type Type = 'spa' | 'browser' | 'node' | 'cypress';
 
-export const getWebpackConfig = (
-  type: Type = project.ws.type
-): Configuration => {
+type Options = {
+  type?: Type;
+  env?: { [key: string]: string };
+};
+
+export const getWebpackConfig = (opts: Options = {}): Configuration => {
+  if (typeof opts === 'string') {
+    throw `Expected an options object, but got the string "${opts}"`;
+  }
+
+  const { type = project.ws.type, env = {} } = opts;
+
+  // convert new env map to old env key-value-array
+  const oldEnv = Object.entries(env).map(([key, value]) => ({
+    key,
+    value
+  }));
+  const options = {
+    parent: {
+      env: oldEnv
+    }
+  };
+
   switch (type) {
     case 'browser':
       return getBrowserReleaseConfig(options);
