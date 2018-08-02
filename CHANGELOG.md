@@ -1,5 +1,9 @@
 The changelog is currently handwritten.
 
+# 3.0.0-6 (2018-08-02)
+
+- Reduced build and watch warnings.
+
 # 3.0.0-5 (2018-08-02)
 
 - Fix a prettier issue.

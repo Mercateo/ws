@@ -10,6 +10,7 @@ import {
   getSpaBuildConfig,
   getSpaE2eConfig
 } from '../lib/webpack/spa';
+import { stats } from '../lib/webpack/options';
 
 type Type = 'spa' | 'browser' | 'node' | 'cypress';
 
@@ -49,6 +50,10 @@ export const getWebpackConfig = (opts: Options = {}): Configuration => {
         config.serve = {
           add(app, middleware, options) {
             app.use(convert(history()));
+          },
+          devMiddleware: {
+            publicPath: project.ws.publicPath, // it looks like this is a required config from devMiddleware
+            stats
           }
         };
         return config;
