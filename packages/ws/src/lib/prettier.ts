@@ -20,20 +20,20 @@ export async function formatAsync(filePatterns = sourceFilePatterns) {
 
   const fixedFiles: string[] = [];
   await Promise.all(
-    filePaths.map(async (filePath, index) => {
+    filePaths.map(async (filepath, index) => {
       const content = contents[index];
       let formattedContent;
 
       try {
-        formattedContent = format(content, config);
+        formattedContent = format(content, { ...config, filepath });
       } catch (err) {
-        error(`Couldn't format ${red(filePath)}.`);
+        error(`Couldn't format ${red(filepath)}.`);
         throw err;
       }
 
       if (content !== formattedContent) {
-        fixedFiles.push(filePath);
-        await writeFileAsync(filePath, formattedContent);
+        fixedFiles.push(filepath);
+        await writeFileAsync(filepath, formattedContent);
       }
     })
   );
