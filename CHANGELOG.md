@@ -1,5 +1,9 @@
 The changelog is currently handwritten.
 
+# 3.0.0-5 (2018-08-02)
+
+- Fix a prettier issue.
+
 # 3.0.0-4 (2018-08-01)
 
 - `getWebpackConfig` expects an optional options object now.
@@ -37,6 +41,7 @@ This is **new and shiny**:
 - We encourage to manually prebuild translations now via `$ yarn ws-build-translations`.
 
 # 2.11.2 (2018-07-06)
+
 # 2.11.1 (2018-07-06)
 
 - Try [`workspace-release`](https://github.com/donaldpipowitch/workspace-release).
@@ -338,6 +343,7 @@ This is **new and shiny**:
 - Remove buggy postinstall.
 
 # 1.0.1-43 (2016-12-09)
+
 # 1.0.1-42 (2016-12-09)
 
 - Allow production build for browser components. You need to run `ws build --production` to do that. Note that you probably **must** update your `"main"` and `"typings"` to point to `dist-release/` and `dist-release/` should **not** be included in your `.npmignore`.
