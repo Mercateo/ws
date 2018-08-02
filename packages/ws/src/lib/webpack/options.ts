@@ -388,8 +388,9 @@ export const stats: Configuration['stats'] = {
   timings: false,
   chunks: false,
   chunkModules: false,
-  // `children` must be `true` to get error logging, when `options` is an array
-  children: true,
+  entrypoints: false,
+  children: false,
+  modules: false,
   // we need this, because we build ts files with transpileOnly and than we don't know
   // if your export/import refers to a type/interface which can't be find by babel
   warningsFilter: /export .* was not found in/
@@ -400,6 +401,7 @@ export const baseConfig: Configuration = {
   resolveLoader,
   resolve,
   devtool,
+  stats,
   mode: 'development'
 };
 
