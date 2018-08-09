@@ -12,7 +12,6 @@
     "no-reference": true,
     "no-var-keyword": true,
     "no-unused-expression": true,
-    "no-unused-variable": [true, { "ignore-pattern": "^_" }],
     "object-literal-shorthand": true,
     "prefer-for-of": true,
     "triple-equals": [true, "allow-null-check"]
