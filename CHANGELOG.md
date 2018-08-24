@@ -1,5 +1,9 @@
 The changelog is currently handwritten.
 
+# HEAD
+
+- Remove `no-unused-variable` rule, because it can break code.
+
 # 3.0.0-7 (2018-08-02)
 
 - Reduced logging in build and watch task a little bit more.
