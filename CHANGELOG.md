@@ -1,6 +1,6 @@
 The changelog is currently handwritten.
 
-# HEAD
+# 3.0.0-8 (2018-08-24)
 
 - Remove `no-unused-variable` rule, because it can break code.
 
