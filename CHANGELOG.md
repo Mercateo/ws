@@ -1,8 +1,12 @@
 The changelog is currently handwritten.
 
-# 3.0.0-8 (2018-08-24)
+# 3.0.0-9 (2018-08-28)
 
 - Remove `no-unused-variable` rule, because it can break code.
+
+# 3.0.0-8 (2018-08-24)
+
+- ~~Remove `no-unused-variable` rule, because it can break code.~~ Didn't work. Sorry.
 
 # 3.0.0-7 (2018-08-02)
 
