@@ -1,6 +1,6 @@
 {
   "name": "@mercateo/ws",
-  "version": "3.0.0-8",
+  "version": "3.0.0-9",
   "main": "./dist/index.js",
   "typings": "./dist/src/index.d.ts",
   "description": "Scripts for building web projects.",
