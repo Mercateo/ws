@@ -5,3 +5,4 @@ dist-i18n/
 dist-tests/
 dist-release/
 .history/
+storybook-static
