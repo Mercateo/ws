@@ -16,10 +16,8 @@ export const getJestConfig = () => ({
   },
   moduleFileExtensions: [...defaults.moduleFileExtensions, 'ts', 'tsx'],
   globals: {
-    // it looks like `ts-jest` resolves `process.cwd()/tsconfig.json` instead
-    // of `<rootDir>/tsconfig.json` so we need that
     'ts-jest': {
-      tsConfigFile: './tsconfig.json'
+      tsConfig: '<rootDir>/tsconfig.json'
     }
   },
   moduleNameMapper: {
