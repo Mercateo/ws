@@ -8,7 +8,7 @@
     "lint": "wsrun lint --exclude-missing --serial",
     "build": "wsrun build --exclude-missing --serial",
     "preunit": "wsrun preunit --exclude-missing --serial",
-    "unit": "yarn jest",
+    "unit": "jest",
     "storybook:build": "wsrun storybook:build --exclude-missing --serial",
     "e2e": "wsrun e2e --exclude-missing --serial",
     "ci": "yarn build && yarn lint && yarn unit && yarn e2e && yarn storybook:build",
