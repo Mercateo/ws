@@ -1,8 +1,6 @@
 {
   "extends": "../tsconfig.base.json",
   "compilerOptions": {
-    "types": [
-      "jest"
-    ]
+    "types": ["jest", "@types/webpack-env", "../dist-i18n"]
   }
 }
