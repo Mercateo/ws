@@ -1,5 +1,10 @@
 The changelog is currently handwritten.
 
+# 3.0.0-10 (2018-09-10)
+
+- Update to TypeScript 3.
+- Supports Storybook configs now.
+
 # 3.0.0-9 (2018-08-28)
 
 - Remove `no-unused-variable` rule, because it can break code.
