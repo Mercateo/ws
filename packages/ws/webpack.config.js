@@ -1,5 +1,4 @@
 const { join } = require('path');
-const webpack = require('webpack');
 const WebpackNodeExternals = require('webpack-node-externals');
 
 const babelConfig = {
@@ -29,10 +28,14 @@ module.exports = {
     chunkModules: false,
     children: false
   },
-  entry: ['source-map-support/register', './src/index.ts'],
+  entry: {
+    index: ['source-map-support/register', './src/index.ts'],
+    'storybook-addons': './src/configs/storybook-addons',
+    'storybook-config': './src/configs/storybook-config'
+  },
   output: {
     path: join(__dirname, 'dist'),
-    filename: 'index.js',
+    filename: '[name].js',
     libraryTarget: 'commonjs2',
     sourcePrefix: '' // removes tabs before multiline strings
   },

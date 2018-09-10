@@ -1,0 +1,7 @@
+{
+  "extends": "../tsconfig.base.json",
+  "compilerOptions": {
+    "types": ["../dist-i18n"]
+  },
+  "include": ["../stories", "../src/typings.d.ts"]
+}
