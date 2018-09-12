@@ -52,7 +52,7 @@ export const getWebpackConfig = (opts: Options = {}): Configuration => {
             app.use(convert(history()));
           },
           devMiddleware: {
-            publicPath: 'test', // it looks like this is a required config from devMiddleware
+            publicPath: project.ws.publicPath, // it looks like this is a required config from devMiddleware
             stats
           }
         };
