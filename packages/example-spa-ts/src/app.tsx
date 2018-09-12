@@ -1,6 +1,7 @@
 import React, { Component } from 'react';
 import { NameComponent, ImageTestComponent } from 'example-browser-ts-react';
 import { hello } from './data.json';
+import { FancyTitle } from 'example-browser-ts-styled-component';
 
 export class Counter extends Component<{}, { value: number }> {
   state = {
@@ -32,6 +33,7 @@ export class Counter extends Component<{}, { value: number }> {
  */
 export const AppComponent = () => (
   <div>
+    <FancyTitle>Unite example SPA</FancyTitle>
     <Counter />
     <NameComponent a={1} b={2} name="_otbe_" />
     <ImageTestComponent />

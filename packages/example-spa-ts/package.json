@@ -20,6 +20,7 @@
     "@types/react-dom": "^16.0.0",
     "@types/react-hot-loader": "^4.1.0",
     "example-browser-ts-react": "*",
+    "example-browser-ts-styled-component": "*",
     "normalize.css": "^8.0.0",
     "react": "^16.0.0",
     "react-dom": "^16.0.0",
