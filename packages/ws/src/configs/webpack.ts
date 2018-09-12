@@ -52,10 +52,15 @@ export const getWebpackConfig = (opts: Options = {}): Configuration => {
             app.use(convert(history()));
           },
           devMiddleware: {
-            publicPath: project.ws.publicPath, // it looks like this is a required config from devMiddleware
+            publicPath: 'test', // it looks like this is a required config from devMiddleware
             stats
           }
         };
+        // having public path as an empty string inside devMiddleware would cause an error:
+        // 'publicPath must be set on `dev` options, or in a compiler's `output` configuration'
+        if (!project.ws.publicPath) {
+          delete config.serve!.devMiddleware!.publicPath;
+        }
         return config;
       } else {
         return getSpaReleaseConfig(options);
