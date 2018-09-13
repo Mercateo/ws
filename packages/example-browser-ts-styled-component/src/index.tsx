@@ -1,14 +1,6 @@
 import React, { Component } from 'react';
 import styled from 'styled-components';
 
-const FancyStyle = styled.p<{ primary?: boolean }>`
-  font-size: 1.5 rem;
-  text-align: center;
-  color: red;
-
-  ${({ primary }) => primary && `font-weight: bold;`};
-`;
-
 const stopwatch = (member: string) =>
   function(Component: Function) {
     const origin = Component.prototype[member];
@@ -20,6 +12,14 @@ const stopwatch = (member: string) =>
       return result;
     };
   };
+
+export const FancyStyle = styled.p<{ primary?: boolean }>`
+  font-size: 1.5 rem;
+  text-align: center;
+  color: red;
+
+  ${({ primary }) => primary && `font-weight: bold;`};
+`;
 
 @stopwatch('render')
 export class FancyTitle extends Component {
