@@ -1,8 +1,7 @@
 {
-  "extends": "../tsconfig.base.json",
+  "extends": "../../../node_modules/@mercateo/ws/tsconfig.base.json",
   "compilerOptions": {
-    "types": [
-      "jest"
-    ]
+    "jsx": "react",
+    "types": ["jest"]
   }
 }

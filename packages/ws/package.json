@@ -18,7 +18,8 @@
     "dist",
     ".eslintrc.json",
     "tslint.json",
-    "prettier.config.js"
+    "prettier.config.js",
+    "tsconfig.base.json"
   ],
   "publishConfig": {
     "access": "public"

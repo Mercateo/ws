@@ -1,12 +1,12 @@
 {
   "compilerOptions": {
-    "target": "es6",
+    "target": "es2017",
     "moduleResolution": "node",
+    "module": "esnext",
     "experimentalDecorators": true,
     "allowSyntheticDefaultImports": true,
-    "skipLibCheck": true,
     "strict": true,
-    "jsx": "react",
+    "skipLibCheck": true,
     "types": []
   }
 }

@@ -7,7 +7,6 @@
   "private": true,
   "scripts": {
     "build": "webpack-cli --config src/webpack.config.js",
-    "watch": "webpack-cli -w --config src/webpack.config.js",
     "lint": "ws lint",
     "unit": "jest --config tests/jest.config.js"
   },
@@ -20,8 +19,7 @@
     "example-browser-css": "*",
     "example-browser-ts": "*",
     "react": "^16.0.0",
-    "styled-components": "^3.4.5",
-    "typescript-styled-plugin": "^0.10.0"
+    "styled-components": "^3.4.5"
   },
   "devDependencies": {
     "@mercateo/ws": "link:../ws",
@@ -31,6 +29,7 @@
     "enzyme": "^3.6.0",
     "enzyme-adapter-react-16": "^1.5.0",
     "jest": "^23.5.0",
+    "typescript-styled-plugin": "^0.10.0",
     "webpack-cli": "^3.1.0"
   }
 }

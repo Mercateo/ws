@@ -1,9 +1,7 @@
 {
-  "extends": "../tsconfig.base.json",
+  "extends": "../../../node_modules/@mercateo/ws/tsconfig.base.json",
   "compilerOptions": {
-    "types": ["node"],
-    "noImplicitAny": false,
-    "noImplicitThis": false,
+    "jsx": "react",
     "plugins": [
       {
         "name": "typescript-styled-plugin"
