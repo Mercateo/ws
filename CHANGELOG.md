@@ -1,5 +1,10 @@
 The changelog is currently handwritten.
 
+# 3.0.0-11 (2018-10-01)
+
+- Fixes a `publicPath` bug with `weback-serve`/`$ yarn watch`.
+- Added a `tsconfig.base.json` so you can extend it.
+
 # 3.0.0-10 (2018-09-10)
 
 - Update to TypeScript 3.
