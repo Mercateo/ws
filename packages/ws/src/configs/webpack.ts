@@ -1,3 +1,4 @@
+import { join } from 'path';
 import { Configuration } from 'webpack';
 import history from 'connect-history-api-fallback';
 import convert from 'koa-connect';
@@ -49,7 +50,13 @@ export const getWebpackConfig = (opts: Options = {}): Configuration => {
         const config = getSpaBuildConfig(options);
         config.serve = {
           add(app, middleware, options) {
-            app.use(convert(history()));
+            app.use(
+              convert(
+                history({
+                  index: join(project.ws.publicPath, '/index.html')
+                })
+              )
+            );
           },
           devMiddleware: {
             publicPath: project.ws.publicPath, // it looks like this is a required config from devMiddleware

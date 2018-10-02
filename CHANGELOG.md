@@ -1,5 +1,9 @@
 The changelog is currently handwritten.
 
+# 3.0.0-12 (2018-10-02)
+
+- Fixes _another_ `publicPath` bug with `weback-serve`/`$ yarn watch`.
+
 # 3.0.0-11 (2018-10-01)
 
 - Fixes a `publicPath` bug with `weback-serve`/`$ yarn watch`.
