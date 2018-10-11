@@ -33,7 +33,7 @@ export const getStorybookWebpackConfig = (
           // },
           // plugins: [
           //   // [
-          //   //   'babel-plugin-styled-components',
+          //   //   '@babel/plugin-styled-components',
           //   //   {
           //   //     minify: false,
           //   //     transpileTemplateLiterals: false

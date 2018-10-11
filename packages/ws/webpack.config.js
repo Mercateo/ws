@@ -4,15 +4,14 @@ const WebpackNodeExternals = require('webpack-node-externals');
 const babelConfig = {
   presets: [
     [
-      'babel-preset-env',
+      '@babel/preset-env',
       {
         targets: { node: '8.9' },
-        useBuiltIns: true
+        useBuiltIns: 'entry'
       }
-    ],
-    'babel-preset-stage-0'
+    ]
   ],
-  plugins: ['babel-plugin-transform-decorators-legacy']
+  plugins: ['@babel/plugin-syntax-dynamic-import']
 };
 
 module.exports = {

@@ -45,18 +45,44 @@ export const performance: PerformanceOptions = {
   hints: false
 };
 
+// previously `@babel/preset-stage-0` - now needs to be explicitly picked
+const stage0Plugins = [
+  // Stage 0
+  // '@babel/plugin-proposal-function-bind',
+
+  // Stage 1
+  // '@babel/plugin-proposal-export-default-from',
+  // '@babel/plugin-proposal-logical-assignment-operators',
+  // ['@babel/plugin-proposal-optional-chaining', { loose: false }],
+  // ['@babel/plugin-proposal-pipeline-operator', { proposal: 'minimal' }],
+  // ['@babel/plugin-proposal-nullish-coalescing-operator', { loose: false }],
+  // '@babel/plugin-proposal-do-expressions',
+
+  // Stage 2
+  [resolveModule('@babel/plugin-proposal-decorators'), { legacy: true }],
+  // '@babel/plugin-proposal-function-sent',
+  // '@babel/plugin-proposal-export-namespace-from',
+  // '@babel/plugin-proposal-numeric-separator',
+  // '@babel/plugin-proposal-throw-expressions',
+
+  // Stage 3
+  resolveModule('@babel/plugin-syntax-dynamic-import'),
+  // '@babel/plugin-syntax-import-meta',
+  [resolveModule('@babel/plugin-proposal-class-properties'), { loose: false }]
+  // '@babel/plugin-proposal-json-strings'
+];
+
 export const babelNode = {
   presets: [
     [
-      resolveModule('babel-preset-env'),
+      resolveModule('@babel/preset-env'),
       {
         targets: { node: project.ws.targets.node },
-        useBuiltIns: true
+        useBuiltIns: 'entry'
       }
-    ],
-    resolveModule('babel-preset-stage-0')
+    ]
   ],
-  plugins: [resolveModule('babel-plugin-transform-decorators-legacy')],
+  plugins: [...stage0Plugins],
   // this removes the "[BABEL] Note: The code generator has deoptimised the styling of..." warning
   // I don't think we need `compact`, because our code is minified for production separately
   compact: false
@@ -65,20 +91,16 @@ export const babelNode = {
 export const babelBrowser = {
   presets: [
     [
-      resolveModule('babel-preset-env'),
+      resolveModule('@babel/preset-env'),
       {
         targets: { browsers: project.ws.targets.browsers },
         modules: false,
-        useBuiltIns: true
+        useBuiltIns: 'entry'
       }
     ],
-    resolveModule('babel-preset-react'),
-    resolveModule('babel-preset-stage-0')
+    resolveModule('@babel/preset-react')
   ],
-  plugins: [
-    resolveModule('babel-plugin-transform-decorators-legacy'),
-    resolveModule('react-hot-loader/babel')
-  ],
+  plugins: [...stage0Plugins, resolveModule('react-hot-loader/babel')],
   // this removes the "[BABEL] Note: The code generator has deoptimised the styling of..." warning
   // I don't think we need `compact`, because our code is minified for production separately
   compact: false

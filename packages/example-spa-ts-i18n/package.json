@@ -27,10 +27,10 @@
     }
   },
   "dependencies": {
+    "@babel/polyfill": "^7.0.0",
     "@mercateo/ws-intl": "^1.0.3",
     "@types/react": "^16.0.0",
     "@types/react-dom": "^16.0.0",
-    "babel-polyfill": "^6.26.0",
     "example-browser-ts-react": "*",
     "example-browser-ts-react-i18n": "*",
     "intl": "^1.2.4",

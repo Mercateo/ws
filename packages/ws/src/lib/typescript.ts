@@ -5,7 +5,7 @@ import { existsAsync } from 'fs-extra-promise';
 import { createProgram } from 'typescript';
 import { Compiler } from 'webpack';
 import chalk from 'chalk';
-import codeFrame from 'babel-code-frame';
+import codeFrame from '@babel/code-frame';
 import { project } from '../project';
 import { sourceFilePatterns } from '../project';
 
