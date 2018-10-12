@@ -1,6 +1,6 @@
 The changelog is currently handwritten.
 
-# HEAD
+# 3.0.0-13 (2018-10-12)
 
 - Updated to Babel 7! 🎉
 
