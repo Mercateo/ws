@@ -2,7 +2,7 @@ import { readJsonSync, writeFileAsync, readFileAsync } from 'fs-extra-promise';
 import { join, relative } from 'path';
 import chalk from 'chalk';
 import { CLIEngine } from 'eslint';
-import codeFrame from 'babel-code-frame';
+import codeFrame from '@babel/code-frame';
 import { sourceFilePatterns } from '../project';
 
 const { dim, red } = chalk;

@@ -33,6 +33,7 @@
     "react": "^16.0.0"
   },
   "devDependencies": {
+    "@babel/polyfill": "^7.0.0",
     "@mercateo/ws": "link:../ws",
     "@storybook/addon-knobs": "^4.0.0-alpha.18",
     "@storybook/cli": "^4.0.0-alpha.18",
@@ -43,7 +44,6 @@
     "@types/storybook__addon-knobs": "^3.4.1",
     "@types/storybook__react": "^3.0.9",
     "babel-plugin-require-context-hook": "^1.0.0",
-    "babel-polyfill": "^6.26.0",
     "enzyme": "^3.0.0",
     "enzyme-adapter-react-16": "^1.1.1",
     "intl": "^1.2.4",

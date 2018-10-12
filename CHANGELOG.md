@@ -1,5 +1,9 @@
 The changelog is currently handwritten.
 
+# HEAD
+
+- Updated to Babel 7! 🎉
+
 # 3.0.0-12 (2018-10-02)
 
 - Fixes _another_ `publicPath` bug with `weback-serve`/`$ yarn watch`.

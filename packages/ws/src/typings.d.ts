@@ -1,5 +1,5 @@
 declare module 'fork-ts-checker-webpack-plugin';
-declare module 'babel-code-frame';
+declare module '@babel/code-frame';
 declare module 'glob-to-regexp';
 declare module 'eslint';
 declare module 'plur';
@@ -70,7 +70,7 @@ declare module 'webpack-node-externals' {
   ): webpack.ExternalsFunctionElement;
 }
 
-declare module 'babel-core' {
+declare module '@babel/core' {
   export function transformFile(
     filename: string,
     options: any,

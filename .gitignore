@@ -1,4 +1,5 @@
 *.log
+cypress/videos/
 node_modules/
 dist/
 dist-i18n/
