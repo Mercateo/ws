@@ -353,11 +353,18 @@ export const externalsNode = [
       callback();
     }
   },
-  // in order to ignore all modules in node_modules folder
-  WebpackNodeExternals({
-    modulesDir: isWorkspace ? join(process.cwd(), '..', '..') : undefined
-  })
+  // default "node_modules" dir is excluded
+  WebpackNodeExternals()
 ];
+
+if (isWorkspace) {
+  // ignore all modules in node_modules workspace root folder
+  externalsNode.push(
+    WebpackNodeExternals({
+      modulesDir: join(process.cwd(), '..', '..', 'node_modules')
+    })
+  );
+}
 
 export const externalsBrowser = [
   (_context: any, request: any, callback: any) => {
