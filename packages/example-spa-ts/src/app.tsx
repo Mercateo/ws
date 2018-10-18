@@ -29,7 +29,7 @@ export class Counter extends Component<{}, { value: number }> {
   }
 }
 
-const AppComponent = () => (
+export const AppComponent = () => (
   <div>
     <FancyTitle>Unite example SPA</FancyTitle>
     <Counter />
