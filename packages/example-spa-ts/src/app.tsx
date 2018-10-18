@@ -1,3 +1,4 @@
+import { hot } from 'react-hot-loader';
 import React, { Component } from 'react';
 import { NameComponent, ImageTestComponent } from 'example-browser-ts-react';
 import { hello } from './data.json';
@@ -28,10 +29,7 @@ export class Counter extends Component<{}, { value: number }> {
   }
 }
 
-/**
- * This is our app component.
- */
-export const AppComponent = () => (
+const AppComponent = () => (
   <div>
     <FancyTitle>Unite example SPA</FancyTitle>
     <Counter />
@@ -45,3 +43,8 @@ export const AppComponent = () => (
     <p>This string was loaded from a JSON file: {hello}</p>
   </div>
 );
+
+/**
+ * This is our app component.
+ */
+export const App = hot(module)(AppComponent);
