@@ -10,7 +10,7 @@
     "e2e": "start-server-and-test e2e:server http://localhost:8080 e2e:run",
     "e2e:run": "cypress run",
     "e2e:debug": "cypress open",
-    "e2e:server": "yarn build && http-server dist-release"
+    "e2e:server": "yarn build && ws-serve"
   },
   "ws": {
     "type": "spa",
@@ -34,7 +34,6 @@
     "@types/react-test-renderer": "^16.0.0",
     "@types/webpack-env": "^1.13.6",
     "cypress": "^3.0.2",
-    "http-server": "^0.11.1",
     "jest": "^23.5.0",
     "react-test-renderer": "^16.0.0",
     "start-server-and-test": "^1.7.0",
