@@ -1,5 +1,9 @@
 The changelog is currently handwritten.
 
+# 3.0.0-14 (2018-10-18)
+
+- Fix nodeExternals for Node.js workspace projects.
+
 # 3.0.0-13 (2018-10-12)
 
 - Updated to Babel 7! 🎉
