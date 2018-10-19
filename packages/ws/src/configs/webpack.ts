@@ -53,7 +53,7 @@ export const getWebpackConfig = (opts: Options = {}): Configuration => {
           hot: true,
           before(app) {
             app.use((req, res, next) => {
-              if (req.path === '/') {
+              if (publicPath !== '/' && req.path === '/') {
                 res.redirect(publicPath);
               } else {
                 next();

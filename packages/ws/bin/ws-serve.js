@@ -14,7 +14,7 @@ const app = express();
 
 const publicPath = project.ws.publicPath ? project.ws.publicPath : '/';
 app.use((req, res, next) => {
-  if (req.path === '/') {
+  if (publicPath !== '/' && req.path === '/') {
     res.redirect(publicPath);
   } else {
     next();
