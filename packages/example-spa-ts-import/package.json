@@ -5,7 +5,7 @@
   "scripts": {
     "build": "webpack-cli --config src/webpack.config.js",
     "lint": "ws lint",
-    "watch": "webpack-serve --config src/webpack.config.js"
+    "watch": "WEBPACK_DEV_SERVER='true' webpack-dev-server --config src/webpack.config.js"
   },
   "ws": {
     "type": "spa"
@@ -23,6 +23,6 @@
   "devDependencies": {
     "@mercateo/ws": "link:../ws",
     "webpack-cli": "^3.1.0",
-    "webpack-serve": "^2.0.2"
+    "webpack-dev-server": "^3.1.9"
   }
 }

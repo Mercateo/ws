@@ -9,7 +9,8 @@ import webpack, {
   Plugin,
   PerformanceOptions,
   Output,
-  Entry
+  Entry,
+  HotModuleReplacementPlugin
 } from 'webpack';
 import MiniCssExtractPlugin from 'mini-css-extract-plugin';
 import ForkTsCheckerWebpackPlugin from 'fork-ts-checker-webpack-plugin';
@@ -575,6 +576,8 @@ export const getModuleAndPlugins = (
     // switch css plugin
     pull(plugins, miniCssExtractPlugin);
     plugins.push(miniCssExtractPluginHashed);
+  } else if (target === 'spa' && command === 'build') {
+    plugins.push(new HotModuleReplacementPlugin());
   }
 
   return { module: { rules }, plugins };

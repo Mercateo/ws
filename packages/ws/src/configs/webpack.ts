@@ -1,7 +1,6 @@
 import { join } from 'path';
 import { Configuration } from 'webpack';
 import history from 'connect-history-api-fallback';
-import convert from 'koa-connect';
 
 import { project } from '../project';
 import { getBrowserReleaseConfig } from '../lib/webpack/browser';
@@ -11,7 +10,6 @@ import {
   getSpaBuildConfig,
   getSpaE2eConfig
 } from '../lib/webpack/spa';
-import { stats } from '../lib/webpack/options';
 
 type Type = 'spa' | 'browser' | 'node' | 'cypress';
 
@@ -46,28 +44,28 @@ export const getWebpackConfig = (opts: Options = {}): Configuration => {
     case 'cypress':
       return getSpaE2eConfig(options);
     case 'spa':
-      if (process.env.WEBPACK_SERVE) {
+      if (process.env.WEBPACK_DEV_SERVER) {
         const config = getSpaBuildConfig(options);
-        config.serve = {
-          add(app, middleware, options) {
+        const publicPath = project.ws.publicPath ? project.ws.publicPath : '/';
+        config.devServer = {
+          stats: 'errors-only',
+          publicPath,
+          hot: true,
+          before(app) {
+            app.use((req, res, next) => {
+              if (publicPath !== '/' && req.path === '/') {
+                res.redirect(publicPath);
+              } else {
+                next();
+              }
+            });
             app.use(
-              convert(
-                history({
-                  index: join(project.ws.publicPath, '/index.html')
-                })
-              )
+              history({
+                index: join(publicPath, '/index.html')
+              })
             );
-          },
-          devMiddleware: {
-            publicPath: project.ws.publicPath, // it looks like this is a required config from devMiddleware
-            stats
           }
         };
-        // having public path as an empty string inside devMiddleware would cause an error:
-        // 'publicPath must be set on `dev` options, or in a compiler's `output` configuration'
-        if (!project.ws.publicPath) {
-          delete config.serve!.devMiddleware!.publicPath;
-        }
         return config;
       } else {
         return getSpaReleaseConfig(options);
