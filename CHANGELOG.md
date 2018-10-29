@@ -1,5 +1,9 @@
 The changelog is currently handwritten.
 
+# 3.0.0-15 (2018-10-29)
+
+- Use `webpack-dev-server` instead of `webpack-serve`.
+
 # 3.0.0-14 (2018-10-18)
 
 - Fix nodeExternals for Node.js workspace projects.
