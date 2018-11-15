@@ -1,6 +1,7 @@
 {
   "extends": "../../../node_modules/@mercateo/ws/tsconfig.base.json",
   "compilerOptions": {
+    "jsx": "react",
     "types": ["../dist-i18n"]
   },
   "include": ["../stories", "../src/typings.d.ts"]
