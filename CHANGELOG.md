@@ -1,5 +1,10 @@
 The changelog is currently handwritten.
 
+# 3.0.0-16 (2018-11-15)
+
+- Updated deps.
+- Still experimenting with good defaults for a storybook config.
+
 # 3.0.0-15 (2018-10-29)
 
 - Use `webpack-dev-server` instead of `webpack-serve`.
