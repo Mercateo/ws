@@ -9,7 +9,7 @@ export class Counter extends Component<{}, { value: number }> {
     value: 0
   };
 
-  intervalId: number | null = null;
+  intervalId: ReturnType<typeof setInterval> | null = null;
 
   componentDidMount() {
     this.intervalId = setInterval(

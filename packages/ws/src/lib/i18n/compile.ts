@@ -42,13 +42,12 @@ function collectArgumentsRecursive(ast: any): KeyTypePair[] {
           element.format && element.format.type === 'pluralFormat'
             ? 'number'
             : element.format && element.format.type === 'selectFormat'
-              ? element.format.options
-                  .map(
-                    ({ selector }: any) =>
-                      selector === 'other' ? 'string' : `'${selector}'`
-                  )
-                  .join(' | ')
-              : 'string'
+            ? element.format.options
+                .map(({ selector }: any) =>
+                  selector === 'other' ? 'string' : `'${selector}'`
+                )
+                .join(' | ')
+            : 'string'
       })
     );
 

@@ -5,12 +5,12 @@
     "type": "browser"
   },
   "scripts": {
-    "lint": "wsrun lint --exclude-missing --serial",
-    "build": "wsrun build --exclude-missing --serial",
-    "preunit": "wsrun preunit --exclude-missing --serial",
+    "lint": "wsrun --exclude-missing --serial lint",
+    "build": "wsrun --exclude-missing --serial build",
+    "preunit": "wsrun --exclude-missing --serial preunit",
     "unit": "jest",
-    "storybook:build": "wsrun storybook:build --exclude-missing --serial",
-    "e2e": "wsrun e2e --exclude-missing --serial",
+    "storybook:build": "wsrun --exclude-missing --serial storybook:build",
+    "e2e": "wsrun --exclude-missing --serial e2e",
     "ci": "yarn build && yarn lint && yarn unit && yarn e2e && yarn storybook:build",
     "release": "workspace-version"
   },
@@ -21,6 +21,6 @@
     "jest": "^23.5.0",
     "rimraf": "^2.6.2",
     "workspace-release": "^0.4.5",
-    "wsrun": "^2.2.1"
+    "wsrun": "^3.4.0"
   }
 }

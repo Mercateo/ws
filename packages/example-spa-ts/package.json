@@ -17,27 +17,27 @@
     "publicPath": "/test/"
   },
   "dependencies": {
-    "@types/react": "^16.0.0",
+    "@types/react": "^16.7.6",
     "@types/react-dom": "^16.0.0",
     "@types/react-hot-loader": "^4.1.0",
     "example-browser-ts-react": "*",
     "example-browser-ts-styled-component": "*",
-    "normalize.css": "^8.0.0",
-    "react": "^16.0.0",
-    "react-dom": "^16.0.0",
-    "react-hot-loader": "^4.3.11"
+    "normalize.css": "^8.0.1",
+    "react": "^16.6.3",
+    "react-dom": "^16.6.3",
+    "react-hot-loader": "^4.3.12"
   },
   "devDependencies": {
-    "@cypress/webpack-preprocessor": "^2.0.1",
+    "@cypress/webpack-preprocessor": "^4.0.2",
     "@mercateo/ws": "link:../ws",
-    "@types/jest": "^23.3.0",
+    "@types/jest": "^23.3.9",
     "@types/react-test-renderer": "^16.0.0",
     "@types/webpack-env": "^1.13.6",
-    "cypress": "^3.0.2",
+    "cypress": "^3.1.1",
     "jest": "^23.5.0",
-    "react-test-renderer": "^16.0.0",
-    "start-server-and-test": "^1.7.0",
+    "react-test-renderer": "^16.6.3",
+    "start-server-and-test": "^1.7.9",
     "webpack-cli": "^3.1.0",
-    "webpack-dev-server": "^3.1.9"
+    "webpack-dev-server": "^3.1.10"
   }
 }

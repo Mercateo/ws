@@ -11,18 +11,18 @@
     "type": "spa"
   },
   "dependencies": {
-    "@types/react": "^16.0.0",
+    "@types/react": "^16.7.6",
     "@types/react-dom": "^16.0.0",
     "@types/react-loadable": "^5.4.0",
     "@types/react-router-dom": "^4.0.0",
-    "react": "^16.0.0",
-    "react-dom": "^16.0.0",
+    "react": "^16.6.3",
+    "react-dom": "^16.6.3",
     "react-loadable": "^5.4.0",
     "react-router-dom": "^4.0.0"
   },
   "devDependencies": {
     "@mercateo/ws": "link:../ws",
     "webpack-cli": "^3.1.0",
-    "webpack-dev-server": "^3.1.9"
+    "webpack-dev-server": "^3.1.10"
   }
 }

@@ -14,7 +14,7 @@
     "type": "node"
   },
   "dependencies": {
-    "@types/node": "^8.0.0",
+    "@types/node": "^10.12.8",
     "example-node-ts": "*"
   },
   "devDependencies": {
