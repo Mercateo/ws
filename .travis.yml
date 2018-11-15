@@ -1,8 +1,8 @@
 language: node_js
 
 node_js:
-  - '9'
-  - '8'
+  - '10'
+  - '11'
 
 cache:
   yarn: true
@@ -20,6 +20,4 @@ jobs:
       script:
         # publish on tag
         - if [ -n "$TRAVIS_TAG" ]; then node node_modules/.bin/workspace-publish; fi
-      node: '9'
-
 # note: the NPM_TOKEN needs to be set as an environment variable in the Travis settings
