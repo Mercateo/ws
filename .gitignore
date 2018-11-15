@@ -6,4 +6,5 @@ dist-i18n/
 dist-tests/
 dist-release/
 .history/
+.cache/
 storybook-static

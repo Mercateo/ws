@@ -10,7 +10,7 @@
     "build": "webpack-cli --config src/webpack.config.js",
     "prestorybook": "ws-build-translations",
     "storybook:build": "build-storybook",
-    "storybook:watch": "start-storybook -p 9001",
+    "storybook:watch": "start-storybook -p 9001 --quiet",
     "lint": "ws lint",
     "preunit": "ws-build-translations",
     "unit": "jest --config tests/jest.config.js"
@@ -35,6 +35,8 @@
   "devDependencies": {
     "@babel/polyfill": "^7.0.0",
     "@mercateo/ws": "link:../ws",
+    "@storybook/addon-a11y": "^4.0.6",
+    "@storybook/addon-backgrounds": "^4.0.6",
     "@storybook/addon-knobs": "^4.0.6",
     "@storybook/cli": "^4.0.6",
     "@storybook/react": "^4.0.6",

@@ -28,9 +28,7 @@ module.exports = {
     children: false
   },
   entry: {
-    index: ['source-map-support/register', './src/index.ts'],
-    'storybook-addons': './src/configs/storybook-addons',
-    'storybook-config': './src/configs/storybook-config'
+    index: ['source-map-support/register', './src/index.ts']
   },
   output: {
     path: join(__dirname, 'dist'),

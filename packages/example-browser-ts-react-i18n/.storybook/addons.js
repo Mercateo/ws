@@ -1,1 +1,3 @@
-import '@mercateo/ws/dist/storybook-addons';
+import '@storybook/addon-knobs/register';
+import '@storybook/addon-backgrounds/register';
+import '@storybook/addon-a11y/register';
