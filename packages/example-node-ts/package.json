@@ -7,7 +7,6 @@
   "private": true,
   "scripts": {
     "build": "webpack-cli --config src/webpack.config.js",
-    "lint": "ws lint",
     "unit": "jest --config tests/jest.config.js"
   },
   "ws": {

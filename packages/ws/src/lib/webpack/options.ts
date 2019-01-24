@@ -1,4 +1,4 @@
-import { join } from 'path';
+import { join, dirname } from 'path';
 import { warn } from 'loglevel';
 import globby from 'globby';
 import { pull } from 'lodash';
@@ -23,8 +23,6 @@ import { resolve as resolveModule } from '../resolve';
 import { project } from '../../project';
 import { EnvOptions } from '../../options';
 import { TypingsPlugin } from '../typescript';
-
-const HappyPack: any = require('happypack');
 
 /**
  * We make some properties of `webpack.Configuration` mandatory. It is easier for future usage, so we don't
@@ -114,50 +112,6 @@ const getBabelOptions = (target: Target) => {
   return babelOptions;
 };
 
-export const getHappyPackPluginJs = (target: Target, command: Command) =>
-  new HappyPack({
-    id: `js-${target}-${command}`,
-    compilerId: `js-${target}-${command}`,
-    threads: 2,
-    verbose: false,
-    loaders: [
-      {
-        loader: 'babel-loader',
-        options: {
-          ...getBabelOptions(target)
-        }
-      }
-    ]
-  });
-
-export const getHappyPackPluginTs = (target: Target, command: Command) =>
-  new HappyPack({
-    id: `ts-${target}-${command}`,
-    compilerId: `ts-${target}-${command}`,
-    threads: 2,
-    verbose: false,
-    loaders: [
-      {
-        loader: 'babel-loader',
-        options: {
-          ...getBabelOptions(target)
-        }
-      },
-      {
-        loader: 'ts-loader',
-        options: {
-          // this automatically sets `transpileOnly` to `true`
-          happyPackMode: true,
-          logLevel: 'warn',
-          configFile: project.ws.tsconfigPath,
-          compilerOptions: {
-            sourceMap: true
-          }
-        }
-      }
-    ]
-  });
-
 const getJsRule = (target: Target, command: Command): Rule => ({
   test: /\.js(x?)$/,
   exclude: /node_modules/,
@@ -169,7 +123,10 @@ const getJsRule = (target: Target, command: Command): Rule => ({
       }
     },
     {
-      loader: `happypack/loader?id=js-${target}-${command}&compilerId=js-${target}-${command}`
+      loader: 'babel-loader',
+      options: {
+        ...getBabelOptions(target)
+      }
     }
   ]
 });
@@ -184,7 +141,22 @@ const getTsRule = (target: Target, command: Command): Rule => ({
       }
     },
     {
-      loader: `happypack/loader?id=ts-${target}-${command}&compilerId=ts-${target}-${command}`
+      loader: 'babel-loader',
+      options: {
+        ...getBabelOptions(target)
+      }
+    },
+    {
+      loader: 'ts-loader',
+      options: {
+        transpileOnly: true,
+        logLevel: 'warn',
+        experimentalWatchApi: true
+        // configFile: project.ws.tsconfigPath,
+        // compilerOptions: {
+        //   sourceMap: true
+        // }
+      }
     }
   ]
 });
@@ -321,13 +293,33 @@ export const productionOptionsPlugin = new webpack.LoaderOptionsPlugin({
   options: defaultLoaderOptions
 });
 
+function getTypes() {
+  // it looks like types need to be converted to an absolute path for ForkTsCheckerWebpackPlugin
+  // we need to do this for "../dist-i18n" mostly
+  if (project.ws.tsconfigPath) {
+    const config = readJsonSync(project.ws.tsconfigPath);
+    if (config.compilerOptions && config.compilerOptions.types) {
+      return config.compilerOptions.types.map((type: string) =>
+        type.startsWith('.')
+          ? join(dirname(project.ws.tsconfigPath!), type)
+          : type
+      );
+    } else {
+      return [];
+    }
+  } else {
+    return [];
+  }
+}
+
 export const forkTsCheckerPlugin = new ForkTsCheckerWebpackPlugin({
   tsconfig: project.ws.tsconfigPath,
-  silent: true,
-  async: false,
-  checkSyntacticErrors: true
-  // `watch` is optional, but docs say it improves performance (less stat calls)
-  // watch: [project.ws.srcDir, project.ws.testsDir]
+  useTypescriptIncrementalApi: true,
+  compilerOptions: {
+    types: getTypes()
+  }
+  // silent: true
+  // async: false
 });
 
 export const devtool = 'inline-source-map';
@@ -516,11 +508,7 @@ export const getModuleAndPlugins = (
     woffRule,
     ttfRule
   ];
-  const plugins: Plugin[] = [
-    getHappyPackPluginJs(target, command),
-    miniCssExtractPlugin,
-    loaderOptionsPlugin
-  ];
+  const plugins: Plugin[] = [miniCssExtractPlugin, loaderOptionsPlugin];
 
   if (options.parent.env.length) {
     const definitions = options.parent.env.reduce(
@@ -536,7 +524,6 @@ export const getModuleAndPlugins = (
 
   if (project.ws.tsconfig) {
     rules.push(getTsRule(target, command));
-    plugins.push(getHappyPackPluginTs(target, command));
     plugins.push(forkTsCheckerPlugin);
   }
 

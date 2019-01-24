@@ -1,5 +1,12 @@
 The changelog is currently handwritten.
 
+# 3.0.0-17 (2019-01-24)
+
+- Removed `$ ws lint`. Use CLIs from Prettier and ESLint and import `@mercateo/ws/prettier.config.js` and `@mercateo/ws/eslintrc.config.js`.
+- Removed TSLint support.
+- Added ESLint rule to check for `console.log`. (Override this setting in Node projects, if you need `console.log`.)
+- Removed `$ ws i18n:import`.
+
 # 3.0.0-16 (2018-11-15)
 
 - Updated deps.

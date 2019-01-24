@@ -5,7 +5,6 @@
   "scripts": {
     "prebuild": "ws-build-translations",
     "build": "webpack-cli --config src/webpack.config.js",
-    "lint": "ws lint",
     "preunit": "ws-build-translations",
     "unit": "jest --config tests/jest.config.js",
     "watch": "WEBPACK_DEV_SERVER='true' webpack-dev-server --config src/webpack.config.js"

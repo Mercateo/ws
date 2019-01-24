@@ -4,7 +4,6 @@
   "private": true,
   "scripts": {
     "build": "webpack-cli --config src/webpack.config.js",
-    "lint": "ws lint",
     "unit": "jest --config tests/jest.config.js",
     "watch": "WEBPACK_DEV_SERVER='true' webpack-dev-server --config src/webpack.config.js",
     "e2e": "start-server-and-test e2e:server http://localhost:8080 e2e:run",

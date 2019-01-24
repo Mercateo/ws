@@ -8,6 +8,7 @@ const stopwatch = (member: string) =>
     Component.prototype[member] = function() {
       const start = Date.now();
       const result = origin.apply(this, arguments);
+      // eslint-disable-next-line no-console
       console.log(`${Component.name} rendered in: ${Date.now() - start}`);
       return result;
     };

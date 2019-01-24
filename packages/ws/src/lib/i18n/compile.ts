@@ -128,13 +128,13 @@ module.exports.COUNTRY_CODE = '${translation.locale.split('_')[1]}';
 
 var cachedMessages = {};
 ${keys
-    .map(
-      (key) => `
+  .map(
+    (key) => `
 module.exports['${key}'] = function(${
-        hasArguments(translation.asts[key]) ? 'data' : ''
-      }) {${
-        translation.asts[key]
-          ? `
+      hasArguments(translation.asts[key]) ? 'data' : ''
+    }) {${
+      translation.asts[key]
+        ? `
   if (!cachedMessages['${key}']) {
     var ast = ${indent(
       '    ',
@@ -144,14 +144,14 @@ module.exports['${key}'] = function(${
   }
 
   return cachedMessages['${key}'].format(${
-              hasArguments(translation.asts[key]) ? 'data' : ''
-            });`
-          : `return 'Missing key "${key}".';`
-      }
+            hasArguments(translation.asts[key]) ? 'data' : ''
+          });`
+        : `return 'Missing key "${key}".';`
+    }
 };
 `
-    )
-    .join('')}
+  )
+  .join('')}
 `;
 
   return outputFileAsync(filename, data);

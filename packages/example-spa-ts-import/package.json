@@ -4,7 +4,6 @@
   "private": true,
   "scripts": {
     "build": "webpack-cli --config src/webpack.config.js",
-    "lint": "ws lint",
     "watch": "WEBPACK_DEV_SERVER='true' webpack-dev-server --config src/webpack.config.js"
   },
   "ws": {

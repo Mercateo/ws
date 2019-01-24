@@ -5,8 +5,7 @@
   "webpack": "src/index.js",
   "private": true,
   "scripts": {
-    "build": "webpack-cli --config src/webpack.config.js",
-    "lint": "ws lint"
+    "build": "webpack-cli --config src/webpack.config.js"
   },
   "ws": {
     "type": "browser"

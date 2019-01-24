@@ -8,7 +8,7 @@ A tool which helps you to build, document and test web projects.
 
 When you say _build tool_ and mean a tool like Grunt, Gulp or Webpack - no. It is a pre-configured and opinionated wrapper or facade around existing tools _like_ Grunt, Gulp or Webpack. Think of it like a `Gruntfile.js`, `webpack.config.js` or a big `"scripts"` configuration inside `package.json` which can be shared across projects and is versioned.
 
-We used `ws` internally for years and it used Grunt, Gulp and now we switched to Webpack. But while we changed the tools _inside_ `ws` it didn't really changed the way how we used and called `ws`. But we gained new features like better compilation speed, better minification, tree shaking and so on in  every change.
+We used `ws` internally for years and it used Grunt, Gulp and now we switched to Webpack. But while we changed the tools _inside_ `ws` it didn't really changed the way how we used and called `ws`. But we gained new features like better compilation speed, better minification, tree shaking and so on in every change.
 
 This project is similar to projects like [`create-react-app`](https://github.com/facebookincubator/create-react-app), but less tied to a specific framework.
 
@@ -32,7 +32,7 @@ Our `ws` tool helps you writing single page applications (SPAs), browser compone
 
 # Why one tool for such different projects like a Node module or a SPA?
 
-We want to make it *really* easy to create examples for your projects. Writing tests and documentation for your project is great and you should still do it, but in our experience the best way _to get started_ with a different project is by reading examples.
+We want to make it _really_ easy to create examples for your projects. Writing tests and documentation for your project is great and you should still do it, but in our experience the best way _to get started_ with a different project is by reading examples.
 
 Mabe you write a Node server with a REST API. Now you can create several standalone SPAs as clients in your examples - all using different frameworks or dependencies (an `Angular` app using `$http` or a `React` app using `fetch`) and every example shows how your server is used. Or you write a _date picker_ component with `React` and you create different examples how you can use it. A little bit like [`react-storybook`](https://github.com/kadirahq/react-storybook), but not tied to `React` and more generic.
 
@@ -171,4 +171,3 @@ We have a _highly_ experimental feature to modify our webpack config. This shoul
 # Limits
 
 Support for libs is currently limited by webpack. E.g. it not possible to output ES6 modules _without_ informations about loaders. You can follow [this issue](https://github.com/webpack/webpack/issues/2933) for example.
-
