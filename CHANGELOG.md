@@ -1,5 +1,9 @@
 The changelog is currently handwritten.
 
+# 3.0.0-18 (2019-03-21)
+
+- Removed the storybook dependency.
+
 # 3.0.0-17 (2019-01-24)
 
 - Removed `$ ws lint`. Use CLIs from Prettier and ESLint and import `@mercateo/ws/prettier.config.js` and `@mercateo/ws/eslintrc.config.js`.
