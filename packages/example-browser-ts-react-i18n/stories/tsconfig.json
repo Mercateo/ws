@@ -4,5 +4,5 @@
     "jsx": "react",
     "types": ["../dist-i18n"]
   },
-  "include": ["../stories", "../src/typings.d.ts"]
+  "include": [".", "../src/typings.d.ts"]
 }
