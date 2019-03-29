@@ -29,11 +29,11 @@
   "devDependencies": {
     "@cypress/webpack-preprocessor": "^4.0.2",
     "@mercateo/ws": "link:../ws",
-    "@types/jest": "^23.3.9",
+    "@types/jest": "^24.0.11",
     "@types/react-test-renderer": "^16.0.0",
     "@types/webpack-env": "^1.13.6",
     "cypress": "^3.1.1",
-    "jest": "^23.5.0",
+    "jest": "^24.5.0",
     "react-test-renderer": "^16.6.3",
     "start-server-and-test": "^1.7.9",
     "webpack-cli": "^3.1.0",

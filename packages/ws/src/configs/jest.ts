@@ -4,6 +4,8 @@ export const getJestConfig = () => ({
   testMatch: ['**/*.+(ts|tsx|js|jsx)'],
   // roots: ['<rootDir>/../src', '<rootDir>/../tests'],
   testPathIgnorePatterns: [
+    'babel.transformer.js',
+    'babel.config.js',
     'jest.config.js',
     '.babelrc.js',
     '__mocks__/',

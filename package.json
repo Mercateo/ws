@@ -18,7 +18,7 @@
     "packages/*"
   ],
   "devDependencies": {
-    "jest": "^23.5.0",
+    "jest": "^24.5.0",
     "rimraf": "^2.6.2",
     "workspace-release": "^0.4.5",
     "wsrun": "^3.4.0"
