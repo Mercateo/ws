@@ -1,5 +1,9 @@
 The changelog is currently handwritten.
 
+# 3.0.0-19 (2019-03-29)
+
+- Updated to Jest 24.
+
 # 3.0.0-18 (2019-03-21)
 
 - Removed the storybook dependency.
