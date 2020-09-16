@@ -1,17 +1,17 @@
 import { join } from 'path';
 import { red } from 'chalk';
 import { info } from 'loglevel';
-import { removeAsync, existsAsync } from 'fs-extra-promise';
+import { existsAsync, removeAsync } from 'fs-extra-promise';
 import { project, TYPE } from '../project';
 import {
   compileAsync,
-  nodeBuildOptions,
+  getBrowserBuildOptions,
+  getBrowserReleaseOptions,
   getSpaDevOptions,
+  nodeBuildOptions,
   spaReleaseOptions,
   spaRootI18nBuildOptions,
   spaRootI18nReleaseOptions,
-  getBrowserBuildOptions,
-  getBrowserReleaseOptions
 } from '../lib/webpack';
 import { compile as compileI18n } from '../lib/i18n';
 import { copy } from '../lib/copy';
@@ -19,7 +19,7 @@ import {
   electronRootI18nBuildOptions,
   electronRootI18nReleaseOptions,
   getElectronBuildOptions,
-  getElectronReleaseOptions
+  getElectronReleaseOptions,
 } from '../lib/webpack/options';
 
 export interface BuildOptions {

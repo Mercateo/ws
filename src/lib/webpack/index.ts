@@ -1,6 +1,7 @@
-import { warn, error, info, getLevel, levels } from 'loglevel';
+import { error, getLevel, info, levels, warn } from 'loglevel';
 import webpack, { compiler } from 'webpack';
 import { WebpackConfig } from './options';
+import { chunk } from 'lodash';
 
 export * from './options';
 
@@ -133,12 +134,18 @@ async function onChange(err: any, stats: compiler.Stats, livereloadServer: any, 
   }
 }
 
-export function compileAsync(options: WebpackConfig) {
+export async function compileAsync(options: any) {
   optionallyProfile(options);
-  const compiler = webpack(options);
-  return new Promise((resolve, reject) => {
-    compiler.run((err, stats) => onBuild(resolve, reject, err, stats));
-  });
+  const languagePlugins: any = options.plugins.filter((plugin: any) => plugin.options && plugin.options.template === 'src/index.html');
+  const otherPlugins: any = options.plugins.filter((plugin: any) => !(plugin.options && plugin.options.template === 'src/index.html'));
+  for (const currentLanguageBatch of chunk(languagePlugins, 10)) {
+    await new Promise((resolve, reject) => {
+      info(`Building ${currentLanguageBatch.map((x: any) => x.options.locale).join(', ')} ...`);
+      options.plugins = [...currentLanguageBatch, ...otherPlugins];
+      const compiler = webpack(options);
+      compiler.run((err, stats) => onBuild(resolve, reject, err, stats));
+    });
+  }
 }
 
 export function watchAsync(livereloadServer: any, options: WebpackConfig, onChangeSuccess?: (stats: compiler.Stats) => void) {
