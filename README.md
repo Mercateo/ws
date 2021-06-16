@@ -1,3 +1,5 @@
+This project is unmantained, deprecated and goes into archive with followup removal in 2 years.
+
 ⚠️ **DEPRECATED**: ️️️️ This package should not be used anymore. Before mature tools for mananing monorepos became available we used this package to share the same configs for building/linting/testing/releasing in multiple internal projects. ️Nowadays we use monorepos and don't need to share configs like we used to. ⚠️
 
 ---
